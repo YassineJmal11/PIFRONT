@@ -8,6 +8,17 @@ import { HeaderComponent } from './Frontend/header/header.component';
 import { FooterComponent } from './Frontend/footer/footer.component';
 import { AlltemplateComponent } from './Frontend/alltemplate/alltemplate.component';
 import { ContactUsComponent } from './Frontend/contact-us/contact-us.component';
+import { SignupComponent } from './user/signup/signup.component';
+import { HomeAComponent } from './Frontend/home-a/home-a.component';
+import { SigninComponent } from './user/signin/signin.component';
+
+import { ProfileComponent } from './user/profile/profile.component';
+import  { FooterBackComponent } from './BackOffice/footer-back/footer-back.component';
+import { TemplateBackComponent } from './BackOffice/template-back/template-back.component';
+import { HeaderBackComponent } from './BackOffice/header-back/header-back.component';
+import { SidebarBackComponent } from './BackOffice/sidebar-back/sidebar-back.component';
+import {AuthInterceptor, authInterceptorProviders } from './user/auto.inter';
+import { EditComponent } from './user/edituser/edituser.component';
 
 @NgModule({
   declarations: [
@@ -15,16 +26,27 @@ import { ContactUsComponent } from './Frontend/contact-us/contact-us.component';
     HeaderComponent,
     FooterComponent,
     AlltemplateComponent,
-    ContactUsComponent
+    ContactUsComponent,
+    SignupComponent,
+    HomeAComponent,
+    SigninComponent,
+   
+    ProfileComponent,
+    FooterBackComponent,
+    TemplateBackComponent,
+    SidebarBackComponent ,
+    HeaderBackComponent,
+   EditComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    
   ],
-  providers: [],
+  providers: [ authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
