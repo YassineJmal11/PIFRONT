@@ -1,0 +1,23 @@
+/* Add your custom CSS styles here */
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-title {
+    margin-bottom: 0;
+}
+
+.card-header-actions {
+    font-size: 1.5rem;
+}
+
+.container {
+    padding: 0 15px;
+}
+
+.mt-5 {
+    margin-top: 3rem !important;
+}

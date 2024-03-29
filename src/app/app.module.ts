@@ -19,6 +19,15 @@ import { HeaderBackComponent } from './BackOffice/header-back/header-back.compon
 import { SidebarBackComponent } from './BackOffice/sidebar-back/sidebar-back.component';
 import {AuthInterceptor, authInterceptorProviders } from './user/auto.inter';
 import { EditComponent } from './user/edituser/edituser.component';
+import { AllGoalsComponent } from './goalTrack/all-goals/all-goals.component';
+import { AllTasksComponent } from './goalTrack/all-tasks/all-tasks.component';
+import { AddGoalComponent } from './goalTrack/add-goal/add-goal.component';
+import { NgChartjsModule } from 'ng-chartjs';
+import { AddTaskComponent } from './goalTrack/add-task/add-task.component';
+import { UpdateTaskComponent } from './goalTrack/update-task/update-task.component';
+import { UpdateGoalComponent } from './goalTrack/update-goal/update-goal.component';
+import { AfterLoginComponent } from './after-login/after-login.component';
+
 
 @NgModule({
   declarations: [
@@ -36,7 +45,14 @@ import { EditComponent } from './user/edituser/edituser.component';
     TemplateBackComponent,
     SidebarBackComponent ,
     HeaderBackComponent,
-   EditComponent
+   EditComponent,
+   AllGoalsComponent,
+   AllTasksComponent,
+   AddGoalComponent,
+   AddTaskComponent,
+   UpdateTaskComponent,
+   UpdateGoalComponent,
+   AfterLoginComponent
   ],
   imports: [
     BrowserModule,
@@ -44,6 +60,7 @@ import { EditComponent } from './user/edituser/edituser.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    NgChartjsModule
     
   ],
   providers: [ authInterceptorProviders],

@@ -19,6 +19,8 @@
     "@angular/platform-browser-dynamic": "^15.2.0",
     "@angular/router": "^15.2.0",
     "bootstrap": "^5.3.3",
+    "chart.js": "^4.4.2",
+    "ng-chartjs": "^0.2.8",
     "ngx-font-picker": "^16.0.0",
     "rxjs": "~7.8.0",
     "slicknav": "^1.0.8",
