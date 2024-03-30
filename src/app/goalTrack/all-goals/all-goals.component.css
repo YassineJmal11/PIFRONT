@@ -200,3 +200,22 @@ img {
   }
 }
 
+.calendar-container {
+  width: 100%;
+  margin-top: 20px;
+}
+
+/* Adjustments for the calendar header */
+.fc-header-toolbar {
+  padding: 0 20px;
+}
+
+/* Adjustments for the calendar */
+.fc-daygrid-event {
+  background-color: #1976d2;
+  color: #fff;
+}
+
+
+
+

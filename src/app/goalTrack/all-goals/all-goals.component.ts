@@ -9,6 +9,8 @@ import { Chart } from 'chart.js';
 import { TokenStorageService } from 'src/app/user/token-storage.service';
 import { Router } from '@angular/router';
 import { UsersService } from 'src/app/user/users.service';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import { CalendarOptions } from '@fullcalendar/core'; // useful for typechecking
 
 @Component({
   selector: 'app-all-goals',
@@ -38,7 +40,7 @@ export class AllGoalsComponent implements OnInit {
   filteredGoals: Goal[] = []; // Property to store filtered goals
   currentUser: any;
   userId:number=1;
-
+  calendarEvents: any[] = []; // Array to store calendar events
   @ViewChild('emptySearch') emptySearch!: TemplateRef<NgIfContext<boolean>>;
 
 
@@ -55,7 +57,57 @@ export class AllGoalsComponent implements OnInit {
     this.currentUser = this.token.getUser();
     this.fetchData();
    // this.userId=this.currentUser.id;
+   
   }
+
+  calendarOptions: CalendarOptions = {
+    plugins: [dayGridPlugin]
+  };
+
+  fetchCalendarEvents() {
+    // Clear the calendar events array before populating it
+    console.log('Fetching calendar events...');
+    console.log('List of tasks:', this.listTasks);
+    console.log('List of goals:', this.listGoals);
+
+    this.calendarEvents = [];
+  
+    // Format events for tasks
+    this.listTasks.forEach(task => {
+      // For start date
+      this.calendarEvents.push({
+        title: task.description,
+        start: task.startDate,
+        color: 'green' 
+      });
+  
+      // For deadline date
+      this.calendarEvents.push({
+        title: task.description,
+        start: task.deadline,
+        color: 'red' 
+      });
+    });
+  
+    
+    this.listGoals.forEach(goal => {
+      // For start date
+      this.calendarEvents.push({
+        title: goal.title,
+        start: goal.startDate,
+        color: 'green' 
+      });
+  
+      // For deadline date
+      this.calendarEvents.push({
+        title: goal.title,
+        start: goal.deadline,
+        color: 'red' 
+      });
+    });
+  }
+  
+  
 
   fetchData() {
     forkJoin([
@@ -77,6 +129,7 @@ export class AllGoalsComponent implements OnInit {
         this.setupGoalStatusPieChart();
         this.calculateAverageProgress();
         this.filterGoals();
+        this.fetchCalendarEvents();
       },
       error: (error) => console.log(error),
       complete: () => console.log('Data fetched successfully')

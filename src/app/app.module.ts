@@ -27,7 +27,8 @@ import { AddTaskComponent } from './goalTrack/add-task/add-task.component';
 import { UpdateTaskComponent } from './goalTrack/update-task/update-task.component';
 import { UpdateGoalComponent } from './goalTrack/update-goal/update-goal.component';
 import { AfterLoginComponent } from './after-login/after-login.component';
-
+import { FullCalendarModule } from '@fullcalendar/angular'; // FullCalendar module
+import dayGridPlugin from '@fullcalendar/daygrid'; // DayGrid plugin
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { AfterLoginComponent } from './after-login/after-login.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgChartjsModule
+    NgChartjsModule,
+    FullCalendarModule  
     
   ],
   providers: [ authInterceptorProviders],
