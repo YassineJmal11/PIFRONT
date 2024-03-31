@@ -65,37 +65,34 @@ export class AllGoalsComponent implements OnInit {
   };
 
   fetchCalendarEvents() {
-    // Clear the calendar events array before populating it
-    console.log('Fetching calendar events...');
-    console.log('List of tasks:', this.listTasks);
-    console.log('List of goals:', this.listGoals);
 
     this.calendarEvents = [];
   
     // Format events for tasks
-    this.listTasks.forEach(task => {
+    this.listIncompleteTasks.forEach(task => {
       // For start date
       this.calendarEvents.push({
         title: task.description,
         start: task.startDate,
-        color: 'green' 
+        color: 'green' ,
       });
   
       // For deadline date
       this.calendarEvents.push({
         title: task.description,
         start: task.deadline,
-        color: 'red' 
+        color: 'red' ,
       });
     });
   
     
-    this.listGoals.forEach(goal => {
+    this.listIncompleteGoals.forEach(goal => {
       // For start date
       this.calendarEvents.push({
         title: goal.title,
         start: goal.startDate,
-        color: 'green' 
+        color: 'green' ,
+
       });
   
       // For deadline date
