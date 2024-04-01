@@ -1,5 +1,6 @@
+import { AccountStatus } from "./AccountStatus";
 export interface User {
-    id: number;
+    userId: number;
     username: string;
     firstName: string;
     lastName: string;
@@ -11,7 +12,8 @@ export interface User {
     weight: number | null;
     height: number | null;
     roles: string[];
-    diploma: any;
-    photo: any;
+    diploma: string;
+    profileImageUrl: string;
+    accountStatus: AccountStatus; 
   }
   

@@ -13,12 +13,17 @@ import { HomeAComponent } from './Frontend/home-a/home-a.component';
 import { SigninComponent } from './user/signin/signin.component';
 
 import { ProfileComponent } from './user/profile/profile.component';
-import  { FooterBackComponent } from './BackOffice/footer-back/footer-back.component';
+
 import { TemplateBackComponent } from './BackOffice/template-back/template-back.component';
 import { HeaderBackComponent } from './BackOffice/header-back/header-back.component';
-import { SidebarBackComponent } from './BackOffice/sidebar-back/sidebar-back.component';
+import { ForgotPasswordComponent } from './user/forgot-password/forgot-password.component';
 import {AuthInterceptor, authInterceptorProviders } from './user/auto.inter';
 import { EditComponent } from './user/edituser/edituser.component';
+import { AlluserComponent } from './user/alluser/alluser.component';
+import { ResetPasswordComponent } from './user/reset-password/reset-password.component';
+import { VerifyComponent } from './user/verify/verify.component';
+import { SignupadminComponent } from './user/signupadmin/signupadmin.component';
+
 
 @NgModule({
   declarations: [
@@ -30,13 +35,18 @@ import { EditComponent } from './user/edituser/edituser.component';
     SignupComponent,
     HomeAComponent,
     SigninComponent,
-   
+    ForgotPasswordComponent,
     ProfileComponent,
-    FooterBackComponent,
+
     TemplateBackComponent,
-    SidebarBackComponent ,
+
     HeaderBackComponent,
-   EditComponent
+   EditComponent,
+   AlluserComponent,
+   ResetPasswordComponent,
+   VerifyComponent,
+   SignupadminComponent
+ 
   ],
   imports: [
     BrowserModule,

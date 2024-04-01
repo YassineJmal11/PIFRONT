@@ -142,7 +142,7 @@
                   <div class="form-group">
                     <label for="photo">Upload Photo</label>
                     <input type="file" class="form-control-file" id="photo" name="photo" required />
-                    <div class="alert-danger" *ngIf="f.submitted && !f.controls['photo'].valid">
+                    <div class="alert-danger" *ngIf="f.submitted && !f.controls['profileImageUrl'].valid">
                       Photo file is required
                     </div>
                   </div>

@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./header-back.component.css']
 })
 export class HeaderBackComponent {
-
+  status = false;
+  addToggle()
+  {
+    this.status = !this.status;       
+  }
 }

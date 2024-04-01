@@ -12,7 +12,7 @@ export class AuthService {
   constructor(private http: HttpClient) { }
   private AUTH_API ='http://localhost:8081/api/auth';
   
-  signup(username: string, firstName: string, lastName: string, email: string, password: string, phoneNumber: string, dateOfBirth: Date | null, gender: string, weight: number | null, height: number | null, roles: string[], diploma: any, photo: any): Observable<any> {
+  signup(username: string, firstName: string, lastName: string, email: string, password: string, phoneNumber: string, dateOfBirth: Date | null, gender: string, weight: number | null, height: number | null, role: string[], diploma: any, photo: any): Observable<any> {
     const formData = {
       username,
       firstName,
@@ -24,7 +24,7 @@ export class AuthService {
       gender,
       weight,
       height,
-      roles,
+      role,
       diploma,
       photo
     };

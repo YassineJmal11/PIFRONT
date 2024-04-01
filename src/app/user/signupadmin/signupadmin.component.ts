@@ -1,14 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { UsersService } from '../users.service';
-
 @Component({
-  selector: 'app-signup',
-  templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.css']
+  selector: 'app-signupadmin',
+  templateUrl: './signupadmin.component.html',
+  styleUrls: ['./signupadmin.component.css']
 })
-export class SignupComponent implements OnInit {
+export class SignupadminComponent {
   form: any = {
     username: null,
     firstName: null,
@@ -45,7 +44,7 @@ export class SignupComponent implements OnInit {
         console.log(data);
         this.isSuccessful = true;
         this.isSignUpFailed = false;
-        this.router.navigate(['/signin']); // Redirige vers la page de connexion après inscription réussie
+        this.router.navigate(['/ALL']); // Redirige vers la page de connexion après inscription réussie
       },
       err => {
         this.errorMessage = err.error.message;
@@ -55,7 +54,7 @@ export class SignupComponent implements OnInit {
   }
 
   goToSignInPage(): void {
-    this.router.navigate(['/signin']); // Redirige vers la page de connexion
+    this.router.navigate(['/ALL']); // Redirige vers la page de connexion
   }
 
   nextPage() {
@@ -67,7 +66,7 @@ export class SignupComponent implements OnInit {
   }
 
   shouldDisplayDiplomaUpload(): boolean {
-    return this.selectedRoles.includes('NUTRITIONIST') || this.selectedRoles.includes('PSYCHOLOGIST') || this.selectedRoles.includes('COACH');
+    return this.selectedRoles.includes('NUTRITIONIST') || this.selectedRoles.includes('PSYCHOLOGIST') || this.selectedRoles.includes('COACH')|| this.selectedRoles.includes('ADMIN');
   }
 
   checkUsernameAvailability() {
