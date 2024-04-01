@@ -16,15 +16,21 @@ import { AddTaskComponent } from './goalTrack/add-task/add-task.component';
 import { UpdateGoalComponent } from './goalTrack/update-goal/update-goal.component';
 import { UpdateTaskComponent } from './goalTrack/update-task/update-task.component';
 import { AfterLoginComponent } from './after-login/after-login.component';
+import { AddMealComponent } from './diet/add-meal/add-meal.component';
+import { ListmealsComponent } from './diet/listmeals/listmeals.component';
+import { AllFoodsComponent } from './diet/all-foods/all-foods.component';
+import { ClientProfileComponent } from './diet/client-profile/client-profile.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeAComponent },
   { path: 'allgoals', component: AllGoalsComponent},
+  { path: 'client-profile/:userId', component: ClientProfileComponent },
   {
     path:"alltasks/:idGoal",
     component:AllTasksComponent
   },
+  { path: 'user/:userId/meals', component: ClientProfileComponent },
   {
     path:"addGoal",
     component:AddGoalComponent
@@ -42,6 +48,19 @@ const routes: Routes = [
     path:'updateTask/:id',
   component:UpdateTaskComponent
   },
+  {
+    path:"addmeal",
+    component:AddMealComponent
+  },
+  {
+    path:"allmeals",
+    component:ListmealsComponent
+  },
+  {
+    path:"allfoods",
+    component:AllFoodsComponent
+  },
+  
   {
     path:'afterlogin',
   component:AfterLoginComponent

@@ -1,0 +1,10 @@
+<div class="container">
+    <h1>All Foods</h1>
+    <ul>
+      <li *ngFor="let food of listFood" 
+          (click)="handleFoodClick(food.foodId)">
+        {{ food.foodName }} - Calories: {{ food.Cals }}, Carbs: {{ food.Carbs }}, Proteins: {{ food.prots }}
+      </li>
+    </ul>
+  </div>
+  

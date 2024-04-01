@@ -1,0 +1,29 @@
+.container {
+    max-width: 800px; /* Adjust the maximum width as needed */
+    margin: auto; /* Center the container horizontally */
+  }
+  
+  h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  li {
+    cursor: pointer; /* Change cursor to pointer on hover */
+    padding: 10px;
+    margin-bottom: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    transition: background-color 0.3s; /* Smooth transition for background color */
+  }
+  
+  li:hover {
+    background-color: #e0e0e0; /* Change background color on hover */
+  }
+  

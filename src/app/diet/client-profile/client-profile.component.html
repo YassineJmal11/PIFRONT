@@ -1,0 +1,60 @@
+<app-header></app-header>
+<div class="container centered-container"></div>
+<div class="padding">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <!-- User Profile Card -->
+            <div class="card card-no-border">
+                <img class="card-img-top" [src]="user?.profileImageUrl" alt="Card image cap">
+                <div class="card-body little-profile text-center">
+                    <div class="pro-img"><img [src]="user?.profileImageUrl" alt="user"></div>
+                    <h3 class="m-b-0">{{ user?.firstName }} {{ user?.lastName }}</h3>
+                    <!-- Your Follow button here -->
+                    <a href="javascript:void(0)" class="m-t-10 waves-effect waves-dark btn btn-primary btn-md btn-rounded" data-abc="true">Follow</a>
+                    <div class="row text-center m-t-20">
+                        <div class="col-lg-4 col-md-4 m-t-20">
+                            <h3 class="m-b-0 font-light">{{ user?.weight }}</h3><small>Weight</small>
+                        </div>
+                        <div class="col-lg-4 col-md-4 m-t-20">
+                            <h3 class="m-b-0 font-light">{{ user?.height }}</h3><small>Height</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Meal Container -->
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-8">
+            <!-- Meals List -->
+            <div class="meal-list">
+                <div class="row">
+                    <!-- Inside the ngFor loop for meals -->
+                    <div class="col-md-4 mb-4" *ngFor="let meal of listMeals" [id]="'meal-' + meal.mealId">
+                        <div class="card h-100">
+                            <img [src]="meal.mealImageUrl" class="card-img-top" alt="Meal Image">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ meal.mealName }}</h5>
+                                <p class="card-text">
+                                    <strong>Total Calories:</strong> {{ meal.totalCals }}<br>
+                                    <strong>Total Carbs:</strong> {{ meal.totalCarbs }}<br>
+                                    <strong>Total Proteins:</strong> {{ meal.totalprots }}
+                                </p>
+                                <!-- Display foods when expanded -->
+                                <div *ngIf="isExpanded(meal.mealId)">
+                                    <ul>
+                                        <li *ngFor="let food of mealFoods[meal.mealId]">{{ food.foodName }}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <!-- Your card footer content here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

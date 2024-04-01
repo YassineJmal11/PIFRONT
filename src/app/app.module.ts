@@ -28,7 +28,11 @@ import { UpdateTaskComponent } from './goalTrack/update-task/update-task.compone
 import { UpdateGoalComponent } from './goalTrack/update-goal/update-goal.component';
 import { AfterLoginComponent } from './after-login/after-login.component';
 import { FullCalendarModule } from '@fullcalendar/angular'; // FullCalendar module
-import dayGridPlugin from '@fullcalendar/daygrid'; // DayGrid plugin
+import dayGridPlugin from '@fullcalendar/daygrid';
+import { AddMealComponent } from './diet/add-meal/add-meal.component';
+import { AllFoodsComponent } from './diet/all-foods/all-foods.component';
+import { ListmealsComponent } from './diet/listmeals/listmeals.component';
+import { ClientProfileComponent } from './diet/client-profile/client-profile.component'; // DayGrid plugin
 
 @NgModule({
   declarations: [
@@ -53,7 +57,11 @@ import dayGridPlugin from '@fullcalendar/daygrid'; // DayGrid plugin
    AddTaskComponent,
    UpdateTaskComponent,
    UpdateGoalComponent,
-   AfterLoginComponent
+   AfterLoginComponent,
+   AddMealComponent,
+   AllFoodsComponent,
+   ListmealsComponent,
+   ClientProfileComponent
   ],
   imports: [
     BrowserModule,
