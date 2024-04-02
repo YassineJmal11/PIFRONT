@@ -16,6 +16,9 @@ import { AddTaskComponent } from './goalTrack/add-task/add-task.component';
 import { UpdateGoalComponent } from './goalTrack/update-goal/update-goal.component';
 import { UpdateTaskComponent } from './goalTrack/update-task/update-task.component';
 import { AfterLoginComponent } from './after-login/after-login.component';
+import { RelaxationExerciseAddComponent } from './wellbeing/addexercise/relaxation-exercise-add/relaxation-exercise-add.component';
+import { RelaxationExerciseListComponent } from './wellbeing/allexercise/relaxation-exercise-list/relaxation-exercise-list.component';
+import { RelaxationExerciseUpdateComponent } from './wellbeing/updateexercise/relaxation-exercise-update/relaxation-exercise-update.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -52,8 +55,11 @@ const routes: Routes = [
 
 
   { path: 'profile', component: ProfileComponent },
-  { path: 'homeadmin', component: TemplateBackComponent }
+  { path: 'homeadmin', component: TemplateBackComponent },
   
+  { path: 'addexercise', component: RelaxationExerciseAddComponent },
+  { path: 'listexercises', component: RelaxationExerciseListComponent },
+  { path: 'relaxation-exercise-update/:id', component: RelaxationExerciseUpdateComponent }
 
 ];
 

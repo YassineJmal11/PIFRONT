@@ -1,0 +1,78 @@
+/* relaxation-exercise-add.component.css */
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Centrer verticalement */
+    background-image: url('/assets/images/Meditation.jpeg'); /* Chemin vers votre image de fond */
+    background-size: 100% auto; /* Ajuster la taille de l'image pour couvrir tout le corps de la page */
+    background-position: center; /* Centrer l'image de fond */
+    margin: 1000; /* Supprimer les marges par défaut du corps */
+    padding: 500; /* Supprimer les rembourrages par défaut du corps */
+  }
+  
+  .form-wrapper {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 100%;
+    margin-top: 100px; /* Ajouter une marge supérieure pour déplacer le formulaire vers le bas */
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  label {
+    font-weight: bold;
+  }
+  
+  input[type="text"],
+  input[type="number"],
+  textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+  
+  button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  input[type="file"] {
+    display: none;
+  }
+  
+  /* Style personnalisé pour le bouton de fichier */
+  input[type="file"] + label {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  input[type="file"] + label:hover {
+    background-color: #0056b3;
+  }
+  
