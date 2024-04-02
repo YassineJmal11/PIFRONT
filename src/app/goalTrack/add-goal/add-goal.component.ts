@@ -5,6 +5,8 @@ import { GoalServiceService } from 'src/app/services/goal-service.service';
 import { TaskServiceService } from 'src/app/services/task-service.service';
 import { TokenStorageService } from 'src/app/user/token-storage.service';
 import { UsersService } from 'src/app/user/users.service';
+import { ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-add-goal',
@@ -15,17 +17,46 @@ export class AddGoalComponent implements OnInit{
   userId:number=1;
   currentUser: any;
 
-  ngOnInit() {
-    this.currentUser = this.token.getUser();
-   // this.userId=this.currentUser.id;
-  }
+  
+  
   constructor(
     private gs: GoalServiceService,
     private ts: TaskServiceService,
     private token: TokenStorageService,
     private usersService: UsersService,
-    private route : Router
+    private route: ActivatedRoute, // Import ActivatedRoute instead of Router
+    private router: Router
   ) {}
+
+
+  ngOnInit() {
+    this.currentUser = this.token.getUser();
+   // this.userId=this.currentUser.id;
+   this.route.queryParams.subscribe(params => {
+    const selectedStartDate = params['startDate'];
+    const selectedDeadlineDate = params['deadline'];
+    if (selectedStartDate) {
+      // Convert the string to a Date object
+      let startDate = new Date(selectedStartDate);
+      startDate.setDate(startDate.getDate() + 1);
+      // Convert Date object to a string in YYYY-MM-DD format
+      const formattedStartDate = startDate.toISOString().split('T')[0];
+
+      this.registerForm.patchValue({ startDate: formattedStartDate }); // Assign the formatted string
+    }
+
+    if (selectedDeadlineDate) {
+      // Convert the string to a Date object
+      let deadline = new Date(selectedDeadlineDate);
+      deadline.setDate(deadline.getDate() + 1);
+
+      // Convert Date object to a string in YYYY-MM-DD format
+      const formattedDeadlineDate = deadline.toISOString().split('T')[0];
+
+      this.registerForm.patchValue({ deadline: formattedDeadlineDate }); // Assign the formatted string
+    }
+  });
+  }
   registerForm=new FormGroup({
     title:new FormControl('',[Validators.required,Validators.minLength(5)]),
     description:new FormControl('',[Validators.required,Validators.minLength(5)]),
@@ -35,7 +66,7 @@ export class AddGoalComponent implements OnInit{
 
   save(){
     this.gs.createGoalAndSetUser(this.registerForm.value as any,this.userId).subscribe(
-      ()=>{this.route.navigateByUrl('/allgoals')}
+      ()=>{this.router.navigateByUrl('/allgoals')}
      )
   }
   reset(){

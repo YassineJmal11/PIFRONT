@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { Goal } from '../model/Goal';
 import { Task } from '../model/Task';
 import { NgIfContext } from '@angular/common';
@@ -9,8 +9,10 @@ import { Chart } from 'chart.js';
 import { TokenStorageService } from 'src/app/user/token-storage.service';
 import { Router } from '@angular/router';
 import { UsersService } from 'src/app/user/users.service';
+import { CalendarOptions } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
-import { CalendarOptions } from '@fullcalendar/core'; // useful for typechecking
+import interactionPlugin from '@fullcalendar/interaction'; // Import interaction plugin
+
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 
@@ -33,7 +35,6 @@ export class AllGoalsComponent implements OnInit {
   showDropdown: boolean = false;
   chartDisplayMap: { [goalId: number]: boolean } = {};
   chart: any;
-  canvas: any;
   ctx: any;
   averageProgress: number = 0;
   selectedSortingOption: string = ''; 
@@ -43,7 +44,23 @@ export class AllGoalsComponent implements OnInit {
   currentUser: any;
   userId:number=1;
   calendarEvents: any[] = []; // Array to store calendar events
+  startDate!: Date  ;
+  endDate!: Date  ;
+  selectedStartDate!: Date|null;
+  selectedEndDate!: Date|null;
   @ViewChild('emptySearch') emptySearch!: TemplateRef<NgIfContext<boolean>>;
+  @ViewChild('canvas') canvas!: ElementRef;
+  @ViewChild('goalCompletionChart') goalCompletionChart!: ElementRef;
+  @ViewChild('taskStatusPieChart') taskStatusPieChart!: ElementRef;
+  @ViewChild('goalStatusPieChart') goalStatusPieChart!: ElementRef;
+
+  chartElements = {
+    'canvas': this.canvas,
+    'goalCompletionChart': this.goalCompletionChart,
+    'taskStatusPieChart': this.taskStatusPieChart,
+    'goalStatusPieChart': this.goalStatusPieChart
+  };
+
 
 
 
@@ -54,6 +71,34 @@ export class AllGoalsComponent implements OnInit {
     private usersService: UsersService,
     private router : Router
   ) {}
+
+  handleDateClick(info: any) {
+    console.log('Clicked date:', info.date);
+    if (!this.selectedStartDate) {
+      // If start date is not selected, save the clicked date as start date
+      this.selectedStartDate = info.date;
+      console.log('Selected start date:', this.selectedStartDate);
+    } else {
+      // If start date is selected, save the clicked date as end date
+      this.selectedEndDate = info.date!;
+      console.log('Selected deadline:', this.selectedEndDate);
+      
+      // Redirect to add-goal page with selected dates
+      this.router.navigate(['/addGoal'], {
+        queryParams: {
+          startDate: this.selectedStartDate!.toISOString(),
+          deadline: this.selectedEndDate!.toISOString()
+        }
+      });
+  
+      // Reset selected start and end dates for future selections
+      this.selectedStartDate = null;
+      this.selectedEndDate = null;
+    }
+  }
+  
+  
+  
 
   exportChartToPDF(chartId: string) {
     const chartCanvas = document.getElementById(chartId) as HTMLCanvasElement;
@@ -68,6 +113,46 @@ export class AllGoalsComponent implements OnInit {
       pdf.save('chart.pdf');
     });
   }
+
+
+
+  exportAllChartsToPDF() {
+    const pdf = new jsPDF();
+  
+    const options = { background: 'white', scale: 3 };
+  
+    const chartIds = ['canvas', 'goalCompletionChart', 'taskStatusPieChart', 'goalStatusPieChart'];
+  
+    let posY = 0;
+    let remainingHeight = pdf.internal.pageSize.getHeight(); // Initialize remaining height for the first page
+  
+    chartIds.forEach(chartId => {
+      const chartCanvas = document.getElementById(chartId) as HTMLCanvasElement;
+  
+      html2canvas(chartCanvas, options).then(canvas => {
+        const imgData = canvas.toDataURL('image/png');
+        const imgHeight = (canvas.height * 210) / canvas.width; // Scale width to fit A4 size
+  
+        if (imgHeight > remainingHeight) {
+          pdf.addPage(); // Add new page if the chart doesn't fit on the current page
+          posY = 0; // Reset posY for the new page
+          remainingHeight = pdf.internal.pageSize.getHeight(); // Reset remainingHeight for the new page
+        }
+  
+        pdf.addImage(imgData, 'PNG', 0, posY, 210, imgHeight);
+        posY += imgHeight;
+        remainingHeight -= imgHeight;
+  
+        if (chartId === chartIds[chartIds.length - 1]) {
+          pdf.save('all_charts.pdf');
+        }
+      });
+    });
+  }
+  
+
+
+  
   
   ngOnInit() {
     this.currentUser = this.token.getUser();
@@ -77,8 +162,12 @@ export class AllGoalsComponent implements OnInit {
   }
 
   calendarOptions: CalendarOptions = {
-    plugins: [dayGridPlugin]
+    plugins: [dayGridPlugin, interactionPlugin], // Include interaction plugin
+    // Add any other options as needed
+    dateClick: this.handleDateClick.bind(this) // Bind the dateClick event to your method
   };
+  
+
 
   fetchCalendarEvents() {
 
@@ -353,6 +442,11 @@ setupGoalStatusPieChart() {
     );
   }
 }
+
+
+
+
+
 
 
     onSearch() {

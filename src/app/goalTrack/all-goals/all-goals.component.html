@@ -256,6 +256,11 @@
                                             <h4 class="name"><i class="bi bi-bar-chart"></i> Stats</h4>
                                             
                                         </div>
+                                       
+                                        
+                                          
+                                        <button class="btn btn-info" (click)="exportAllChartsToPDF()">Export All Charts to PDF</button>
+
                                         <div class="quote2 pl-2">Total number of goals: {{ listGoals.length }}</div>
             
                                         <div class="quote2 pl-2">Number of completed goals: {{ listCompleteGoals.length }}</div>
@@ -318,9 +323,10 @@
                                 <full-calendar
                                     [options]="calendarOptions"
                                     [events]="calendarEvents"
-                                  
+                                    (dateClick)="handleDateClick($event)"
                                 ></full-calendar>
                             </div>
+                            
                             
 
                    
