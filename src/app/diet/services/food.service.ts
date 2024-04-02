@@ -30,4 +30,7 @@ export class FoodService {
   deleteFood(foodId: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/delete/${foodId}`);
   }
+  getFoodByName(foodName: string): Observable<Food> {
+    return this.http.get<Food>(`${this.apiUrl}/byname?foodName=${foodName}`);
+  }
 }

@@ -32,7 +32,7 @@
                     <!-- Inside the ngFor loop for meals -->
                     <div class="col-md-4 mb-4" *ngFor="let meal of listMeals" [id]="'meal-' + meal.mealId">
                         <div class="card h-100">
-                            <img [src]="meal.mealImageUrl" class="card-img-top" alt="Meal Image">
+                            <img [src]="meal.mealImageUrl" class="card-img-top clickable-image" alt="Meal Image" (click)="toggleFoods(meal.mealId)">
                             <div class="card-body">
                                 <h5 class="card-title">{{ meal.mealName }}</h5>
                                 <p class="card-text">
@@ -56,5 +56,18 @@
             </div>
         </div>
     </div>
+    <div class="row justify-content-center mt-3">
+        <div class="col-md-8 text-center">
+          <h4>Total Protein Intake: {{ totalProtein }} grams</h4>
+          <p>Total Protein Needed: {{ totalProteinNeeded }}g</p>
+          <div class="chart-container">
+            <div class="bar intake-bar" [style.height.px]="totalProtein"></div>
+            <div class="bar needed-bar" [style.height.px]="totalProteinNeeded"></div>
+          </div>
+        </div>
+      
+      </div>
+      
+      
 </div>
 

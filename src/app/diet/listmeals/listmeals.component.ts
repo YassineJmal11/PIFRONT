@@ -72,6 +72,14 @@ export class ListmealsComponent implements OnInit {
         this.mealFoods[mealId] = foods;
       });
   }
+  removeFoodFromMeal(mealId: number, foodId: number): void {
+    this.mealService.removeFoodFromMeal(mealId, foodId)
+      .subscribe(() => {
+        // Optionally, perform any additional actions after the food is removed from the meal
+        // For example, you could update the list of foods for the meal
+        this.getFoodsForMeal(mealId);
+      });
+  }
 
   // Method to navigate to the "allfoods" route and pass the selected meal ID
   navigateToAllFoods(mealId: number): void {

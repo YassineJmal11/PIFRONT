@@ -12,7 +12,8 @@ import { FoodService } from '../services/food.service';
 })
 export class AllFoodsComponent implements OnInit {
   listFood: Food[] = [];
-  selectedMealId: number | null = null; // Define selectedMealId property
+  selectedMealId: number | null = null;
+  searchTerm: string = ''; // Define searchTerm property
 
   constructor(
     private foodService: FoodService,
@@ -22,15 +23,13 @@ export class AllFoodsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getMealIdFromRoute(); // Call method to get mealId from route
+    this.getMealIdFromRoute();
     this.getAllFoods();
   }
 
   getMealIdFromRoute(): void {
     this.route.paramMap.subscribe(params => {
-      // Extract mealId from route parameters
       const mealIdParam = params.get('mealId');
-      // Convert mealId to a number (if provided)
       this.selectedMealId = mealIdParam ? +mealIdParam : null;
     });
   }
@@ -49,12 +48,41 @@ export class AllFoodsComponent implements OnInit {
         // Perform any additional actions if needed
       });
   }
+
   handleFoodClick(foodId: number): void {
     console.log('Food clicked:', foodId);
     if (this.selectedMealId !== null) {
       this.associateFoodWithMeal(this.selectedMealId, foodId);
     } else {
       console.log("No meal selected. Cannot associate food.");
+    }
+  }
+
+  searchFood(event: any): void {
+    const searchTerm = (event.target as HTMLInputElement).value; // Extract value from the input element
+    if (searchTerm.trim() !== '') {
+      // Implement search functionality here
+      // Filter foods based on search term
+      this.listFood = this.listFood.filter(food =>
+        food.foodName.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    } else {
+      this.getAllFoods(); // If search term is empty, display all foods
+    }
+  }
+
+  searchFoodByName(foodName: string): void {
+    if (foodName.trim() !== '') {
+      this.foodService.getFoodByName(foodName)
+        .subscribe(food => {
+          if (food) {
+            this.listFood = [food]; // Replace the list with the found food
+          } else {
+            console.log('Food not found');
+          }
+        });
+    } else {
+      console.log('Please enter a valid food name');
     }
   }
 }

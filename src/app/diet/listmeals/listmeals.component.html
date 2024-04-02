@@ -11,8 +11,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
+    
     <!-- Your HTML content here -->
     <div class="container centered-container">
+        
         <!-- User Container -->
         <div class="user-container">
             <!-- Loop through users and display each user -->
@@ -33,6 +35,7 @@
     
         <!-- Meal Container -->
         <div class="meal-container">
+            <a [routerLink]="['/addmeal']" class="btn btn-primary">Add New Meal</a>
             <!-- Meals List -->
             <div class="meal-list">
                 <div class="card-deck">
@@ -53,7 +56,7 @@
                             <!-- Display foods when expanded -->
                             <div *ngIf="isExpanded(meal.mealId)">
                                 <ul>
-                                    <li *ngFor="let food of mealFoods[meal.mealId]">{{ food.foodName }}</li>
+                                    <li *ngFor="let food of mealFoods[meal.mealId]" class="clickable-food" (click)="removeFoodFromMeal(meal.mealId, food.foodId)">{{ food.foodName }}</li>
                                 </ul>
                             </div>
                             <!-- Buttons -->
@@ -65,7 +68,9 @@
                 </div>
             </div>
         </div>
+
     </div>
+
     <!-- Bootstrap JS (optional) -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 </body>

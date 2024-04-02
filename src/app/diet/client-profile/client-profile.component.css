@@ -204,3 +204,23 @@ p {
     background-size: cover;
     background-repeat: no-repeat;
 }
+
+.chart-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.bar {
+  width: 50px;
+  margin-right: 10px;
+  height: 200px; /* Set the height to 200px to make the bars twice the size */
+}
+
+.intake-bar {
+  background-color: #ff4d4d; /* Red color for protein intake */
+}
+
+.needed-bar {
+  background-color: #4da6ff; /* Blue color for protein needed */
+}

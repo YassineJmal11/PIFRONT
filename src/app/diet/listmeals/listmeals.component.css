@@ -135,7 +135,7 @@
 /* Add this code to your CSS file */
 
 body {
-    background-image: url('src\assets\images\plsss.webp');
+    background-image: url('src/assets/images/plsss.webp');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -163,4 +163,26 @@ body {
 
 .clickable-image {
     cursor: pointer;
+}
+a.btn.btn-primary {
+    /* Your CSS styles here */
+    /* For example: */
+    background-color: #ff3c00a2; /* Blue background color */
+    color: #fff; /* White text color */
+    padding: 10px 20px; /* Padding for the button */
+    border-radius: 5px; /* Rounded corners */
+    text-decoration: none; /* Remove underline */
+  }
+  
+  a.btn.btn-primary:hover {
+    /* Hover styles */
+    background-color: #b30000; /* Darker blue background color on hover */
+  }
+  .clickable-food {
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Add transition for smoother effect */
+}
+
+.clickable-food:hover {
+    background-color: #f0f0f0; /* Change background color on hover */
 }

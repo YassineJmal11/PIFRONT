@@ -21,6 +21,8 @@ export class ClientProfileComponent implements OnInit, OnDestroy {
   isLoading: boolean = true; // Flag to indicate data loading state
   private routeSub: Subscription | undefined;
   listMeals: Meal[] = []; // Define listMeals property
+  totalProtein: number = 0;
+  totalProteinNeeded: number = 0;
 
   constructor(private route: ActivatedRoute, private mealService: MealService) {}
 
@@ -29,6 +31,7 @@ export class ClientProfileComponent implements OnInit, OnDestroy {
       this.userId = +params.get('userId')! || 0;
       this.fetchUserDetails(); // Fetch user details based on the ID
       this.fetchUserMeals(); // Fetch meals associated with the user
+      this.fetchTotalProteinForUser(); 
     });
   }
 
@@ -44,6 +47,7 @@ export class ClientProfileComponent implements OnInit, OnDestroy {
         (user: User) => {
           this.user = user; // Assign the fetched user details
           this.isLoading = false; // Data loading completed
+          this.fetchTotalProteinForUser(); 
         },
         (error) => {
           console.error('Error fetching user details:', error);
@@ -94,6 +98,23 @@ export class ClientProfileComponent implements OnInit, OnDestroy {
           // Handle error (e.g., show error message)
         }
       );
+  }
+  fetchTotalProteinForUser(): void {
+    this.mealService.calculateTotalProteinForUser(this.userId).subscribe(
+      (totalProtein: number) => {
+        this.totalProtein = totalProtein;
+        this.totalProteinNeeded = this.calculateProteinNeeded(this.user!.weight); // Calculate protein needed
+      },
+      (error) => {
+        console.error('Error fetching total protein for user:', error);
+      }
+    );
+  }
+  calculateProteinNeeded(weight: number): number {
+    // Assuming the protein requirement is a percentage of the user's weight
+    // You can adjust this formula based on your specific requirements or recommendations
+    const proteinPercentage = 0.8; // For example, 0.8 represents 80% of the weight
+    return weight * proteinPercentage;
   }
   
 }

@@ -68,5 +68,12 @@ export class MealService {
       return this.http.get<User>(url);
     }
     
-
+  // Add the method to calculate total protein for a user
+  calculateTotalProteinForUser(userId: number): Observable<number> {
+    const url = `${this.baseUrl}/user/${userId}/totalProtein`;
+    return this.http.get<number>(url);
+  }
+  removeFoodFromMeal(mealId: number, foodId: number): Observable<any> {
+    return this.http.delete<any>(`${this.baseUrl}/${mealId}/foods/${foodId}`);
+  }
 }
