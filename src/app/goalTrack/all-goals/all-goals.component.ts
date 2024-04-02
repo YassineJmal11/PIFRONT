@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 import { UsersService } from 'src/app/user/users.service';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import { CalendarOptions } from '@fullcalendar/core'; // useful for typechecking
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 @Component({
   selector: 'app-all-goals',
@@ -53,6 +55,20 @@ export class AllGoalsComponent implements OnInit {
     private router : Router
   ) {}
 
+  exportChartToPDF(chartId: string) {
+    const chartCanvas = document.getElementById(chartId) as HTMLCanvasElement;
+
+    html2canvas(chartCanvas).then(canvas => {
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF();
+      const imgWidth = 208;
+      const imgHeight = canvas.height * imgWidth / canvas.width;
+
+      pdf.addImage(imgData, 0, 0, imgWidth, imgHeight);
+      pdf.save('chart.pdf');
+    });
+  }
+  
   ngOnInit() {
     this.currentUser = this.token.getUser();
     this.fetchData();

@@ -228,6 +228,8 @@
                                             <div [hidden]="!chart">
                                                 <canvas id="canvas"></canvas>
                                               </div>
+                                              <button class="btn-info" (click)="exportChartToPDF('canvas')">Export to PDF</button>
+
                                     </div>
                                    </div>
             
@@ -239,6 +241,8 @@
                                         <div [hidden]="!chart">
                                             <canvas id="goalCompletionChart"></canvas>
                                           </div>
+                                          <button class="btn-info" (click)="exportChartToPDF('goalCompletionChart')">Export to PDF</button>
+
                                 </div>
                                </div>
             
@@ -292,6 +296,8 @@
                                     <canvas id="taskStatusPieChart"></canvas>
                                   </div>
                                 </div>
+                                <button class="btn-info" (click)="exportChartToPDF('taskStatusPieChart')">Export to PDF</button>
+
                               </div>
             
                               <div class="two">   
@@ -302,6 +308,8 @@
                                   <div [hidden]="!chart">
                                     <canvas id="goalStatusPieChart"></canvas>
                                   </div>
+                                  <button class="btn-info" (click)="exportChartToPDF('goalStatusPieChart')">Export to PDF</button>
+
                                 </div>
                               </div>
 

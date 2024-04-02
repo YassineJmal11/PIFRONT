@@ -24,6 +24,8 @@
     "bootstrap": "^5.3.3",
     "chart.js": "^4.4.2",
     "date-fns": "^3.6.0",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^2.5.1",
     "ng-chartjs": "^0.2.8",
     "ngx-font-picker": "^16.0.0",
     "rxjs": "~7.8.0",
