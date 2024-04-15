@@ -67,7 +67,9 @@
           <th>Username</th>
           <th>First Name</th>
           <th>Last Name</th>
+          <th>Diploma</th>
           <th>Account Status</th>
+    
           <th>Actions</th>
         </tr>
       </thead>
@@ -77,6 +79,8 @@
           <td>{{ user.username }}</td>
           <td>{{ user.firstName }}</td>
           <td>{{ user.lastName }}</td>
+          <td>{{ user.diploma }}</td>
+
           <td>{{ user.accountStatus }}</td>
           <td>
             <select [(ngModel)]="user.accountStatus">

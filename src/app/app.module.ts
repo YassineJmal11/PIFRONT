@@ -23,6 +23,7 @@ import { AlluserComponent } from './user/alluser/alluser.component';
 import { ResetPasswordComponent } from './user/reset-password/reset-password.component';
 import { VerifyComponent } from './user/verify/verify.component';
 import { SignupadminComponent } from './user/signupadmin/signupadmin.component';
+import { CloudinaryModule } from '@cloudinary/ng';
 
 
 @NgModule({
@@ -54,9 +55,10 @@ import { SignupadminComponent } from './user/signupadmin/signupadmin.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    CloudinaryModule
     
   ],
-  providers: [ authInterceptorProviders],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,91 +1,144 @@
-import { Component } from '@angular/core';
-import { AuthService } from '../auth.service';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 import { UsersService } from '../users.service';
+import { Observable, map } from 'rxjs';
 @Component({
   selector: 'app-signupadmin',
   templateUrl: './signupadmin.component.html',
   styleUrls: ['./signupadmin.component.css']
 })
 export class SignupadminComponent {
-  form: any = {
-    username: null,
-    firstName: null,
-    lastName: null,
-    email: null,
-    password: null,
-    phoneNumber: null,
-    dateOfBirth: null,
-    gender: null,
-    weight: null,
-    height: null,
-    diploma: null,
-    photo: null
-  };
-
-  selectedRoles: string[] = [];
-  availableRoles: string[] = ['CUSTOMER', 'NUTRITIONIST', 'PSYCHOLOGIST', 'COACH'];
-  isSuccessful = false;
-  isSignUpFailed = false;
+  signUpForm!: FormGroup;
+  loading = false;
+  submitted = false;
+  error = '';
+  currentStep: number = 1;
+  usernameExists: boolean = false;
   errorMessage = '';
-  page = 1;
-  usernameExists = false;
-
-  constructor(private authService: AuthService, private router: Router, private userService: UsersService) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private authService: AuthService,
+    private userService: UsersService
+  ) { }
 
   ngOnInit(): void {
+    this.signUpForm = this.formBuilder.group({
+      username: ['', [Validators.required], [this.uniqueUsernameValidator.bind(this)]],
+      firstName: ['', [Validators.required, Validators.pattern('[a-zA-Z]*')]],
+      lastName: ['', [Validators.required, Validators.pattern('[a-zA-Z]*')]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      phoneNumber: ['', [Validators.required, Validators.pattern(/^\+216\d{8}$/)]],
+      dateOfBirth: ['', Validators.required],
+      gender: ['', Validators.required],
+      weight: [null],
+      height: [null],
+      diploma: [null],
+      photo: [null, Validators.required],
+      roles: [['CUSTOMER'], Validators.required]
+    });
   }
 
-  onSubmit(): void {
-    const { username, password, firstName, lastName, email, phoneNumber, dateOfBirth, gender, weight, height, diploma, photo } = this.form;
-    
-    this.authService.signup(username, password, firstName, lastName, email, phoneNumber, dateOfBirth, gender, weight, height, this.selectedRoles, diploma, photo).subscribe(
-      data => {
-        console.log(data);
-        this.isSuccessful = true;
-        this.isSignUpFailed = false;
-        this.router.navigate(['/ALL']); // Redirige vers la page de connexion après inscription réussie
-      },
-      err => {
-        this.errorMessage = err.error.message;
-        this.isSignUpFailed = true;
+  get formControls() {
+    return this.signUpForm.controls;
+  }
+
+  onFileChange(event: Event, controlName: string) {
+    const fileInput = event.target as HTMLInputElement;
+    if (fileInput && fileInput.files && fileInput.files.length > 0) {
+      const file = fileInput.files[0];
+      this.signUpForm.patchValue({
+        [controlName]: file
+      });
+    } else {
+      // Si aucun fichier n'est sélectionné, attribuer null au champ "diploma" seulement si le rôle est "CUSTOMER"
+      if (controlName === 'diploma' && this.selected('CUSTOMER')) {
+        this.signUpForm.get('diploma')?.setValue(null);
       }
+    }
+  }
+  nextStep() {
+    this.currentStep++;
+  }
+
+  prevStep() {
+    this.currentStep--;
+  }
+  
+  onSubmit() {
+    this.submitted = true;
+    if (this.signUpForm.invalid) {
+      return;
+    }
+    const formValue = this.signUpForm.value;
+    const weight = formValue.weight !== null ? formValue.weight.toString() : null;
+    const height = formValue.height !== null ? formValue.height.toString() : null;
+
+    this.loading = true;
+  
+    this.authService.signUp(
+      formValue.username,
+      formValue.firstName,
+      formValue.lastName,
+      formValue.email,
+      formValue.password,
+      formValue.phoneNumber,
+      formValue.dateOfBirth,
+      formValue.gender,
+      weight,
+      height,
+      formValue.diploma,
+      formValue.photo,
+      formValue.roles
+    )
+      .subscribe(
+        data => {
+          this.router.navigate(['/signin']);
+        },
+        error => {
+          this.error = error;
+          this.loading = false;
+        }
+      );
+  }
+
+  selected(role: string): boolean {
+    const roles = this.signUpForm.value.roles;
+    return roles && roles.includes(role);
+  }
+  uniqueUsernameValidator(control: FormControl): Observable<any> {
+    return this.userService.getUserByUsername(control.value).pipe(
+      map(response => {
+        if (response.exists) {
+          return { usernameExists: true };
+        } else {
+          return null;
+        }
+      })
     );
   }
 
-  goToSignInPage(): void {
-    this.router.navigate(['/ALL']); // Redirige vers la page de connexion
-  }
-
-  nextPage() {
-    this.page++;
-  }
-
-  prevPage() {
-    this.page--;
-  }
-
-  shouldDisplayDiplomaUpload(): boolean {
-    return this.selectedRoles.includes('NUTRITIONIST') || this.selectedRoles.includes('PSYCHOLOGIST') || this.selectedRoles.includes('COACH')|| this.selectedRoles.includes('ADMIN');
-  }
-
   checkUsernameAvailability() {
-    const username = this.form.username;
+    const username = this.signUpForm.get('username')?.value;
     if (username) {
       this.userService.getUserByUsername(username).subscribe(
         response => {
           this.usernameExists = response.exists;
           if (this.usernameExists) {
             console.log('Username already exists. Please choose another one.');
-            // Optionally, you can display a message to the user
+            // Afficher un message d'erreur
             this.errorMessage = 'Username already exists. Please choose another one.';
           }
         },
         error => {
           console.error('Error checking username availability:', error);
-          // Handle error response, if any
+          // Gérer la réponse d'erreur, le cas échéant
         }
       );
     }
   }
 }
+
