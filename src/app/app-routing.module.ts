@@ -16,6 +16,10 @@ import { AddTaskComponent } from './goalTrack/add-task/add-task.component';
 import { UpdateGoalComponent } from './goalTrack/update-goal/update-goal.component';
 import { UpdateTaskComponent } from './goalTrack/update-task/update-task.component';
 import { AfterLoginComponent } from './after-login/after-login.component';
+import { AddCommunityComponent } from './forum/community/add-community/add-community.component';
+import { FeedComponent } from './forum/community/feed/feed.component';
+import { ViewCommunityComponent } from './forum/community/view-community/view-community.component';
+import { CreatePostComponent } from './forum/community/post/create-post/create-post.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -41,6 +45,22 @@ const routes: Routes = [
   {
     path:'updateTask/:id',
   component:UpdateTaskComponent
+  },
+
+  {
+    path:'community/:id',
+    component:ViewCommunityComponent
+
+  },
+  {
+    path:"addCommunity",
+    component:AddCommunityComponent
+  },
+  { path: "addPost", component: CreatePostComponent },
+
+  {
+    path:"feed",
+    component:FeedComponent
   },
   {
     path:'afterlogin',
