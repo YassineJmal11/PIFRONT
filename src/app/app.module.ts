@@ -13,6 +13,14 @@ import { HomeAComponent } from './Frontend/home-a/home-a.component';
 import { SigninComponent } from './user/signin/signin.component';
 
 import { ProfileComponent } from './user/profile/profile.component';
+
+
+
+import { AlluserComponent } from './user/alluser/alluser.component';
+import { ResetPasswordComponent } from './user/reset-password/reset-password.component';
+import { VerifyComponent } from './user/verify/verify.component';
+import { SignupadminComponent } from './user/signupadmin/signupadmin.component';
+
 import  { FooterBackComponent } from './BackOffice/footer-back/footer-back.component';
 import { TemplateBackComponent } from './BackOffice/template-back/template-back.component';
 import { HeaderBackComponent } from './BackOffice/header-back/header-back.component';
@@ -29,7 +37,7 @@ import { UpdateGoalComponent } from './goalTrack/update-goal/update-goal.compone
 import { AfterLoginComponent } from './after-login/after-login.component';
 import { FullCalendarModule } from '@fullcalendar/angular'; // FullCalendar module
 import dayGridPlugin from '@fullcalendar/daygrid'; // DayGrid plugin
-
+import { ForgotPasswordComponent } from './user/forgot-password/forgot-password.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,7 +48,7 @@ import dayGridPlugin from '@fullcalendar/daygrid'; // DayGrid plugin
     SignupComponent,
     HomeAComponent,
     SigninComponent,
-   
+    ForgotPasswordComponent,
     ProfileComponent,
     FooterBackComponent,
     TemplateBackComponent,
@@ -53,6 +61,11 @@ import dayGridPlugin from '@fullcalendar/daygrid'; // DayGrid plugin
    AddTaskComponent,
    UpdateTaskComponent,
    UpdateGoalComponent,
+   EditComponent,
+   AlluserComponent,
+   ResetPasswordComponent,
+   VerifyComponent,
+   SignupadminComponent,
    AfterLoginComponent
   ],
   imports: [

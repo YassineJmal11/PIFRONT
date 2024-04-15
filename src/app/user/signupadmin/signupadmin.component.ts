@@ -4,13 +4,12 @@ import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { UsersService } from '../users.service';
 import { Observable, map } from 'rxjs';
-
 @Component({
-  selector: 'app-signup',
-  templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.css']
+  selector: 'app-signupadmin',
+  templateUrl: './signupadmin.component.html',
+  styleUrls: ['./signupadmin.component.css']
 })
-export class SignupComponent implements OnInit {
+export class SignupadminComponent {
   signUpForm!: FormGroup;
   loading = false;
   submitted = false;
@@ -142,3 +141,4 @@ export class SignupComponent implements OnInit {
     }
   }
 }
+

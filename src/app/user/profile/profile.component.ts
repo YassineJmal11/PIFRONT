@@ -24,15 +24,6 @@ export class ProfileComponent implements OnInit {
   }
 
   editProfile(): void {
-    this.usersService.updateUser(this.currentUser.id, this.currentUser).subscribe(
-      data => {
-        console.log(data); // Affichez la réponse du backend pour la mise à jour du profil
-        // Vous pouvez également ajouter une notification ou un message de succès ici
-      },
-      error => {
-        console.log(error); // Gérez les erreurs en cas d'échec de la mise à jour du profil
-        // Vous pouvez également afficher un message d'erreur à l'utilisateur ici
-      }
-    );
-  }
+    this.router.navigate(['/edit']);
+}
 }

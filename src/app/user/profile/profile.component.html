@@ -1,115 +1,32 @@
 <app-after-login></app-after-login>
-
-<div class="container" *ngIf="currentUser; else loggedOut">
-  <header class="jumbotron">
-    <h3 class="display-4">
-      <strong>{{ currentUser.username }}</strong> Profile
-    </h3>
-  </header>
-  
-  <!-- Ajout de la photo de profil -->
-  <div class="text-center mb-3">
-    <img src="{{ currentUser.photo }}" alt="User Photo" class="img-fluid rounded-circle" style="width: 150px; height: 150px;">
-  </div>
-  
-  <div class="card mb-3">
-    <div class="card-body">
-      <h5 class="card-title">Token:</h5>
-      <p class="card-text">{{ currentUser.accessToken.substring(0, 20) }} ...
-        {{ currentUser.accessToken.substr(currentUser.accessToken.length - 20) }}</p>
+<div class="container centered-container bg-light"> <!-- Ajout de l'arrière-plan -->
+    <div class="padding">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <!-- User Profile Card -->
+                <div class="card card-no-border">
+                    <img class="card-img-top" [src]="currentUser.profileImageUrl" alt="Card image cap">
+                    <div class="card-body little-profile text-center">
+                        <div class="pro-img"><img [src]="currentUser.profileImageUrl" alt="user"></div>
+                        <h3 class="m-b-0">{{ currentUser.firstName }} {{ currentUser.lastName }}</h3>
+                        <!-- Bouton Edit -->
+                        <button class="m-t-10 waves-effect waves-dark btn btn-primary btn-md btn-rounded m-2" (click)="editProfile()">Edit</button> <!-- Ajout de la marge -->
+                        <!-- Emoji pour la messagerie -->
+                        <span style="font-size: 20px;">📧</span>
+                        <!-- Bouton Logout -->
+                        <button class="m-t-10 waves-effect waves-dark btn btn-danger btn-md btn-rounded m-2" (click)="logout()">Logout</button> <!-- Ajout de la marge -->
+                        <div class="row text-center m-t-20">
+                            <div class="col-lg-4 col-md-4 m-t-20">
+                           
+                            </div>
+                            <div class="col-lg-4 col-md-4 m-t-20">
+                           
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Meal Container -->
     </div>
-  </div>
-  
-  <div class="card mb-3">
-    <div class="card-body">
-      <h5 class="card-title">Email:</h5>
-      <p class="card-text">{{ currentUser.email }}</p>
-    </div>
-  </div>
-
-  <!-- Nouveaux champs à ajouter -->
-  <div class="card mb-3">
-    <div class="card-body">
-      <h5 class="card-title">First Name:</h5>
-      <p class="card-text">{{ currentUser.firstName }}</p>
-    </div>
-  </div>
-
-  <div class="card mb-3">
-    <div class="card-body">
-      <h5 class="card-title">Last Name:</h5>
-      <p class="card-text">{{ currentUser.lastName }}</p>
-    </div>
-  </div>
-  
-  <div class="card mb-3">
-    <div class="card-body">
-      <h5 class="card-title">Phone Number:</h5>
-      <p class="card-text">{{ currentUser.phoneNumber }}</p>
-    </div>
-  </div>
-  
-  <div class="card mb-3">
-    <div class="card-body">
-      <h5 class="card-title">Date of Birth:</h5>
-      <p class="card-text">{{ currentUser.dateOfBirth }}</p>
-    </div>
-  </div>
-  
-  <div class="card mb-3">
-    <div class="card-body">
-      <h5 class="card-title">Gender:</h5>
-      <p class="card-text">{{ currentUser.gender }}</p>
-    </div>
-  </div>
-  
-  <div class="card mb-3">
-    <div class="card-body">
-      <h5 class="card-title">Weight:</h5>
-      <p class="card-text">{{ currentUser.weight }}</p>
-    </div>
-  </div>
-  
-  <div class="card mb-3">
-    <div class="card-body">
-      <h5 class="card-title">Height:</h5>
-      <p class="card-text">{{ currentUser.height }}</p>
-    </div>
-  </div>
-  
-  <div class="card mb-3">
-    <div class="card-body">
-      <h5 class="card-title">Roles:</h5>
-      <ul class="list-group">
-        <li class="list-group-item" *ngFor="let role of currentUser.roles">{{ role }}</li>
-      </ul>
-    </div>
-  </div>
-  
-  <div class="card mb-3">
-    <div class="card-body">
-      <h5 class="card-title">Diplome:</h5>
-      <p class="card-text">{{ currentUser.diploma }}</p>
-    </div>
-  </div>
-  <!-- Reste du contenu du profil -->
-
-  <!-- Boutons de déconnexion et de modification de profil -->
-  <div class="text-center">
-    <button class="btn btn-danger" (click)="logout()">Logout</button>
-    <div class="text-center">
-      <a routerLink="/edit" class="btn btn-primary">Edit Profile</a>
-    </div>
-  </div>
-
-  <!-- Flèche de retour vers la page d'accueil -->
-  <a routerLink="/home" class="btn btn-link mt-3">
-    <i class="fas fa-arrow-left"></i> Back to Home
-  </a>
 </div>
-
-<ng-template #loggedOut>
-  <div class="container text-center">
-    <p class="lead">Please login to view your profile.</p>
-  </div>
-</ng-template>

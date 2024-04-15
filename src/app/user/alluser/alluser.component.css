@@ -1,4 +1,91 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Poppins:wght@400;500;600;700&display=swap');
+/* Style pour le conteneur */
+.container {
+    margin: 20px auto;
+    width: 80%;
+  }
+  
+  /* Style pour le bouton "New user" */
+  .border {
+    margin-bottom: 20px;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
+  }
+  
+  /* Style pour le tableau */
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  /* Style pour l'en-tête du tableau */
+  .table th {
+    background-color: #007bff;
+    color: #fff;
+    font-weight: bold;
+  }
+  
+  /* Style pour les lignes impaires du tableau */
+  .table tbody tr:nth-child(odd) {
+    background-color: #f2f2f2;
+  }
+  
+  /* Style pour les cellules du tableau */
+  .table td {
+    padding: 8px;
+  }
+  
+  /* Style pour le select */
+  select {
+    width: 120px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  /* Style pour les boutons */
+  .btn {
+    cursor: pointer;
+    border-radius: 4px;
+    margin-right: 5px; /* Ajoute un espace à droite de chaque bouton */
+  }
+  
+
+  .btn-outline-primary {
+    color: #007bff;
+    border-color: #007bff;
+  }
+  
+  .btn-outline-primary:hover {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .btn-info {
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+    color: #fff;
+  }
+  
+  .btn-info:hover {
+    background-color: #138496;
+    border-color: #117a8b;
+  }
+  .btn {
+    cursor: pointer;
+    border-radius: 4px;
+    margin-right: 5px; /* Ajoute un espace à droite de chaque bouton */
+  }
+  
+  .delete-btn {
+    background-color: #ff2f05;
+    border-color: #ff3300;
+    color: #fff;
+  }
+  
+  .delete-btn:hover {
+    background-color: #bd2130; /* Couleur rouge plus foncée au survol */
+  }
+  @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Poppins:wght@400;500;600;700&display=swap');
 
 * {
   margin: 0;
