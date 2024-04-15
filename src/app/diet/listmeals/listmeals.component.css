@@ -186,3 +186,22 @@ a.btn.btn-primary {
 .clickable-food:hover {
     background-color: #f0f0f0; /* Change background color on hover */
 }
+.popover {
+    max-width: 250px; /* Adjust the maximum width as needed */
+    font-size: 14px; /* Adjust the font size as needed */
+    background-color: #fff; /* Background color for popover */
+    color: #333; /* Text color for popover */
+    border: 1px solid #ddd; /* Border color for popover */
+}
+
+.popover-header {
+    background-color: #007bff; /* Background color for popover header */
+    color: #fff; /* Text color for popover header */
+    border-bottom: none; /* Remove border bottom for popover header */
+    padding: 10px 15px; /* Padding for popover header */
+    border-radius: 5px 5px 0 0; /* Border radius for popover header */
+}
+
+.popover-body {
+    padding: 10px 15px; /* Padding for popover body */
+}

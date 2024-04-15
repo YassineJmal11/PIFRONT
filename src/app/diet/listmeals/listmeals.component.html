@@ -52,7 +52,13 @@
                                 <strong>Total Calories:</strong> {{ meal.totalCals }}<br>
                                 <strong>Total Carbs:</strong> {{ meal.totalCarbs }}<br>
                                 <strong>Total Proteins:</strong> {{ meal.totalprots }}
+                                
                             </p>
+                            <div *ngIf="isExpanded(meal.mealId)">
+                                <h6>Recipe</h6>
+                                <p>{{ meal.recipe }}</p>
+                            </div>
+                            
                             <!-- Display foods when expanded -->
                             <div *ngIf="isExpanded(meal.mealId)">
                                 <ul>

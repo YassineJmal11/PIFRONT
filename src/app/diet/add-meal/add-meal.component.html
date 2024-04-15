@@ -33,7 +33,12 @@
         <label for="totalProts">Total Proteins:</label>
         <input type="number" id="totalProts" name="totalProts" [(ngModel)]="totalProts" class="form-control" required>
       </div>
-  
+      
+      <div class="form-group">
+        <label for="recipe">Recipe:</label>
+        <textarea id="recipe" name="recipe" [(ngModel)]="recipe" class="form-control" rows="5"></textarea>
+      </div>
+
       <div class="form-group">
         <label for="file">Choose Image:</label>
         <input type="file" id="file" name="file" (change)="onFileChange($event)" class="form-control-file" required>

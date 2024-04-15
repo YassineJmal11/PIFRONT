@@ -6,7 +6,8 @@ export class Meal {
     totalCals!: number;
     totalCarbs!: number;
     totalprots!: number;
-    mealImageUrl!:string; 
+    mealImageUrl!:string;
+    recipe!: string; 
     foods!: Food[];
     
     

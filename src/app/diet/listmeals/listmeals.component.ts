@@ -5,6 +5,10 @@ import { MealService } from '../services/meal.service';
 import { Food } from '../model/Food';
 import { User } from '../model/User';
 
+declare var $: any;
+
+
+
 @Component({
   selector: 'app-listmeals',
   templateUrl: './listmeals.component.html',
@@ -102,4 +106,6 @@ associateMealWithUser(mealId: number, userId: number): void {
     console.error('Selected user ID is null');
   }
 }
+
 }
+

@@ -13,6 +13,8 @@ export class AddMealComponent {
   totalCals: number = 0;
   totalCarbs: number = 0;
   totalProts: number = 0;
+  recipe: string = '';
+
   file: File | null = null;
 
   constructor(private mealService: MealService , private router: Router) { }
@@ -25,7 +27,9 @@ export class AddMealComponent {
     formData.append('totalCals', this.totalCals.toString());
     formData.append('totalCarbs', this.totalCarbs.toString());
     formData.append('totalProts', this.totalProts.toString());
-  
+    // Add recipe content to the form data
+    formData.append('recipe', this.recipe); // Use the recipe property Assuming you have a variable named recipeContent
+    
     this.mealService.uploadMealWithImage(formData).subscribe(
       response => {
         console.log('Upload successful', response);

@@ -34,6 +34,7 @@ import { AllFoodsComponent } from './diet/all-foods/all-foods.component';
 import { ListmealsComponent } from './diet/listmeals/listmeals.component';
 import { ClientProfileComponent } from './diet/client-profile/client-profile.component'; // DayGrid plugin
 
+
 @NgModule({
   declarations: [
     AppComponent,

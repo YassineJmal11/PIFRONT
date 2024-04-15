@@ -224,3 +224,47 @@ p {
 .needed-bar {
   background-color: #4da6ff; /* Blue color for protein needed */
 }
+.doughnut-chart {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+}
+
+.chart {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  clip: rect(0, 200px, 200px, 100px);
+}
+
+.slice {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  clip: rect(0, 100px, 200px, 0);
+}
+
+.intake-slice {
+  background-color: #2196F3; /* Change color as needed */
+  transform: rotate(0deg);
+}
+
+.needed-slice {
+  background-color: #FF9800; /* Change color as needed */
+  transform: rotate(0deg);
+}
+
+.chart-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.chart-text {
+  font-size: 24px;
+  font-weight: bold;
+}
