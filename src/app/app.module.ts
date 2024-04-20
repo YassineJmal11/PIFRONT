@@ -36,6 +36,11 @@ import { UpdateTaskComponent } from './goalTrack/update-task/update-task.compone
 import { UpdateGoalComponent } from './goalTrack/update-goal/update-goal.component';
 import { AfterLoginComponent } from './after-login/after-login.component';
 import { FullCalendarModule } from '@fullcalendar/angular'; // FullCalendar module
+import { AddCommunityComponent } from './forum/community/add-community/add-community.component';
+import { FeedComponent } from './forum/community/feed/feed.component';
+import { ViewCommunityComponent } from './forum/community/view-community/view-community.component';
+import { CreatePostComponent } from './forum/community/post/create-post/create-post.component';
+import { ViewPostComponent } from './forum/community/view-post/view-post.component';
 import dayGridPlugin from '@fullcalendar/daygrid'; // DayGrid plugin
 import { ForgotPasswordComponent } from './user/forgot-password/forgot-password.component';
 @NgModule({
@@ -61,6 +66,12 @@ import { ForgotPasswordComponent } from './user/forgot-password/forgot-password.
    AddTaskComponent,
    UpdateTaskComponent,
    UpdateGoalComponent,
+   AfterLoginComponent,
+   AddCommunityComponent,
+   FeedComponent,
+   ViewCommunityComponent,
+   CreatePostComponent,
+   ViewPostComponent,
    EditComponent,
    AlluserComponent,
    ResetPasswordComponent,

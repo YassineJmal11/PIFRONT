@@ -1,0 +1,32 @@
+html, body {
+    background-color: #f8f9fa; /* Light background color */
+    color: #343a40; /* Dark text color */
+    margin: 0;
+    padding: 0;
+  }
+
+  .container {
+    margin-bottom: 0; /* Set the bottom margin to 0 */
+}
+
+section {
+    margin-top: 0;
+    padding-top: 0;
+}
+
+
+  .navbar {
+    background-color: #007bff !important; /* Light navbar background color */
+  }
+
+  body {
+    padding-top: 100px; /* Height of the fixed navbar */
+  }
+
+  .post {
+    background-color: #fff; /* White background for posts */
+    border: 1px solid #ced4da; /* Border color for posts */
+  }
+
+
+
