@@ -33,6 +33,7 @@ import { AddCommunityComponent } from './forum/community/add-community/add-commu
 import { FeedComponent } from './forum/community/feed/feed.component';
 import { ViewCommunityComponent } from './forum/community/view-community/view-community.component';
 import { CreatePostComponent } from './forum/community/post/create-post/create-post.component';
+import { ViewPostComponent } from './forum/community/view-post/view-post.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { CreatePostComponent } from './forum/community/post/create-post/create-p
    FeedComponent,
    ViewCommunityComponent,
    CreatePostComponent,
+   ViewPostComponent,
   ],
   imports: [
     BrowserModule,

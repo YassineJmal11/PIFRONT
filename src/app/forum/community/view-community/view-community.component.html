@@ -7,6 +7,8 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
 </head>
 <body>
 <app-after-login></app-after-login>
@@ -22,16 +24,18 @@
           <select class="form-control form-control-sm" id="sortOrder" [(ngModel)]="sortOrder" (change)="onSortOrderChange()">
             <option value="newest">Newest First</option>
             <option value="oldest">Oldest First</option>
+            <option value="mostUpvoted">Most Upvoted</option>
           </select>
         </div>
         <!-- Display posts -->
-        <div *ngFor="let post of posts" class="post p-3 mb-4 rounded">
+        <div *ngFor="let post of posts" class="post p-3 mb-4 rounded ">
           <!-- Post content -->
+          <div class="community-card" [routerLink]="['/viewPost', post.postId]"> 
           <div class="d-flex align-items-center mb-2">
             <img src="https://via.placeholder.com/30" alt="User Avatar" class="rounded-circle mr-2">
             <span class="font-weight-bold mr-2">{{post.user.firstName}}</span>
             <a href="#" class="community-link">/{{community.communityName}}</a>
-            <small class="text-muted">{{timeSinceCreation}}</small> <!-- Display time since creation -->
+            <small class="text-muted">{{this.calculateTimeSinceCreation(post.createdAt)}}</small> <!-- Display time since creation -->
 
 
           </div>
@@ -41,13 +45,27 @@
           <p>{{post.textContent}}</p>
           
           <img *ngIf="post.attachment" src={{post.attachment}} alt="Post Image" class="img-fluid rounded mb-2">
-          
+        </div>
           <div class="d-flex justify-content-between align-items-center">
             <div>
-              <button class="btn btn-outline-dark btn-sm mr-2"><i class="fas fa-arrow-up"></i> Upvote</button>
-              <button class="btn btn-outline-dark btn-sm mr-2"><i class="fas fa-arrow-down"></i> Downvote</button>
-              <button class="btn btn-outline-dark btn-sm"><i class="fas fa-comment"></i> Comment</button>
-            </div>
+              <!-- Upvote button -->
+<button class="btn btn-outline-dark btn-sm mr-2"
+(click)="upvote(post)"
+[ngClass]="{'btn-success': post.upvoted, 'btn-outline-dark': !post.upvoted}">
+<i class="fas fa-arrow-up"></i> {{ post.upvoteCount }}
+</button>
+
+<!-- Downvote button -->
+<button class="btn btn-outline-dark btn-sm mr-2"
+(click)="downvote(post)"
+[ngClass]="{'btn-danger': post.downvoted, 'btn-outline-dark': !post.downvoted}">
+<i class="fas fa-arrow-down"></i> {{ post.downvoteCount }}
+</button>
+<button  [routerLink]="['/viewPost', post.postId]" class="btn btn-outline-dark btn-sm"><i class="fas fa-comment"></i> Comment</button>
+<button class="btn btn-outline-dark btn-sm" (click)="speak(post)">
+  <i class="bi bi-soundwave"></i> 
+</button> 
+</div>
           </div>
         </div>
       </ng-container>

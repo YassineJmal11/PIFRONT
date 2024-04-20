@@ -1,6 +1,7 @@
 import { User } from "src/app/user/user";
 import { Community } from "./Community";
 import { PostType } from "./PostType";
+import { Vote } from "./Vote";
 
 export class Post {
   postId!: number;
@@ -11,4 +12,10 @@ export class Post {
   updatedAt!: Date;
   community!: Community;
   postType!: PostType; 
+  votes!:Vote[];
+  upvoteCount!: number;
+  downvoteCount!: number;
+  upvoted!: boolean;
+  downvoted!: boolean;
+  totalVotes!:number;
 }

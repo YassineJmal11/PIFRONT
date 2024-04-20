@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Post } from '../../model/Post';
+import { Page } from '../../model/Page';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,20 @@ export class PostServiceService {
   findByCommunityCommunityId(communityId: number): Observable<Post[]> {
     return this.http.get<Post[]>(`${this.baseUrl}/all/${communityId}`);
   }
+
+  findByUserJoinedCommunities(userId: number): Observable<Post[]> {
+    return this.http.get<Post[]>(`${this.baseUrl}/JoinedCommunitiesPosts/${userId}`);
+  }
+
+  getPostById(userId: number): Observable<Post> {
+    return this.http.get<Post>(`${this.baseUrl}/${userId}`);
+  }
+
+  findByUserJoinedCommunitiesPaginated(userId: number, page: number, size: number): Observable<Page<Post>> {
+    return this.http.get<Page<Post>>(`${this.baseUrl}/user/${userId}/communities?page=${page}&size=${size}`);
+  }
+
+  
 
   
 

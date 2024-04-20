@@ -20,6 +20,7 @@ import { AddCommunityComponent } from './forum/community/add-community/add-commu
 import { FeedComponent } from './forum/community/feed/feed.component';
 import { ViewCommunityComponent } from './forum/community/view-community/view-community.component';
 import { CreatePostComponent } from './forum/community/post/create-post/create-post.component';
+import { ViewPostComponent } from './forum/community/view-post/view-post.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -57,6 +58,9 @@ const routes: Routes = [
     component:AddCommunityComponent
   },
   { path: "addPost", component: CreatePostComponent },
+
+
+  { path: "viewPost/:id", component: ViewPostComponent },
 
   {
     path:"feed",

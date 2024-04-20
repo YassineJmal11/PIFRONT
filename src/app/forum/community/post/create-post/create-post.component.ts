@@ -8,6 +8,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { PostServiceService } from '../../services/post-service.service';
 import { Post } from 'src/app/forum/model/Post';
 import { PostType } from 'src/app/forum/model/PostType';
+import { HttpClient } from '@angular/common/http'; // Import HttpClient
+import { catchError, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-create-post',
@@ -22,6 +24,7 @@ export class CreatePostComponent implements OnInit {
   attachments: any;
   selectedCommunity: any = {}; // Initialize with an empty object
   postTypes = Object.values(PostType);
+  profanityError: boolean = false;
 
   constructor(
     private cs: CommunityServiceService,
@@ -30,28 +33,23 @@ export class CreatePostComponent implements OnInit {
     private router: Router,
     private postService : PostServiceService,
     private route : ActivatedRoute,
-    private cdr: ChangeDetectorRef // Inject ChangeDetectorRef
-
+    private cdr: ChangeDetectorRef,
+    private http: HttpClient // Inject HttpClient
   ) {}
 
   ngOnInit() {
     this.currentUser = this.token.getUser();
     this.initForm();
-  
     this.route.queryParams.subscribe(params => {
       console.log(params); // Log the entire queryParams object
       const id = params['id'];
-      
       this.fetchCommunities();
-
       if (id) {
         console.log(id);
         this.fetchCommunity(id);
       }
     });
-
   }
-  
 
   initForm() {
     this.postForm = new FormGroup({
@@ -91,33 +89,57 @@ export class CreatePostComponent implements OnInit {
     });
   }
   
-
   onSubmit() {
     if (this.postForm.valid) {
       const userId = this.userId;
       const communityId = this.postForm.value.community.communityId;
-      const post: Post = {
-        postId: 0,
-        textContent: this.postForm.value.textContent,
-        user: this.currentUser,
-        attachment: '',
-        createdAt: new Date(),
-        updatedAt: new Date(),
-        community: this.postForm.value.community,
-        postType: this.postForm.value.postType
-      };
+      const textContent = this.postForm.value.textContent;
 
-      const attachment = this.attachments ? this.attachments[0] : undefined;
+      // Make an HTTP request to PurgoMalum API
+      this.http.get<any>('https://www.purgomalum.com/service/containsprofanity?text=' + encodeURIComponent(textContent))
+        .pipe(
+          catchError(error => {
+            console.error('Error checking profanity:', error);
+            return throwError('Error checking profanity');
+          })
+        )
+        .subscribe({
+          next: (response) => {
+            if (response) {
+              console.log('Profanity detected in text content');
+              this.profanityError = true;
+            } else {
+              const post: Post = {
+                postId: 0,
+                textContent: textContent,
+                user: this.currentUser,
+                attachment: '',
+                createdAt: new Date(),
+                updatedAt: new Date(),
+                community: this.postForm.value.community,
+                postType: this.postForm.value.postType,
+                votes: [],
+                upvoteCount: 0,
+                downvoteCount: 0,
+                downvoted:false,
+                upvoted:false,
+                totalVotes:0
+              };
 
-      this.postService.createPost(userId, communityId, attachment, post).subscribe({
-        next: (response) => {
-          console.log('Post created successfully:', response);
-          this.router.navigate(['/community', communityId]);
-        },
-        error: (error) => {
-          console.error('Error creating post:', error);
-        }
-      });
+              const attachment = this.attachments ? this.attachments[0] : undefined;
+
+              this.postService.createPost(userId, communityId, attachment, post).subscribe({
+                next: (response) => {
+                  console.log('Post created successfully:', response);
+                  this.router.navigate(['/community', communityId]);
+                },
+                error: (error) => {
+                  console.error('Error creating post:', error);
+                }
+              });
+            }
+          }
+        });
     } else {
       console.log('Form is invalid');
     }
@@ -132,6 +154,4 @@ export class CreatePostComponent implements OnInit {
     // Check if the selectedCommunity is initialized and if the community ID matches
     return this.selectedCommunity && community.communityId === this.selectedCommunity.communityId;
   }
-  
-  
 }
