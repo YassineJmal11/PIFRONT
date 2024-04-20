@@ -10,6 +10,9 @@ import { Post } from 'src/app/forum/model/Post';
 import { PostType } from 'src/app/forum/model/PostType';
 import { HttpClient } from '@angular/common/http'; // Import HttpClient
 import { catchError, throwError } from 'rxjs';
+import BadWords from 'bad-words';
+
+
 
 @Component({
   selector: 'app-create-post',
@@ -25,6 +28,7 @@ export class CreatePostComponent implements OnInit {
   selectedCommunity: any = {}; // Initialize with an empty object
   postTypes = Object.values(PostType);
   profanityError: boolean = false;
+   profanityFilter = new BadWords();
 
   constructor(
     private cs: CommunityServiceService,
@@ -102,63 +106,54 @@ export class CreatePostComponent implements OnInit {
       complete: () => console.log('Joined communities fetched successfully')
     });
   }
+  containsProfanity(text: string): boolean {
+    const isProfane = this.profanityFilter.isProfane(text);
+    console.log('Text:', text);
+    console.log('Is Profane:', isProfane);
+    return isProfane;
+  }
   
   onSubmit() {
-    console.log('Form validity:', this.postForm.valid);
-    console.log('Form values:', this.postForm.value.text);
     if (this.postForm.valid) {
+      // Check for profanity before submitting
+      if (this.containsProfanity(this.postForm.value.text)) {
+        this.profanityError = true;
+        return; // Stop submission if profanity found
+      }
+
+      // Continue with post submission if no profanity found
       const userId = this.userId;
       const communityId = this.postForm.value.community.communityId;
       const textContent = this.postForm.value.text;
-      
-      // Commented out the HTTP request to PurgoMalum API
-      /*
-      this.http.get<any>('https://www.purgomalum.com/service/containsprofanity?text=' + encodeURIComponent(textContent))
-        .pipe(
-          catchError(error => {
-            console.error('Error checking profanity:', error);
-            return throwError('Error checking profanity');
-          })
-        )
-        .subscribe({
-          next: (response) => {
-            if (response) {
-              console.log('Profanity detected in text content');
-              this.profanityError = true;
-            } else {
-            */
-              const post: Post = {
-                postId: 0,
-                textContent: textContent,
-                user: this.currentUser,
-                attachment: '',
-                createdAt: new Date(),
-                updatedAt: new Date(),
-                community: this.postForm.value.community,
-                postType: this.postForm.value.postType,
-                votes: [],
-                upvoteCount: 0,
-                downvoteCount: 0,
-                downvoted:false,
-                upvoted:false,
-                totalVotes:0
-              };
-  
-              const attachment = this.attachments ? this.attachments[0] : undefined;
-  
-              this.postService.createPost(userId, communityId, attachment, post).subscribe({
-                next: (response) => {
-                  console.log('Post created successfully:', response);
-                  this.router.navigate(['/community', communityId]);
-                },
-                error: (error) => {
-                  console.error('Error creating post:', error);
-                }
-              });
-            // }
-          // }
-        // }
-      // );
+
+      const post: Post = {
+        postId: 0,
+        textContent: textContent,
+        user: this.currentUser,
+        attachment: '',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        community: this.postForm.value.community,
+        postType: this.postForm.value.postType,
+        votes: [],
+        upvoteCount: 0,
+        downvoteCount: 0,
+        downvoted: false,
+        upvoted: false,
+        totalVotes: 0
+      };
+
+      const attachment = this.attachments ? this.attachments[0] : undefined;
+
+      this.postService.createPost(userId, communityId, attachment, post).subscribe({
+        next: (response) => {
+          console.log('Post created successfully:', response);
+          this.router.navigate(['/community', communityId]);
+        },
+        error: (error) => {
+          console.error('Error creating post:', error);
+        }
+      });
     } else {
       console.log('Form is invalid');
     }
