@@ -42,7 +42,7 @@ export class AllGoalsComponent implements OnInit {
   searchText: string = '';
   filteredGoals: Goal[] = []; // Property to store filtered goals
   currentUser: any;
-  userId:number=1;
+  userId!:number;
   calendarEvents: any[] = []; // Array to store calendar events
   startDate!: Date  ;
   endDate!: Date  ;
@@ -69,7 +69,8 @@ export class AllGoalsComponent implements OnInit {
     private ts: TaskServiceService,
     private token: TokenStorageService,
     private usersService: UsersService,
-    private router : Router
+    private router : Router,
+    private userService: UsersService
   ) {}
 
   handleDateClick(info: any) {
@@ -154,11 +155,16 @@ export class AllGoalsComponent implements OnInit {
 
   
   
-  ngOnInit() {
+  ngOnInit(): void {
     this.currentUser = this.token.getUser();
-    this.fetchData();
-   // this.userId=this.currentUser.id;
-   
+    this.userService.getUserIdByUsername(this.currentUser.username).subscribe(
+      (data) => {
+        this.currentUser = data;
+        this.userId = this.currentUser.userId; 
+        console.log( this.currentUser)
+        this.fetchData(); 
+      }
+    );
   }
 
   calendarOptions: CalendarOptions = {

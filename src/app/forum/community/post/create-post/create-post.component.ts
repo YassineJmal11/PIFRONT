@@ -19,7 +19,7 @@ import { catchError, throwError } from 'rxjs';
 export class CreatePostComponent implements OnInit {
   joinedCommunities: any[] = [];
   currentUser!: User;
-  userId: number = 1;
+  userId!: number;
   postForm!: FormGroup;
   attachments: any;
   selectedCommunity: any = {}; // Initialize with an empty object
@@ -34,26 +34,40 @@ export class CreatePostComponent implements OnInit {
     private postService : PostServiceService,
     private route : ActivatedRoute,
     private cdr: ChangeDetectorRef,
-    private http: HttpClient // Inject HttpClient
+    private http: HttpClient ,
+    private userService: UsersService
+
   ) {}
 
   ngOnInit() {
     this.currentUser = this.token.getUser();
-    this.initForm();
-    this.route.queryParams.subscribe(params => {
-      console.log(params); // Log the entire queryParams object
-      const id = params['id'];
-      this.fetchCommunities();
-      if (id) {
-        console.log(id);
-        this.fetchCommunity(id);
+    this.userService.getUserIdByUsername(this.currentUser.username).subscribe(
+      (data) => {
+        this.currentUser = data;
+        this.userId = this.currentUser.userId; 
+        console.log( this.currentUser)
+        
+        this.route.queryParams.subscribe(params => {
+          console.log(params); // Log the entire queryParams object
+          const id = params['id'];
+          this.fetchCommunities();
+          if (id) {
+            console.log(id);
+            this.fetchCommunity(id);
+          }
+        });
+
+        this.initForm();
       }
-    });
+    );
+   
   }
 
   initForm() {
     this.postForm = new FormGroup({
-      textContent: new FormControl('', [Validators.required, Validators.minLength(4)]),
+      textContent: new FormControl('', []),
+      text: new FormControl('', [Validators.required, Validators.minLength(4)]),
+
       community: new FormControl('', Validators.required),
       postType: new FormControl('', Validators.required)
     });
@@ -90,12 +104,15 @@ export class CreatePostComponent implements OnInit {
   }
   
   onSubmit() {
+    console.log('Form validity:', this.postForm.valid);
+    console.log('Form values:', this.postForm.value.text);
     if (this.postForm.valid) {
       const userId = this.userId;
       const communityId = this.postForm.value.community.communityId;
-      const textContent = this.postForm.value.textContent;
-
-      // Make an HTTP request to PurgoMalum API
+      const textContent = this.postForm.value.text;
+      
+      // Commented out the HTTP request to PurgoMalum API
+      /*
       this.http.get<any>('https://www.purgomalum.com/service/containsprofanity?text=' + encodeURIComponent(textContent))
         .pipe(
           catchError(error => {
@@ -109,6 +126,7 @@ export class CreatePostComponent implements OnInit {
               console.log('Profanity detected in text content');
               this.profanityError = true;
             } else {
+            */
               const post: Post = {
                 postId: 0,
                 textContent: textContent,
@@ -125,9 +143,9 @@ export class CreatePostComponent implements OnInit {
                 upvoted:false,
                 totalVotes:0
               };
-
+  
               const attachment = this.attachments ? this.attachments[0] : undefined;
-
+  
               this.postService.createPost(userId, communityId, attachment, post).subscribe({
                 next: (response) => {
                   console.log('Post created successfully:', response);
@@ -137,13 +155,15 @@ export class CreatePostComponent implements OnInit {
                   console.error('Error creating post:', error);
                 }
               });
-            }
-          }
-        });
+            // }
+          // }
+        // }
+      // );
     } else {
       console.log('Form is invalid');
     }
   }
+  
 
   onFileChange(event: any) {
     console.log(event.target.files);

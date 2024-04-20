@@ -12,6 +12,9 @@ export class PostServiceService {
 
   constructor(private http:HttpClient) { }
 
+
+
+  
   createPost(userId: number, communityId: number, attachment: File | undefined, post: Post): Observable<Post> {
     console.log('Attachment:', attachment); // Check if attachment is received correctly
     const formData = new FormData();

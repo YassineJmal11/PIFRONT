@@ -32,6 +32,11 @@ export class UsersService {
   
   }
 
+  getUserIdByUsername(username: string): Observable<User> {
+    const url = `${this.authUrl}/getUserIdByUsername/${username}`;
+    return this.http.get<User>(url);
+  }
+
   setPasswordWithVerification(email: string, verificationCode: string, newPassword: string): Observable<any> {
     const url = `${this.authUrl}/set-password-with-verification`;
 

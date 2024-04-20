@@ -21,7 +21,7 @@ export class FeedComponent  {
   joinedCommunities: any;
   createdCommunities: any;
   currentUser!: User;
-  userId:number=1;
+  userId!:number;
   showConfirmation: boolean[] = [];
   posts: Post[] = [];
   timeSinceCreation!: string;
@@ -40,13 +40,24 @@ export class FeedComponent  {
     private router : Router,
     private ps : PostServiceService,
     private vs: VoteServiceService ,
-    private cdr: ChangeDetectorRef 
+    private cdr: ChangeDetectorRef ,
+    private userService: UsersService
+
   ) {}
 
   ngOnInit() {
     this.currentUser = this.token.getUser();
-    this.fetchCommunities();
-    this.fetchPosts();
+    this.userService.getUserIdByUsername(this.currentUser.username).subscribe(
+      (data) => {
+        this.currentUser = data;
+        this.userId = this.currentUser.userId; 
+        console.log( this.currentUser)
+        this.fetchCommunities();
+        this.fetchPosts();
+        
+      }
+    );
+    
    
   }
 

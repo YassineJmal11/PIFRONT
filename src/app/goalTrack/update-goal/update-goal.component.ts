@@ -15,7 +15,8 @@ export class UpdateGoalComponent {
   goalId!:number
   userId!:number;
   p!:Goal
-  constructor(private route:Router , private gs :GoalServiceService , private act : ActivatedRoute){}
+  constructor(private route:Router , private gs :GoalServiceService , private act : ActivatedRoute,    private userService: UsersService
+  ){}
   registerForm=new FormGroup({
     title:new FormControl('',[Validators.required,Validators.minLength(5)]),
     description:new FormControl('',[Validators.required,Validators.minLength(5)]),

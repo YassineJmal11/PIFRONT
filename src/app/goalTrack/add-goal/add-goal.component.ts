@@ -14,7 +14,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./add-goal.component.css']
 })
 export class AddGoalComponent implements OnInit{
-  userId:number=1;
+  userId!:number;
   currentUser: any;
 
   
@@ -25,13 +25,21 @@ export class AddGoalComponent implements OnInit{
     private token: TokenStorageService,
     private usersService: UsersService,
     private route: ActivatedRoute, // Import ActivatedRoute instead of Router
-    private router: Router
+    private router: Router,
+    private userService: UsersService
   ) {}
 
 
   ngOnInit() {
     this.currentUser = this.token.getUser();
-   // this.userId=this.currentUser.id;
+    this.userService.getUserIdByUsername(this.currentUser.username).subscribe(
+      (data) => {
+        this.currentUser = data;
+        this.userId = this.currentUser.userId; 
+        console.log( this.currentUser)
+        
+      }
+    );
    this.route.queryParams.subscribe(params => {
     const selectedStartDate = params['startDate'];
     const selectedDeadlineDate = params['deadline'];

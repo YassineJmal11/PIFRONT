@@ -20,7 +20,7 @@ export class ViewCommunityComponent implements OnInit {
   community!: any;
   posts: Post[] = [];
   currentUser!: User;
-  userId: number = 1;
+  userId!: number;
   communityId!: number;
   isInCommunity!: boolean;
   sortOrder: 'newest' | 'oldest' | 'mostUpvoted' = 'newest'; // Add 'mostUpvoted' option
@@ -34,14 +34,27 @@ export class ViewCommunityComponent implements OnInit {
     private router: Router,
     private act: ActivatedRoute,
     private vs: VoteServiceService ,
-    private cdr: ChangeDetectorRef 
+    private cdr: ChangeDetectorRef ,
+    private userService: UsersService
+
   ) {}
 
   ngOnInit() {
-    this.act.params.subscribe(params => {
-      this.communityId = params['id'];
-      this.fetchCommunity();
-    });
+    this.currentUser = this.token.getUser();
+    this.userService.getUserIdByUsername(this.currentUser.username).subscribe(
+      (data) => {
+        this.currentUser = data;
+        this.userId = this.currentUser.userId; 
+        console.log( this.currentUser)
+        this.act.params.subscribe(params => {
+          this.communityId = params['id'];
+          this.fetchCommunity();
+        });
+        
+      }
+    );
+    
+    
   }
 
   fetchCommunity() {

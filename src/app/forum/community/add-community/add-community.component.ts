@@ -11,7 +11,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./add-community.component.css']
 })
 export class AddCommunityComponent implements OnInit {
-  userId: number = 1;
+  userId!: number ;
   currentUser: any;
   
   constructor(
@@ -19,12 +19,21 @@ export class AddCommunityComponent implements OnInit {
     private token: TokenStorageService,
     private usersService: UsersService,
     private route: ActivatedRoute, 
-    private router: Router
+    private router: Router,
+    private userService: UsersService
+
   ) {}
 
   ngOnInit() {
     this.currentUser = this.token.getUser();
-    // this.userId = this.currentUser.id;
+    this.userService.getUserIdByUsername(this.currentUser.username).subscribe(
+      (data) => {
+        this.currentUser = data;
+        this.userId = this.currentUser.userId; 
+        console.log( this.currentUser)
+        
+      }
+    );
   }
 
   communityForm = new FormGroup({

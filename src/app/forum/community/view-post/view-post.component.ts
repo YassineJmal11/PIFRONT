@@ -22,10 +22,11 @@ export class ViewPostComponent implements OnInit {
   postId: any;
   post!: Post;
   timeSinceCreation!: string;
-  userId: number = 1;
+  userId!: number;
   showReplyInput: boolean = false;
   comments: any[] = []; 
   showReplyInputForCommentId: number | null = null;
+  currentUser!:any;
 
 
   constructor(
@@ -38,7 +39,8 @@ export class ViewPostComponent implements OnInit {
     private vs: VoteServiceService,
     private cdr: ChangeDetectorRef,
     private commentService: CommentServiceService ,
-    private commentLikeService: CommentLikeServiceService 
+    private commentLikeService: CommentLikeServiceService ,
+    private userService: UsersService
 
 
   ) {}
@@ -88,10 +90,22 @@ export class ViewPostComponent implements OnInit {
     }
 
   ngOnInit() {
-    this.act.params.subscribe(params => {
-      this.postId = params['id'];
-      this.fetchPostAndComments();
-    });
+    this.currentUser = this.token.getUser();
+    this.userService.getUserIdByUsername(this.currentUser.username).subscribe(
+      (data) => {
+        this.currentUser = data;
+        this.userId = this.currentUser.userId; 
+        console.log( this.currentUser)
+
+        this.act.params.subscribe(params => {
+          this.postId = params['id'];
+          this.fetchPostAndComments();
+        });
+        
+      }
+    );
+
+   
   }
 
   fetchPostAndComments() {
