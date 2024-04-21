@@ -1,11 +1,11 @@
-<app-header></app-header>
+<app-after-login></app-after-login>
 <div class="container centered-container"></div>
 <div class="padding">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <!-- User Profile Card -->
             <div class="card card-no-border">
-                <img class="card-img-top" [src]="user?.profileImageUrl" alt="Card image cap">
+                <img class="card-img-top" src="../../../assets/images/contact-bg.jpg" alt="Card image cap">
                 <div class="card-body little-profile text-center">
                     <div class="pro-img"><img [src]="user?.profileImageUrl" alt="user"></div>
                     <h3 class="m-b-0">{{ user?.firstName }} {{ user?.lastName }}</h3>
@@ -40,6 +40,10 @@
                                     <strong>Total Carbs:</strong> {{ meal.totalCarbs }}<br>
                                     <strong>Total Proteins:</strong> {{ meal.totalprots }}
                                 </p>
+                                <div *ngIf="isExpanded(meal.mealId)">
+                                    <h6>Recipe</h6>
+                                    <p>{{ meal.recipe }}</p>
+                                </div>
                                 <!-- Display foods when expanded -->
                                 <div *ngIf="isExpanded(meal.mealId)">
                                     <ul>
@@ -58,16 +62,18 @@
     </div>
     <div class="row justify-content-center mt-3">
         <div class="col-md-8 text-center">
-          <h4>Total Protein Intake: {{ totalProtein }} grams</h4>
-          <p>Total Protein Needed: {{ totalProteinNeeded }}g</p>
-          <div class="chart-container">
-            <div class="bar intake-bar" [style.height.px]="totalProtein"></div>
-            <div class="bar needed-bar" [style.height.px]="totalProteinNeeded"></div>
+            <h4><span class="dot red-dot"></span>Total Protein Intake: {{ totalProtein }} grams</h4>
+            <p><span class="dot blue-dot"></span>Total Protein Needed: {{ totalProteinNeeded }}g</p>
+          <div class="doughnut-chart">
+            <div class="slice intake-slice" [style.transform]="'rotate(' + (totalProteinNeeded/  totalProtein ) * 180 + 'deg)'"></div>
+            <div class="slice needed-slice" [style.transform]="'rotate(' + ( (totalProtein + totalProteinNeeded)) * 360+ 'deg)'"></div>
+            <div class="chart-center">
+              <div class="chart-text">{{ totalProtein }}</div>
+              <div class="chart-text">{{ totalProteinNeeded }}</div>
+            </div>
           </div>
         </div>
-      
-      </div>
-      
-      
+      </div> 
+        
 </div>
 
