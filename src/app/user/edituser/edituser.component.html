@@ -1,0 +1,121 @@
+<app-after-login></app-after-login>
+<div class="container">
+    <header class="jumbotron">
+      <h3 class="display-4">Edit Profile</h3>
+    </header>
+  
+    <!-- Photo de profil -->
+    <div class="text-center mb-3">
+      <img src="{{ currentUser.profileImageUrl }}" alt="User Photo" class="img-fluid rounded-circle" style="width: 150px; height: 150px;">
+    </div>
+    <div *ngIf="errorMessage" class="alert alert-danger">
+      {{ errorMessage }}
+    </div>
+  
+    <!-- Afficher le message de succès -->
+    <div *ngIf="successMessage" class="alert alert-success">
+      {{ successMessage }}
+    </div>
+    <!-- Formulaire de modification du profil -->
+    <form>
+      <!-- Champ pour modifier le prénom -->
+      <div class="card mb-3">
+        <div class="card-body">
+          <div class="form-group">
+            <label for="firstName">First Name:</label>
+            <input type="text" class="form-control" id="firstName" [(ngModel)]="currentUser.firstName" name="firstName">
+          </div>
+        </div>
+      </div>
+  
+      <!-- Champ pour modifier le nom de famille -->
+      <div class="card mb-3">
+        <div class="card-body">
+          <div class="form-group">
+            <label for="lastName">Last Name:</label>
+            <input type="text" class="form-control" id="lastName" [(ngModel)]="currentUser.lastName" name="lastName">
+          </div>
+        </div>
+      </div>
+  
+      <!-- Champ pour modifier l'adresse email -->
+      <div class="card mb-3">
+        <div class="card-body">
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" id="email" [(ngModel)]="currentUser.email" name="email">
+          </div>
+        </div>
+      </div>
+  
+      <!-- Champ pour modifier le numéro de téléphone -->
+      <div class="card mb-3">
+        <div class="card-body">
+          <div class="form-group">
+            <label for="phoneNumber">Phone Number:</label>
+            <input type="text" class="form-control" id="phoneNumber" [(ngModel)]="currentUser.phoneNumber" name="phoneNumber">
+          </div>
+        </div>
+      </div>
+  
+      <!-- Champ pour modifier la date de naissance -->
+      <div class="card mb-3">
+        <div class="card-body">
+          <div class="form-group">
+            <label for="dateOfBirth">Date of Birth:</label>
+            <input type="date" class="form-control" id="dateOfBirth" [(ngModel)]="currentUser.dateOfBirth" name="dateOfBirth">
+          </div>
+        </div>
+      </div>
+  
+      <!-- Champ pour modifier le genre -->
+      <div class="card mb-3">
+        <div class="card-body">
+          <div class="form-group">
+            <label for="gender">Gender:</label>
+            <select class="form-control" id="gender" [(ngModel)]="currentUser.gender" name="gender">
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Champ pour modifier le poids -->
+      <div class="card mb-3">
+        <div class="card-body">
+          <div class="form-group">
+            <label for="weight">Weight (kg):</label>
+            <input type="number" class="form-control" id="weight" [(ngModel)]="currentUser.weight" name="weight">
+          </div>
+        </div>
+      </div>
+  
+      <!-- Champ pour modifier la taille -->
+      <div class="card mb-3">
+        <div class="card-body">
+          <div class="form-group">
+            <label for="height">Height (cm):</label>
+            <input type="number" class="form-control" id="height" [(ngModel)]="currentUser.height" name="height">
+          </div>
+        </div>
+      </div>
+  
+      <!-- Champ pour modifier le mot de passe -->
+      <div class="card mb-3">
+        <div class="card-body">
+          <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" class="form-control" id="password" [(ngModel)]="currentUser.password" name="password">
+          </div>
+        </div>
+      </div>
+  
+      <!-- Bouton de sauvegarde -->
+      <div class="text-center">
+        <button class="btn btn-primary" (click)="saveChanges()">Save Changes</button>
+      </div>
+    </form>
+  </div>
+  

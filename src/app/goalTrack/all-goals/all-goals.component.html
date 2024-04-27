@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goal Cards</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5+z+JU4vM/rWpih4MMsGj2N0Z1jG6T5I8b6TAhFJ" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+</head>
+
+<body>
+    
+    
+   
+    <app-after-login></app-after-login>
+    
+
+    <div class="container">
+        <div class="main">
+
+
+
+        
+           
+        
+               <div class="alert  mx-5 mt-4 border " role="alert">
+                <div class="search-filter-container">
+                    <div>
+                        <label for="sortingOption">Search by description or title</label>
+        
+                        <input class="search" type="text" [(ngModel)]="searchText" (input)="onSearch()" placeholder="Search goals">
+                    </div>
+                    <div>
+                        <label for="sortingOption">Sort By:</label>
+                        <select id="sortingOption" [(ngModel)]="selectedSortingOption" (change)="onSortingOptionChange()">
+                            <option value="">Select Sorting Option</option>
+                            <option value="progress">Progress</option>
+                            <option value="deadline">Deadline</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="sortingOrder">Sort Order:</label>
+                        <select id="sortingOrder" [(ngModel)]="selectedSortingOrder" (change)="onSortingOrderChange()">
+                            <option value="asc">Ascending</option>
+                            <option value="desc">Descending</option>
+                        </select>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div *ngFor="let task of getAllIncompleteTasks()" class="alert alert-danger 
+                alert-dismissible fade show mx-5 mt-4 
+                border border-danger" role="alert" >
+                <b><strong>Task to complete!</strong> {{ task.description }}</b>
+                <button type="button" class="close"
+                    data-dismiss="alert">
+                    <h6>X</h6>
+                </button>
+            </div>
+           
+            <!-- Total Progress -->
+        <div class="alert alert-success mx-5 mt-4 border border-success" role="alert">
+            <h4 class="alert-heading">Total Progress</h4>
+            <div class="progress">
+                <div class="progress-bar bg-success" role="progressbar" [style.width.%]="averageProgress" [attr.aria-valuenow]="averageProgress" aria-valuemin="0" aria-valuemax="100">{{ averageProgress | number: '1.0-0' }}%</div>
+            </div>
+        </div>
+        
+        
+                <!-- Main content -->
+                <div class="main">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="d-flex justify-content-center flex-wrap">
+                                <!-- Card for existing goals -->
+                                <ng-container *ngIf="searchText.trim() !== ''; else emptySearch">
+            
+                                <ng-container *ngFor="let g of filteredGoals">
+                                    <div class="two mx-2">
+                                        <div class="d-flex justify-content-end px-3 pt-1">
+                                            <i class="mdi mdi-star-outline pr-1 star"></i><i class="mdi mdi-dots-horizontal dot"></i>
+                                        </div>
+                                      
+                                        <div class="px-3 pt-3">
+                                            <h4 class="name">{{g.title}}</h4>
+                                            <p class="quote2">Description {{g.description}}</p>
+                                        </div>
+                                        <div class="widget-content-left">                                    
+                                                <div *ngIf="g.completed" class="badge badge-pill badge-info ml-2">completed</div>
+                                                <div *ngIf="!g.completed" class="badge badge-danger ml-2">Not completed</div>
+                                          </div>        
+            
+                                            <div class="progress">
+                                                <div class="progress-bar bg-info" role="progressbar" [style.width.%]="g.progress" [attr.aria-valuenow]="g.progress" aria-valuemin="0" aria-valuemax="100">{{ g.progress | number: '1.0-0' }}%</div>
+                                            </div>
+                                        
+                                
+                                        <div class="d-flex justify-content-start px-3 align-items-center">
+                                            <i class="mdi mdi-view-comfy task"></i>
+                                            <span class="quote2 pl-2">StartDate: {{g.startDate | date: 'yyyy-MM-dd'}}</span>
+                                        </div>
+                                   
+                                        <div class="d-flex justify-content-between px-3 align-items-center pb-3">
+                                            <div class="d-flex justify-content-start align-items-center">
+                                                <i class="mdi mdi-calendar-clock date"></i>
+                                                <span class="quote2 pl-2">Deadline: {{ g.deadline | date: 'yyyy-MM-dd' }}</span>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-between px-5 align-items-center pb-3">
+                                            <div class="d-flex justify-content-start align-items-center">
+                                               
+                                                <button class="btn btn-info" type="button" id="dropdownMenuButton"
+                                                data-bs-toggle="dropdown" aria-expanded="false" [routerLink]="['/alltasks',g.goalId]">
+                                                <span class="position-relative">
+                                                    <!-- icon -->
+                                                    <i class="bi bi-list-task" style="font-size: 1.5rem;"></i>
+                                                </span>
+                                            </button>
+                    
+                                            <button class="btn btn-warning" type="button" id="dropdownMenuButton"
+                                            data-bs-toggle="dropdown" aria-expanded="false" [routerLink]="['/updateGoal',g.goalId]">
+                                            <span class="position-relative">
+                                                <!-- icon -->
+                                                <i class="bi bi-pencil-square" style="font-size: 1.5rem;"></i>
+                                            </span>
+                                        </button>
+                                        <button (click)="supp(g.goalId)" class="btn btn-danger" type="button" id="dropdownMenuButton"
+                                            data-bs-toggle="dropdown" aria-expanded="false" >
+                                            <span class="position-relative">
+                                                <!-- icon -->
+                                                <i class="bi bi-trash" style="font-size: 1.5rem;"></i>
+                                            </span>
+                                        </button>                                </div>
+                                        </div>
+            
+                                   
+                                    </div>
+                                </ng-container>
+            
+                                </ng-container>
+            
+                                <ng-template #emptySearch>
+                                    <!-- Loop through all goals when search text is empty -->
+                                    <ng-container *ngFor="let g of listGoals">
+                                        <div class="two mx-2">
+                                            <div class="d-flex justify-content-end px-3 pt-1">
+                                                <i class="mdi mdi-star-outline pr-1 star"></i><i class="mdi mdi-dots-horizontal dot"></i>
+                                            </div>
+                                          
+                                            <div class="px-3 pt-3">
+                                                <h4 class="name">{{g.title}}</h4>
+                                                <p class="quote2">Description {{g.description}}</p>
+                                            </div>
+                                            <div class="widget-content-left">                                    
+                                                    <div *ngIf="g.completed" class="badge badge-pill badge-info ml-2">completed</div>
+                                                    <div *ngIf="!g.completed" class="badge badge-danger ml-2">Not completed</div>
+                                              </div>        
+                
+                                                <div class="progress">
+                                                    <div class="progress-bar bg-info" role="progressbar" [style.width.%]="g.progress" [attr.aria-valuenow]="g.progress" aria-valuemin="0" aria-valuemax="100">{{ g.progress | number: '1.0-0' }}%</div>
+                                                </div>
+                                            
+                                    
+                                            <div class="d-flex justify-content-start px-3 align-items-center">
+                                                <i class="mdi mdi-view-comfy task"></i>
+                                                <span class="quote2 pl-2">StartDate: {{g.startDate | date: 'yyyy-MM-dd'}}</span>
+                                            </div>
+                                       
+                                            <div class="d-flex justify-content-between px-3 align-items-center pb-3">
+                                                <div class="d-flex justify-content-start align-items-center">
+                                                    <i class="mdi mdi-calendar-clock date"></i>
+                                                    <span class="quote2 pl-2">Deadline: {{ g.deadline | date: 'yyyy-MM-dd' }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex justify-content-between px-5 align-items-center pb-3">
+                                                <div class="d-flex justify-content-start align-items-center">
+                                                   
+                                                    <button class="btn btn-info" type="button" id="dropdownMenuButton"
+                                                    data-bs-toggle="dropdown" aria-expanded="false" [routerLink]="['/alltasks',g.goalId]">
+                                                    <span class="position-relative">
+                                                        <!-- icon -->
+                                                        <i class="bi bi-list-task" style="font-size: 1.5rem;"></i>
+                                                    </span>
+                                                </button>
+                        
+                                                <button class="btn btn-warning" type="button" id="dropdownMenuButton"
+                                                data-bs-toggle="dropdown" aria-expanded="false" [routerLink]="['/updateGoal',g.goalId]">
+                                                <span class="position-relative">
+                                                    <!-- icon -->
+                                                    <i class="bi bi-pencil-square" style="font-size: 1.5rem;"></i>
+                                                </span>
+                                            </button>
+                                            <button (click)="supp(g.goalId)" class="btn btn-danger" type="button" id="dropdownMenuButton"
+                                                data-bs-toggle="dropdown" aria-expanded="false" >
+                                                <span class="position-relative">
+                                                    <!-- icon -->
+                                                    <i class="bi bi-trash" style="font-size: 1.5rem;"></i>
+                                                </span>
+                                            </button>                                </div>
+                                            </div>
+                
+                                       
+                                        </div>
+                                    </ng-container>
+                                  </ng-template>
+                                    <div class="two">
+                                        <div class="px-3 pb-4">
+                                            <div><img src="https://img.icons8.com/bubbles/50/000000/blond-short-hair-lady-with-blue-glasses.png" width="15" class="pic1" /><img src="https://img.icons8.com/bubbles/50/000000/girl-with-chemical-test-tube.png" width="22" class="pic2" /></div>
+                                            <div><img src="https://img.icons8.com/bubbles/100/000000/girl-with-glasses-art-palette.png" width="65" /></div>
+                                            <div><img src="https://img.icons8.com/bubbles/50/000000/short-curly-hair-girl-gem.png" width="16" class="pic3" /><img src="https://img.icons8.com/bubbles/50/000000/girl-and-playing-card.png" width="16" class="pic4" /></div>
+            
+                                            <div><a class="btn btn-success" [routerLink]="['/addGoal']">Add new Goal + </a></div>
+                                            <br>
+                                            <div><p class="quote">"Set your goals high, and don't stop until you get there." <br>- Bo Jackson</p></div>
+                                        </div>   
+                            
+                                    </div>
+            
+                                    <div class="two">   
+                                        <div class="px-3 pb-4">
+                                            <div class="px-3 pb-4">
+                                                <h4 class="name">Tasks completion</h4>
+                                            </div>
+                                            <div [hidden]="!chart">
+                                                <canvas id="canvas"></canvas>
+                                              </div>
+                                              <button class="btn-info" (click)="exportChartToPDF('canvas')">Export to PDF</button>
+
+                                    </div>
+                                   </div>
+            
+                                   <div class="two">   
+                                    <div class="px-3 pb-4">
+                                        <div class="px-3 pb-4">
+                                            <h4 class="name">Goals completion</h4>
+                                        </div>
+                                        <div [hidden]="!chart">
+                                            <canvas id="goalCompletionChart"></canvas>
+                                          </div>
+                                          <button class="btn-info" (click)="exportChartToPDF('goalCompletionChart')">Export to PDF</button>
+
+                                </div>
+                               </div>
+            
+            
+                        
+            
+            
+                                <div class="two">   
+                                    <div class="px-3 pb-4">
+                                        <div class="px-3 pt-3">
+                                            <h4 class="name"><i class="bi bi-bar-chart"></i> Stats</h4>
+                                            
+                                        </div>
+                                       
+                                        
+                                          
+                                        <button class="btn btn-info" (click)="exportAllChartsToPDF()">Export All Charts to PDF</button>
+
+                                        <div class="quote2 pl-2">Total number of goals: {{ listGoals.length }}</div>
+            
+                                        <div class="quote2 pl-2">Number of completed goals: {{ listCompleteGoals.length }}</div>
+                                        
+                                        <div class="quote2 pl-2">Completed Before Deadline: {{ beforeDeadlineGoalsComplete.length }}</div>
+            
+                                        <div class="quote2 pl-2">Completed After Deadline: {{ listCompleteGoals.length - beforeDeadlineGoalsComplete.length }}</div>
+            
+            
+                                        <div class="quote2 pl-2">Not completed goals: {{ listIncompleteGoals.length }}</div>
+                                        <div class="quote2 pl-2">Not completed after Deadline: {{ afterDeadlineGoalsIncomplete.length }}</div>
+            
+            
+                                        <div class="quote2 pl-2">Total number of tasks: {{ listTasks.length }}</div>
+                                        
+                                        <div class="quote2 pl-2">Number of completed Tasks: {{ listCompleteTasks.length }}</div>
+            
+                                        <div class="quote2 pl-2">Completed Before Deadline: {{ beforeDeadlineTasksComplete.length }}</div>
+            
+                                        <div class="quote2 pl-2">Completed After Deadline: {{ listCompleteTasks.length - beforeDeadlineTasksComplete.length }}</div>
+            
+                                        
+                                        <div class="quote2 pl-2">Not completed Tasks: {{ listIncompleteTasks.length }}</div>
+                                        <div class="quote2 pl-2">Not completed after Deadline: {{ AfterDeadlineTasksIncomplete.length }}</div>
+            
+            
+                                </div>
+                            </div>
+            
+            
+            
+                            <div class="two">   
+                                <div class="px-3 pb-4">
+                                  <div class="px-3 pb-4">
+                                    <h4 class="name">Tasks  Status</h4>
+                                  </div>
+                                  <div [hidden]="!chart">
+                                    <canvas id="taskStatusPieChart"></canvas>
+                                  </div>
+                                </div>
+                                <button class="btn-info" (click)="exportChartToPDF('taskStatusPieChart')">Export to PDF</button>
+
+                              </div>
+            
+                              <div class="two">   
+                                <div class="px-3 pb-4">
+                                  <div class="px-3 pb-4">
+                                    <h4 class="name">Goals Status</h4>
+                                  </div>
+                                  <div [hidden]="!chart">
+                                    <canvas id="goalStatusPieChart"></canvas>
+                                  </div>
+                                  <button class="btn-info" (click)="exportChartToPDF('goalStatusPieChart')">Export to PDF</button>
+
+                                </div>
+                              </div>
+
+
+                              <div class="calendar-container">
+                                <full-calendar
+                                    [options]="calendarOptions"
+                                    [events]="calendarEvents"
+                                    (dateClick)="handleDateClick($event)"
+                                ></full-calendar>
+                            </div>
+                            
+                            
+
+                   
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        
+
+        </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-8p1b7cQfZzneP0T0wc4q4YRVHU6SUE5FsQ/QlJxyya2KgkDWPSK0rdqJV9Kgr8Yt" crossorigin="anonymous">
+</script>
+</body>
+
+</html>

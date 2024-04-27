@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Votre titre</title>
+    <style>
+        body {
+            background-image: url('https://img.freepik.com/free-photo/flat-lay-pink-sporty-aesthetics-with-dark-background_23-2148259100.jpg?w=996&t=st=1711151874~exp=1711152474~hmac=e4d6ad10bc47c85266e98d85d76a14707c2386d5772e6f76851e067af6ce8f83');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            /* Autres propriétés de style si nécessaire */
+        }
+    </style>
+</head>
+<body>
+          <div class="signup-container" *ngIf="currentStep === 1">
+            <!-- Première partie du formulaire -->
+            <h2>Step 1: Personal Information</h2>
+            <form [formGroup]="signUpForm">
+              <div class="form-group">
+                <label>Username</label>
+                <input type="text" formControlName="username" class="form-control" />
+              </div>
+              <div class="form-group">
+                <label>First Name</label>
+                <input type="text" formControlName="firstName" class="form-control" />
+                <div *ngIf="formControls['firstName'].errors && (formControls['firstName'].dirty || formControls['firstName'].touched)"class="error-message">
+                  <div *ngIf="formControls['firstName'].errors['required']">First Name is required.</div>
+                  <div *ngIf="formControls['firstName'].errors['pattern']">First Name should contain only letters.</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Last Name</label>
+                <input type="text" formControlName="lastName" class="form-control" />
+                <div *ngIf="formControls['lastName'].errors && (formControls['lastName'].dirty || formControls['lastName'].touched)"class="error-message">
+                  <div *ngIf="formControls['lastName'].errors['required']">Last Name is required.</div>
+                  <div *ngIf="formControls['lastName'].errors['pattern']">Last Name should contain only letters.</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Email</label>
+                <input type="email" formControlName="email" class="form-control" />
+                <div *ngIf="formControls['email'].errors && (formControls['email'].dirty || formControls['email'].touched)"class="error-message">
+                  <div *ngIf="formControls['email'].errors['required']">Email is required.</div>
+                  <div *ngIf="formControls['email'].errors['email']">Invalid email format.</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Password</label>
+                <input type="password" formControlName="password" class="form-control" />
+                <div *ngIf="formControls['password'].errors && (formControls['password'].dirty || formControls['password'].touched)"class="error-message">
+                  <div *ngIf="formControls['password'].errors['required']">Password is required.</div>
+                  <div *ngIf="formControls['password'].errors['minlength']">Password should be at least 6 characters long.</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Phone Number</label>
+                <input type="text" formControlName="phoneNumber" class="form-control" />
+                <div *ngIf="formControls['phoneNumber'].errors && (formControls['phoneNumber'].dirty || formControls['phoneNumber'].touched)"class="error-message">
+                  <div *ngIf="formControls['phoneNumber'].errors['required']">Phone Number is required.</div>
+                  <div *ngIf="formControls['phoneNumber'].errors['pattern']">Invalid phone number format.</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Date of Birth</label>
+                <input type="date" formControlName="dateOfBirth" class="form-control" />
+              </div>
+              <div class="form-group">
+                <label>Gender</label>
+                <select formControlName="gender" class="form-control">
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select>
+              </div>
+            </form>
+            <a routerLink="/signin">J'ai déjà un compte</a>
+            <button (click)="nextStep()" class="btn btn-primary">Next</button>
+          </div>
+          
+          <div class="signup-container" *ngIf="currentStep === 2">
+            <!-- Deuxième partie du formulaire -->
+            <h2>Step 2: Additional Information</h2>
+            <form [formGroup]="signUpForm">
+              <div class="form-group">
+                <label>Role</label>
+                <select formControlName="roles" class="form-control" multiple>
+                  <option value="CUSTOMER">Customer</option>
+                  <option value="COACH">Coach</option>
+                  <option value="NUTRITIONIST">Nutritionist</option>
+                  <option value="PSYCHOLOGIST">Psychologist</option>
+               
+                </select>
+              </div>
+              <div class="form-group" *ngIf="!selected('CUSTOMER')">
+                <label>Diploma</label>
+                <input type="file" (change)="onFileChange($event, 'diploma')" class="form-control-file" />
+              </div>
+              <div *ngIf="selected('CUSTOMER')">
+                <div class="form-group">
+                  <label>Weight</label>
+                  <input type="number" formControlName="weight" class="form-control" />
+                </div>
+                <div class="form-group">
+                  <label>Height</label>
+                  <input type="number" formControlName="height" class="form-control" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Photo</label>
+                <input type="file" (change)="onFileChange($event, 'photo')" class="form-control-file" />
+              </div>
+            </form>
+            <button (click)="prevStep()" class="btn btn-secondary">Previous</button>
+            <button [disabled]="loading" (click)="onSubmit()" class="btn btn-primary">Submit</button>
+            <div *ngIf="error" class="alert alert-danger mt-3">{{ error }}</div>
+          </div>
+</body>
+</html>
