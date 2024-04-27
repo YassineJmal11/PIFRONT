@@ -1,0 +1,18 @@
+
+<div class="commentContainer">
+    <div class="user">
+        <ng-container *ngIf="review.user !== null; else unknownUser">
+            <!--div class="userIcon" [ngStyle]="{'background-image': 'url(' + review.user.icon + ')'}"></div-->
+            <div class="userName">{{ review.user.username }}</div>
+        </ng-container>
+        <ng-template #unknownUser>
+            <div class="userIcon" [ngStyle]="{'background-image': 'url('+unknownUserIcon+')'}"></div>
+            <div class="userName">Unknown User</div>
+        </ng-template>
+        <div class="userRating">{{ review.rating }} stars</div>
+    </div>
+    <div class="userCommentDate">{{ review.reviewDate }}</div>
+    <div class="userComment">
+        {{ review.comment }}
+    </div>
+</div>

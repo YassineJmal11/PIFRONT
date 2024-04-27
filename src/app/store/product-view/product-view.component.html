@@ -1,0 +1,165 @@
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
+
+<div style="width: 100vw; height: 100vh;" *ngIf="product">
+<div class="productContainer">
+    <div class="productContainerInfo">
+        <div class="productContainerInfoLeft" #productContainerInfoLeft>
+            <div class="imageControllers">
+                <div class="nextButton">
+                    Next
+                </div>
+                <div class="prevButton">
+                    Prev
+                </div>
+            </div>
+        </div>
+        <div class="productContainerInfoRight">
+
+            <div class="addToCartButton" (click)="addToCartButtonClicked()">
+                + Add to cart
+            </div>
+
+            <div class="productOverview">
+                <!--here you put the productCard, just modify the colors and fonts a bit-->
+                <app-product-card [product]="product" ></app-product-card>
+            </div>
+        </div>
+    </div>
+    
+    <div class="productTechnicalArea">
+        <div class="productTechnicalName">
+            {{product.technicalName}}
+        </div>
+        <br>
+        <div>
+            Description: {{product.description}}
+        </div>
+        <br>
+        <div class="productTechnicalDescription" #productTechnicalDescription>
+        </div>
+    </div>
+    
+    <div class="productStoresArea">
+        
+        <div class="productStores">
+            
+            <div>Nos Magasins:</div>
+            <select size="8" [(ngModel)]="selectedStore">
+              <option *ngFor="let store of product.stores" [value]="store.name">{{ store.name }}</option>
+            </select>
+
+        </div>
+        <div class="storeMap">
+            <iframe
+                width="100%"
+                height="100%"
+                frameborder="0"
+                style="border:0"
+                [src]="getMapUrl()"
+                allowfullscreen>
+            </iframe>
+        </div>
+
+    </div>
+
+    <div class="productContainerComments">
+        <div class="commentCreatorContainer">
+            <div class="commentCreatorForm">
+                <label>Add a comment</label>
+                <textarea class="commentInput" placeholder="Write your comment here..." #commentInput></textarea>
+                <select class="ratingSelector" #ratingSelector>
+                  <option value="1">1 star</option>
+                  <option value="2">2 stars</option>
+                  <option value="3">3 stars</option>
+                  <option value="4">4 stars</option>
+                  <option value="5">5 stars</option>
+                </select>
+                <label class="commentErrors"></label>
+                <button class="submitCommentButton" (click)="submitComment(commentInput.value, +ratingSelector.value)">Submit</button>
+              </div>
+              
+              
+        </div>
+
+        
+        <div *ngFor="let r of product.reviews">
+            <app-product-review [review]="r"></app-product-review>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+function obj2html(obj) {
+	if (typeof obj !== 'object') {
+		var p = document.createElement('p');
+		p.innerText = obj;
+		return p;
+	}
+
+	if (obj instanceof Array) {
+		var table = document.createElement('table');
+		obj.forEach(function(element) {
+			var tr = document.createElement('tr');
+			var td = document.createElement('td');
+			td.appendChild(obj2html(element));
+			tr.appendChild(td);
+			table.appendChild(tr);
+		});
+		return table;
+	}
+
+	if (obj instanceof Object) {
+		var iterator = Object.keys(obj);
+		var table = document.createElement('table');
+		for (var key of iterator) {
+			var tr = document.createElement('tr');
+			var th = document.createElement('th');
+			th.innerText = key;
+			tr.appendChild(th);
+			var td = document.createElement('td');
+			td.appendChild(obj2html(obj[key]));
+			tr.appendChild(td);
+			table.appendChild(tr);
+		}
+		return table;
+	}
+}
+
+var productImages = [
+    "https://cdn.thewirecutter.com/wp-content/media/2023/05/running-shoes-2048px-9718.jpg",
+    "https://rukminim2.flixcart.com/image/450/500/xif0q/shoe/7/z/r/8-white-leaf-8-urbanbox-white-black-original-imagvgf4cuzs2hrw.jpeg?q=90&crop=false",
+    "https://contents.mediadecathlon.com/p2153179/e958b22d2eccd9c7db0fea1da358fd8f/p2153179.jpg?format=auto&quality=70&f=650x0"
+]
+var currentImageIdx = 0
+function showProductImage(offset = 1) {
+    const img = document.body.getElementsByClassName("productContainerInfoLeft")[0];
+    currentImageIdx = (currentImageIdx + offset + productImages.length) % productImages.length
+    console.log(productImages[currentImageIdx])
+    img.style.backgroundImage = 'url(' + productImages[currentImageIdx] + ')'
+}
+
+
+const technicalDescription = 
+{
+    processor: "intel pentium",
+    GPU: "nvidea gforce 90213",
+    memoire: "15gb"
+}
+
+const technicalDescriptionArea = document.body.getElementsByClassName("productTechnicalDescription")[0];
+const table = obj2html(technicalDescription)
+technicalDescriptionArea.appendChild(table)
+
+const nextButton = document.body.getElementsByClassName("nextButton")[0];
+const prevButton = document.body.getElementsByClassName("prevButton")[0];
+nextButton.addEventListener('click', e => showProductImage(1))
+prevButton.addEventListener('click', e => showProductImage(-1))
+
+
+
+</script>
+</div>

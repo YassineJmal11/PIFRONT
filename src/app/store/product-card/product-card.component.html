@@ -1,0 +1,25 @@
+<div class="productCard" (click)="onClick()">
+    <div class="productCardTopbar">
+        <div class="productCardName">
+            {{product.mark.name}}
+        </div>
+        <div class="productCardDescription">
+            {{product.name}}
+        </div>
+    </div>
+    <div class="productCardCenter" [style.background-image]="'url(' + product.images[0] + ')'">
+    </div>
+    <div class="productCardBottombar">
+        <div>
+            <div class="productCardDisponibility">
+                {{product.disponibility}}
+            </div>
+            <div class="productCardSeller">
+                {{product.sellerName}}
+            </div>
+        </div>
+        <div class="productCardPriceTag">
+            {{product.price}} TND
+        </div>
+    </div>
+</div>

@@ -1,0 +1,165 @@
+
+
+<html>
+    <head>
+        
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
+    </head>
+
+    <body>
+
+    <div class="storeContent">
+        <div class="storeContentTopBar">
+            <div class="category">
+                <pre>home > store</pre>
+            </div>
+            <div class="searchArea">
+                <input type="text" placeholder="Search..." (keyup)="onKeyUp($event)" #searchInput>
+
+                <div class="ng-autocomplete">
+                <ng-autocomplete 
+                [data]="suggestions"
+                [searchKeyword]="suggestions_keyword"
+                (inputChanged)='onKeyUp($event)'
+                [itemTemplate]="itemTemplate"
+                [notFoundTemplate]="notFoundTemplate">                          
+                </ng-autocomplete>
+                <ng-template #itemTemplate let-item>
+                <a [innerHTML]="item.name"></a>
+                </ng-template>
+                
+                <ng-template #notFoundTemplate let-notFound>
+                <div [innerHTML]="notFound"></div>
+                </ng-template>
+                </div>
+
+            </div>
+        </div>
+        <div class="storeContentCenter">
+            <div class="filtersArea">
+                <div class="sortArea">
+                    <label>Sort</label>
+                    <select>
+                        <option>For you</option>
+                    </select>
+                </div>
+                <div class="categoryArea">
+                    <label>Filter</label>
+                    <div>
+                        price:
+                        <input type="number" placeholder="min?" (input)="onPriceFilterChange()" style="width: -webkit-fill-available;">
+                        <input type="number" placeholder="max?" (input)="onPriceFilterChange()" style="width: -webkit-fill-available;">
+                        Mark:
+                        <select (change)="onMarkSelected($event)">
+                            <option value="">All</option>
+                            <option *ngFor="let mark of marks" [value]="mark.name">{{ mark.name }}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="productsArea">
+                <div *ngFor="let p of products">
+                    <app-product-card [product]="p" (productClicked)="onProductClicked($event)"></app-product-card>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+
+        const filterArea = document.body.getElementsByClassName("categoryArea")[0];
+        //const btn = document.body.getElementsByClassName("filterExpandableButtonsArea")[0];
+
+        function createFilterElement(name) {
+            const filterElementString = `
+                <div class="filterExpandableButton">
+                    <div class="filterExpandableButtonTitle">
+                        <span>${name}</span>
+                    </div>
+                    <div class="filterExpandableButtonContent"></div>
+                </div>
+            `;
+
+            const filterContainer = document.createElement('div');
+            filterContainer.classList.add('filterExpandableButtonsArea');
+            filterContainer.innerHTML = filterElementString;
+
+            return filterContainer;
+        }
+
+        function addFilter(name, {isSlider, sliderMin=1, sliderMax=10, values, formatter=x=>x})
+        {
+            //const newBtn = btn.cloneNode(true);
+            const newBtn = createFilterElement(name);
+            const titleElement = newBtn.querySelector('.filterExpandableButtonTitle span');
+            titleElement.textContent = name;
+            
+            const content = newBtn.querySelector('.filterExpandableButtonContent');
+
+            if(isSlider)
+            {
+                const sliderElement = document.createElement('input');
+                sliderElement.setAttribute('type', 'range');
+                sliderElement.setAttribute('min', sliderMin);
+                sliderElement.setAttribute('max', sliderMax);
+                content.appendChild(sliderElement);
+
+                // Create a text node to display the current value
+                const valueText = document.createElement("div");
+                content.appendChild(valueText);
+                valueText.textContent = formatter(sliderElement.value);
+
+                // Update the text value when the slider value changes
+                sliderElement.addEventListener('input', function() {
+                    valueText.textContent = formatter(this.value);
+                });
+            }
+            else
+            {
+                const selectElement = document.createElement('select');
+                selectElement.setAttribute('size', 6)
+                values.forEach(value => {
+                    const option = document.createElement('option');
+                    option.value = value;
+                    option.textContent = value;
+                    selectElement.appendChild(option);
+                });
+                content.appendChild(selectElement);
+            }
+            
+            filterArea.insertBefore(newBtn, filterArea.lastChild);
+
+            newBtn.addEventListener('mouseenter', function(e)
+            {
+                content.style.height = '150px'
+            })
+            newBtn.addEventListener('mouseleave', function(e)
+            {
+                content.style.height = 0
+            })
+        }
+
+        addFilter("Brand", {values: ["Nike", "Adidas", "Reebok"]});
+        addFilter("Rating", {isSlider: true, formatter: x=>x+" stars"});
+        addFilter("Price range", {isSlider: true, sliderMin:0, sliderMax:5000, formatter: x=>"from 0$ to "+x+"$"});
+
+    </script>
+    
+    <script type="text/javascript">
+        // use this script to test adding multiple products in UI
+        // use this script to test adding multiple products in UI
+        // use this script to test adding multiple products in UI
+        // use this script to test adding multiple products in UI
+        const card = document.body.getElementsByClassName("productCard")[0];
+        for(var i=0; i<3; i++){
+            const clone = card.cloneNode(true)
+            card.parentNode.appendChild(clone)
+        }
+    </script>
+
+</body>
+
+</html>
