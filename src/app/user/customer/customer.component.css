@@ -1,0 +1,54 @@
+/* CSS pour la mise en forme de la liste de clients */
+
+/* Style général */
+.centered-content {
+    text-align: center;
+  }
+  
+  /* Style de la liste des clients */
+  .coach-item {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .coach-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .coach-item .profile-image {
+    margin-right: 10px;
+  }
+  
+  .coach-item .profile-image img {
+    width: 100px; /* Ajustez la taille de l'image selon vos besoins */
+    height: 100px; /* Ajustez la taille de l'image selon vos besoins */
+    border-radius: 50%; /* Rendre l'image ronde */
+  }
+  
+  .coach-item .username {
+    display: flex;
+    align-items: center;
+  }
+  
+  .coach-item .username span {
+    margin-right: 10px;
+    font-weight: bold;
+  }
+  
+  /* Style du bouton Chat */
+  .btn-primary {
+    background-color: #007bff; /* Couleur de fond du bouton */
+    color: white; /* Couleur du texte */
+    border: none; /* Supprimer la bordure */
+    border-radius: 5px; /* Arrondir les coins */
+    padding: 5px 10px; /* Ajuster le rembourrage */
+    cursor: pointer; /* Curseur de la souris */
+  }
+  
+  .btn-primary:hover {
+    background-color: #0056b3; /* Couleur de fond du bouton au survol */
+  }
+  

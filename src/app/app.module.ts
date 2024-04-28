@@ -43,6 +43,8 @@ import { CreatePostComponent } from './forum/community/post/create-post/create-p
 import { ViewPostComponent } from './forum/community/view-post/view-post.component';
 import dayGridPlugin from '@fullcalendar/daygrid'; // DayGrid plugin
 import { ForgotPasswordComponent } from './user/forgot-password/forgot-password.component';
+import { ChatComponent } from './chat/chat/chat.component';
+import { CustomerComponent } from './user/customer/customer.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -77,7 +79,9 @@ import { ForgotPasswordComponent } from './user/forgot-password/forgot-password.
    ResetPasswordComponent,
    VerifyComponent,
    SignupadminComponent,
-   AfterLoginComponent
+   AfterLoginComponent,
+   ChatComponent,
+   CustomerComponent
   ],
   imports: [
     BrowserModule,

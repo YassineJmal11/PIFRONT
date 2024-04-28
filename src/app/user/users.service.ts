@@ -68,4 +68,7 @@ export class UsersService {
   getAllUsers(): Observable<User[]> {
     return this.http.get<User[]>(this.authUrl);
   }
+  getCustomers(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.authUrl}/customers`);
+  }
 }
