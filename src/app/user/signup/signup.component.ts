@@ -61,6 +61,7 @@ export class SignupComponent implements OnInit {
       }
     }
   }
+
   nextStep() {
     this.currentStep++;
   }
@@ -75,8 +76,7 @@ export class SignupComponent implements OnInit {
       return;
     }
     const formValue = this.signUpForm.value;
-    const weight = formValue.weight !== null ? formValue.weight.toString() : null;
-    const height = formValue.height !== null ? formValue.height.toString() : null;
+
 
     this.loading = true;
   
@@ -89,8 +89,8 @@ export class SignupComponent implements OnInit {
       formValue.phoneNumber,
       formValue.dateOfBirth,
       formValue.gender,
-      weight,
-      height,
+      formValue.weight,
+      formValue.height,
       formValue.diploma,
       formValue.photo,
       formValue.roles
@@ -110,6 +110,7 @@ export class SignupComponent implements OnInit {
     const roles = this.signUpForm.value.roles;
     return roles && roles.includes(role);
   }
+
   uniqueUsernameValidator(control: FormControl): Observable<any> {
     return this.userService.getUserByUsername(control.value).pipe(
       map(response => {
