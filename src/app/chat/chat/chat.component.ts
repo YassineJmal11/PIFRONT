@@ -21,7 +21,7 @@ export class ChatComponent implements OnInit {
   public chatList: any = [];
   replymessage: string = "checking";
   public chatData: any;
-  msg = "Good work";
+  meetForm: FormGroup;
   chatId: string | null = null;
   color = "";
   secondUserName = "";
@@ -39,7 +39,10 @@ export class ChatComponent implements OnInit {
     this.chatForm = new FormGroup({
       replymessage: new FormControl()
     });
-  }
+    this.meetForm = new FormGroup({
+      meetingLink: new FormControl('')
+    });
+}
 
   ngOnInit(): void {
     this.currentUser = this.tokenStorageService.getUser();
@@ -134,4 +137,37 @@ export class ChatComponent implements OnInit {
         });
     }
   }
-}
+  startVideoMeeting() {
+    if (this.chatId) {
+      const link = `${window.location.origin}/meet?roomID=${this.chatId}`;
+      const message = `Join the meeting: ${link}`;
+      this.addMessageToChatRoom(message);
+      window.open(link, '_blank');
+    }
+  }
+  
+  addMessageToChatRoom(message: string) {
+    if (this.chatId) {
+      this.messageObj.replymessage = message;
+      this.messageObj.senderEmail = this.currentUser.username;
+      this.chatObj.chatId = parseInt(this.chatId) || 0;
+  
+      this.messageObj.chat = this.chatObj;
+      this.chatService.addMessageToChatRoom(this.messageObj).subscribe(data => {
+        this.chatForm.reset();
+        this.loadChatMessages();
+      });
+    }
+  
+  
+      
+
+  }
+  startCustomMeeting() {
+    const meetingLink = this.meetForm.get('meetingLink')?.value;
+    if (meetingLink) {
+      window.open(meetingLink, '_blank'); // Ouvre le lien dans un nouvel onglet
+    } else {
+      // Gérer le cas où le champ de saisie est vide
+    }
+}}

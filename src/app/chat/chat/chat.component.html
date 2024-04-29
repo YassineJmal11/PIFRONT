@@ -2,32 +2,20 @@
 <div class="container-fluid h-100 mt-5">
   <div class="row justify-content-center h-100">
     <div class="col-md-0 col-xl-1 order-lg-1"></div>
-    <!-- =======================left Body================================ -->
-    <div class="col-md-4 col-xl-2 chat order-last order-lg-2">
-      <div class="card mb-sm-3 mb-md-0 contacts_card">
-        <div class="card-body contacts_body ">
-          <ul class="contacts chatList" *ngFor="let presentation of alluser">
-            <li *ngIf="presentation.userName != currentUser.username">
-              <div class="d-flex bd-highlight">
-                <div class="img_cont">
-                  <div class="rounded-circle user_img text_inside_circle">
-                    {{presentation.userName.substring(0,1)}}
-                  </div>
-                </div>
-                <div class="user_info" (click)="goToChat(presentation.userName)">
-                  <div style="margin-top: 1rem;">
-                    {{presentation.userName}}</div>
-                  <br>
-                </div>
-              </div>
-            </li>
-          </ul>
+    <div class="col-md-4 col-xl-2 order-lg-2">
+      <div class="card mb-sm-3 mb-md-0">
+        <div class="card-body">
+          <form [formGroup]="meetForm" (ngSubmit)="startCustomMeeting()">
+            <div class="form-group">
+              <label for="meetingLink">Meeting Link</label>
+              <input type="text" class="form-control" id="meetingLink" formControlName="meetingLink" placeholder="Enter meeting link">
+            </div>
+            <button type="submit" class="btn btn-primary">Start Custom Meeting</button>
+          </form>
         </div>
-        <div class="card-footer"></div>
       </div>
     </div>
     <div class="col-md-0 col-xl-1 order-lg-3"></div>
-    <!-- =============================Middle Body============================= -->
     <div class="col-md-8 col-xl-5 chat order-md-1 order-lg-4">
       <div class="card">
         <div class="card-header msg_head">
@@ -45,8 +33,9 @@
               <span *ngIf="secondUserName==currentUser.username">{{firstUserName}}</span>
               <p>Message</p>
             </div>
-            <div class="video_cam">
-            </div>
+            <button mat-raised-button class="input-group-text send_btn" (click)="startVideoMeeting()">
+              Start Video Meeting
+            </button>
           </div>
           <span id="action_menu_btn"></span>
         </div>
@@ -89,7 +78,6 @@
         </div>
       </div>
     </div>
-    <!-- ========================Right Body========================= -->
     <div class="col-md-4 col-xl-2 chat order-md-2 order-lg-5">
       <div class="card mb-sm-3 mb-md-0 contacts_card">
         <div class="card-header">

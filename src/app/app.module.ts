@@ -45,6 +45,7 @@ import dayGridPlugin from '@fullcalendar/daygrid'; // DayGrid plugin
 import { ForgotPasswordComponent } from './user/forgot-password/forgot-password.component';
 import { ChatComponent } from './chat/chat/chat.component';
 import { CustomerComponent } from './user/customer/customer.component';
+import { MeetComponent } from './chat/meet/meet.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -81,7 +82,8 @@ import { CustomerComponent } from './user/customer/customer.component';
    SignupadminComponent,
    AfterLoginComponent,
    ChatComponent,
-   CustomerComponent
+   CustomerComponent,
+   MeetComponent
   ],
   imports: [
     BrowserModule,

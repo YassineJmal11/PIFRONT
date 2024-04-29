@@ -28,6 +28,7 @@ import { CreatePostComponent } from './forum/community/post/create-post/create-p
 import { ViewPostComponent } from './forum/community/view-post/view-post.component';
 import { ChatComponent } from './chat/chat/chat.component';
 import { CustomerComponent } from './user/customer/customer.component';
+import { MeetComponent } from './chat/meet/meet.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -35,6 +36,7 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'signin', component: SigninComponent },
   { path: 'edit', component: EditComponent },
+  { path: 'meet', component: MeetComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'customer', component: CustomerComponent },
   { path: 'chat', component: ChatComponent },
