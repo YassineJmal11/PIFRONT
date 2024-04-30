@@ -2,6 +2,7 @@ import { User } from "src/app/user/user";
 import { Community } from "./Community";
 import { PostType } from "./PostType";
 import { Vote } from "./Vote";
+import { Comment } from "./Comment";
 
 export class Post {
   postId!: number;
@@ -18,4 +19,5 @@ export class Post {
   upvoted!: boolean;
   downvoted!: boolean;
   totalVotes!:number;
+  comments!:Comment[];
 }

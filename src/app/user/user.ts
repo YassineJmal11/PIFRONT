@@ -15,5 +15,7 @@ export interface User {
     diploma: string;
     profileImageUrl: string;
     accountStatus: AccountStatus; 
+    badWordsCount:number;
+
   }
   

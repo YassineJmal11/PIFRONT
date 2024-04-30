@@ -35,6 +35,8 @@ export class CommunityServiceService {
   deleteCommunity(communityId:number){
     return this.http.delete(this.baseUrl+'/delete/'+communityId);
   }
-
+  getCommunitiesOrderByMembers(){
+    return this.http.get(this.baseUrl+'/popularCommunities');
+  }
   
 }
