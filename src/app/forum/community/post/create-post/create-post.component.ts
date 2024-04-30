@@ -106,19 +106,22 @@ export class CreatePostComponent implements OnInit {
   onSubmit() {
     if (this.postForm.valid) {
       const sanitizedTextContent = this.replaceBadWords(this.postForm.value.text);
-      
+  
       if (this.containsProfanity(this.postForm.value.text)) {
-        console.log("bad words detected")
+        console.log("bad words detected");
         this.usersService.updateUserBadWordsCount(this.userId).subscribe(
-          () => {
+          (action: number) => {
+            console.log(action)
             console.log('Bad words count updated successfully');
-            // Do something after successful update
-            this.submitPost(sanitizedTextContent);
+            if (action === 1) {
+              console.log("yetbana")
+              this.token.signOut();
+              this.router.navigate(['/home']);
+            }
+            if (action === 2) {
+              this.submitPost(sanitizedTextContent);
+            }
           },
-          (error) => {
-            console.error('Error updating bad words count:', error);
-            // Handle error
-          }
         );
       } else {
         this.submitPost(sanitizedTextContent);
@@ -127,7 +130,7 @@ export class CreatePostComponent implements OnInit {
       console.log('Form is invalid');
     }
   }
-
+  
   submitPost(sanitizedTextContent: string) {
     const userId = this.userId;
     const communityId = this.postForm.value.community.communityId;

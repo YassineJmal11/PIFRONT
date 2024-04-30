@@ -71,7 +71,7 @@ export class UsersService {
     return this.http.get<User[]>(`${this.authUrl}/customers`);
   }
 
-  updateUserBadWordsCount(userId: number): Observable<void> {
+  updateUserBadWordsCount(userId: number): any {
     const url = `${this.authUrl}/users/${userId}/bad-words`; // Endpoint for updating bad words count
     return this.http.put<void>(url, {});
   }
