@@ -161,7 +161,7 @@
                     </a>
                     <div>
                         <div *ngFor="let c of joinedCommunities" class="community-card" [routerLink]="['/community', c.communityId]">
-                            <span>{{c.communityName}}</span>
+                            <span>/{{c.communityName}}</span>
                         </div>
                     </div>
                 </div>
@@ -170,7 +170,7 @@
                     <h5>Popular communities</h5>
                     <div>
                         <div *ngFor="let c of popularCommunities" class="community-card" [routerLink]="['/community', c.communityId]">
-                            <span>{{c.communityName}}</span>
+                            <span>/{{c.communityName}}</span>
                         </div>
                     </div>
                 </div>
@@ -184,19 +184,8 @@
                     <div *ngFor="let c of createdCommunities; let i = index" class="community-card">
                         <div class="d-flex justify-content-between">
                             <div>
-                                <span [routerLink]="['/community', c.communityId]">{{c.communityName}}</span>
+                                <span [routerLink]="['/community', c.communityId]">/{{c.communityName}}</span>
                             </div>
-                            <div>
-                                <button class="btn btn-danger" type="button" (click)="showConfirmation[i] = !showConfirmation[i]">
-                                    <i class="bi bi-trash"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <!-- Confirmation div -->
-                        <div *ngIf="showConfirmation[i]" class="confirmation-div">
-                            <p>Are you sure you want to delete '{{c.communityName}}'?</p>
-                            <button class="btn btn-danger" (click)="delete(c.communityId); showConfirmation[i] = false">Yes</button>
-                            <button class="btn btn-secondary" (click)="showConfirmation[i] = false">No</button>
                         </div>
                     </div>
                 </div>
