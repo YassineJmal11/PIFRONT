@@ -10,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ShoppingCartComponent {
   
-  @Input() userId!: number;
+  userId : number = -1;
   shoppingCart: any;
   
   constructor(private route: ActivatedRoute,
@@ -19,11 +19,9 @@ export class ShoppingCartComponent {
 
   ngOnInit() 
   {
-    this.route.params.subscribe(params => {
-      const userId = params['userId'];
-      this.userId = userId;
+    
+    this.userId = parseInt(localStorage.getItem("userId") ?? "-1");
       this.getShoppingCart();
-    });
 
   }
 

@@ -3,6 +3,8 @@ import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { Product } from '../entities';
 import API from '../api';
+import { UsersService } from 'src/app/user/users.service';
+import { TokenStorageService } from 'src/app/user/token-storage.service';
 
 
 @Component({
@@ -21,12 +23,19 @@ export class StoreComponent {
   filterPriceMin: any;
   filterPriceMax: any;
 
-  constructor(private router: Router, private http: HttpClient) {}
+  constructor(private router: Router, private http: HttpClient, 
+    private usersService: UsersService, private tokenService: TokenStorageService) {}
 
   ngOnInit() {
     // Initialize products here if needed
     this.getAllProducts();
     this.getAllProductMarks();
+
+    this.usersService.getUserIdByUsername(this.tokenService.getUser().username).subscribe(
+      (data) => {
+        localStorage.setItem("userId", data.userId.toString());
+      }
+    );
   }
 
   getAllProductMarks() {

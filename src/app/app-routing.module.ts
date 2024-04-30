@@ -41,7 +41,7 @@ const routes: Routes = [
   
   {path: 'store', component: StoreComponent},
   {path: 'product-view/:id', component: ProductViewComponent},
-  {path: 'shopping-cart/:userId', component: ShoppingCartComponent},
+  {path: 'shopping-cart', component: ShoppingCartComponent},
   {path: 'store-backend-tableviewer/:type', component: StoreBackendTableviewerComponent},
   {path: 'store-backend-edit/:type/:id', component: StoreBackendEditComponent},
   {path: 'store-backend-new/:type', component: StoreBackendEditComponent},

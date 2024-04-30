@@ -52,7 +52,6 @@ import { ProductViewComponent } from './store/product-view/product-view.componen
 import { ShoppingCartComponent } from './store/shopping-cart/shopping-cart.component';
 import { StoreBackendEditComponent } from './store/store-backend-edit/store-backend-edit.component';
 import { StoreBackendTableviewerComponent } from './store/store-backend-tableviewer/store-backend-tableviewer.component';
-import { StoreBackendComponent } from './store/store-backend/store-backend.component';
 import { StoreShipmentComponent } from './store/store-shipment/store-shipment.component';
 import { StoreComponent } from './store/store/store.component';
 import {AutocompleteLibModule} from 'angular-ng-autocomplete';
@@ -104,7 +103,6 @@ import {AutocompleteLibModule} from 'angular-ng-autocomplete';
    ProductViewComponent,
    ProductReviewComponent,
    ShoppingCartComponent,
-   StoreBackendComponent,
    StoreBackendEditComponent,
    StoreBackendTableviewerComponent,
    StoreShipmentComponent
