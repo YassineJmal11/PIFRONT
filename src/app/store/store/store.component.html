@@ -1,0 +1,76 @@
+
+
+<html>
+    <head>
+        
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
+    </head>
+
+    <body>
+
+        <app-header></app-header>
+
+    <div class="storeContent">
+        <div class="storeContentTopBar">
+            <div class="category">
+                <pre>home > store</pre>
+            </div>
+            <div class="searchArea">
+                <input type="text" placeholder="Search..." (keyup)="onKeyUp($event)" #searchInput>
+
+                <div class="ng-autocomplete">
+                <ng-autocomplete 
+                [data]="suggestions"
+                [searchKeyword]="suggestions_keyword"
+                (inputChanged)='onKeyUp($event)'
+                [itemTemplate]="itemTemplate"
+                [notFoundTemplate]="notFoundTemplate">                          
+                </ng-autocomplete>
+                <ng-template #itemTemplate let-item>
+                <a [innerHTML]="item.name"></a>
+                </ng-template>
+                
+                <ng-template #notFoundTemplate let-notFound>
+                <div [innerHTML]="notFound"></div>
+                </ng-template>
+                </div>
+
+            </div>
+        </div>
+        <div class="storeContentCenter">
+            <div class="filtersArea">
+                <div class="sortArea">
+                    <label>Sort</label>
+                    <select>
+                        <option>For you</option>
+                    </select>
+                </div>
+                <div class="categoryArea">
+                    <label>Filter</label>
+                    <div>
+                        price:
+                        <input type="number" placeholder="min?" (input)="onPriceFilterChange()" style="width: -webkit-fill-available;">
+                        <input type="number" placeholder="max?" (input)="onPriceFilterChange()" style="width: -webkit-fill-available;">
+                        Mark:
+                        <select (change)="onMarkSelected($event)">
+                            <option value="">All</option>
+                            <option *ngFor="let mark of marks" [value]="mark.name">{{ mark.name }}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="productsArea">
+                <div *ngFor="let p of products">
+                    <app-product-card [product]="p" (productClicked)="onProductClicked($event)"></app-product-card>
+                </div>
+            </div>
+        </div>
+    </div>
+<app-footer></app-footer>
+
+</body>
+
+</html>

@@ -1,0 +1,292 @@
+:root, :host {
+    --soft: rgb(0,0,0,.3);
+    --softer: rgb(0,0,0,.1);
+    --softest: rgb(0,0,0,0.05);
+}
+body
+{
+    margin: 0px;
+    background-color: white;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.productContainer
+{
+    width: 100%;
+    height: 100%;
+}
+.productContainerInfo
+{
+    width: 100%;
+    height: 90%;
+
+    display: flex;
+    flex-direction: row;
+
+    box-shadow: 0px 0px 50px 10px var(--soft);
+}
+.productContainerInfoLeft
+{
+    width: 50%;
+    height: 100%;
+    background-color: black;
+
+    background-image: url(https://cdn.thewirecutter.com/wp-content/media/2023/05/running-shoes-2048px-9718.jpg);
+    background-size: cover;
+    background-position: center;
+    transition: filter .3s ease;
+}
+.productContainerInfoLeft:hover
+{
+    filter: saturate(5);
+}
+.productContainerInfoRight
+{
+    width: 50%;
+    height: 100%;
+
+    padding: 50px;
+    box-sizing: border-box;
+}
+.productTechnicalArea
+{
+    width: 100%;
+    height: auto;
+
+    padding: min(100px, 20%);
+    box-sizing: border-box;
+}
+.productTechnicalName
+{
+    font-size: 50px;
+    font-weight: bold;
+}
+
+.productStoresArea
+{
+    width: 100%;
+    height: 50%;
+
+    display: flex;
+    flex-direction: row;
+
+    background-color: white;
+    box-shadow: 0px 0px 50px 10px var(--softer);
+}
+.productStores
+{
+    padding: 50px;
+    box-sizing: border-box;
+    width: 50%;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    font-size: 5vw;
+    font-weight: bolder;
+}
+.productStores>select
+{
+    width: 100%;
+    height: auto;
+
+    font-size: 20px;
+    border: none;
+    outline: none;
+    overflow: hidden;
+}
+.storeMap
+{
+    width: 50%;
+}
+
+.productContainerComments
+{
+    width: 100%;
+
+    padding: 10%;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center
+}
+
+.addToCartButton
+{
+    position: absolute;
+    top: 0%;
+    padding: 3%;
+    background-color: khaki;
+    cursor: pointer;
+    border-bottom-right-radius: 30px;
+    font-size: 1.5em;
+    transition: background-color 0.3s, transform 0.3s;
+}
+.addToCartButton:hover {
+    background-color: gold;
+    transform: scale(1.1);
+}
+
+.imageControllers
+{
+    width: 100%;
+    height: 10%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+.imageControllers>*
+{
+    aspect-ratio: 1/1;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.nextButton
+{
+    background-color: white;
+    transition: transform .2s ease;
+}
+.prevButton
+{
+    background-color: black;
+    color: white;
+    transition: transform .2s ease;
+}
+.nextButton:hover { transform: scale(1.5); }
+.prevButton:hover { transform: scale(1.5); }
+
+.commentContainer
+{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 30px;
+    margin-bottom: 20px;
+    box-shadow: 0px 0px 50px 10px var(--softest);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.commentContainer:hover
+{
+    transform: scale(1.05);
+    box-shadow: 0px 0px 50px 10px var(--soft);
+    z-index: 1;
+}
+.user
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 50px;
+    padding-bottom: 10px;
+}
+.userIcon
+{
+    aspect-ratio: 1/1;
+    height: 100%;
+    border-radius: 1000px;
+    background-color: black;
+    background-size: cover;
+    background-position: center;
+    background-image: url(https://static.vecteezy.com/system/resources/thumbnails/002/318/271/small/user-profile-icon-free-vector.jpg);
+}
+.userName
+{
+    font-size: 20px;
+    padding-left: 30px;
+}
+.userRating
+{
+    color: gold;
+    font-size: 30px;
+    padding-left: 30px;
+}
+.userCommentDate
+{
+    color: var(--soft);
+}
+.userComment
+{
+
+}
+
+.productOverview
+{
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    pointer-events: none;
+}
+
+.productTechnicalDescription table {
+width: 100%;
+border-collapse: collapse;
+border: 1px solid #ddd;
+}
+
+.productTechnicalDescription th,
+.productTechnicalDescription td {
+padding: 8px;
+text-align: left;
+border-bottom: 1px solid #ddd;
+}
+
+.productTechnicalDescription th {
+background-color: #f2f2f2;
+font-weight: bold;
+}
+
+.productTechnicalDescription tr:nth-child(even) {
+background-color: #f9f9f9;
+}
+
+.productTechnicalDescription tr:hover {
+background-color: #f2f2f2;
+}
+
+
+.commentCreatorContainer {
+width: 50%;
+margin-bottom: 20px;
+}
+
+.commentCreatorForm {
+display: flex;
+flex-direction: column;
+}
+
+.commentInput {
+padding: 10px;
+margin-bottom: 10px;
+border: 1px solid var(--soft);
+border-radius: 5px;
+resize: vertical;
+}
+
+.ratingSelector {
+padding: 10px;
+margin-bottom: 10px;
+border: 1px solid var(--soft);
+border-radius: 5px;
+font-size: 1em;
+}
+
+.submitCommentButton {
+padding: 10px 20px;
+background-color: khaki;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+font-size: 1em;
+transition: background-color 0.3s, transform 0.3s;
+}
+
+.submitCommentButton:hover {
+background-color: gold;
+transform: scale(1.05);
+}
+

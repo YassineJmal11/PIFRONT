@@ -1,0 +1,97 @@
+
+
+.commentContainer
+{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 30px;
+    margin-bottom: 20px;
+    box-shadow: 0px 0px 50px 10px var(--softest);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.commentContainer:hover
+{
+    transform: scale(1.05);
+    box-shadow: 0px 0px 50px 10px var(--soft);
+    z-index: 1;
+}
+.user
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 50px;
+    padding-bottom: 10px;
+}
+.userIcon
+{
+    aspect-ratio: 1/1;
+    height: 100%;
+    border-radius: 1000px;
+    background-color: black;
+    background-size: cover;
+    background-position: center;
+    background-image: url(https://static.vecteezy.com/system/resources/thumbnails/002/318/271/small/user-profile-icon-free-vector.jpg);
+}
+.userName
+{
+    font-size: 20px;
+    padding-left: 30px;
+}
+.userRating
+{
+    color: gold;
+    font-size: 30px;
+    padding-left: 30px;
+}
+.userCommentDate
+{
+    color: var(--soft);
+}
+.userComment
+{
+
+}
+
+.commentCreatorContainer {
+    width: 50%;
+    margin-bottom: 20px;
+}
+
+.commentCreatorForm {
+    display: flex;
+    flex-direction: column;
+}
+
+.commentInput {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid var(--soft);
+    border-radius: 5px;
+    resize: vertical;
+}
+
+.ratingSelector {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid var(--soft);
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+.submitCommentButton {
+    padding: 10px 20px;
+    background-color: khaki;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.submitCommentButton:hover {
+    background-color: gold;
+    transform: scale(1.05);
+}

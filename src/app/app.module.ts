@@ -46,6 +46,19 @@ import { ForgotPasswordComponent } from './user/forgot-password/forgot-password.
 import { ChatComponent } from './chat/chat/chat.component';
 import { CustomerComponent } from './user/customer/customer.component';
 import { MeetComponent } from './chat/meet/meet.component';
+import { ProductCardComponent } from './store/product-card/product-card.component';
+import { ProductReviewComponent } from './store/product-review/product-review.component';
+import { ProductViewComponent } from './store/product-view/product-view.component';
+import { ShoppingCartComponent } from './store/shopping-cart/shopping-cart.component';
+import { StoreBackendEditComponent } from './store/store-backend-edit/store-backend-edit.component';
+import { StoreBackendTableviewerComponent } from './store/store-backend-tableviewer/store-backend-tableviewer.component';
+import { StoreBackendComponent } from './store/store-backend/store-backend.component';
+import { StoreShipmentComponent } from './store/store-shipment/store-shipment.component';
+import { StoreComponent } from './store/store/store.component';
+import {AutocompleteLibModule} from 'angular-ng-autocomplete';
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -83,7 +96,18 @@ import { MeetComponent } from './chat/meet/meet.component';
    AfterLoginComponent,
    ChatComponent,
    CustomerComponent,
-   MeetComponent
+   MeetComponent,
+
+   
+   StoreComponent,
+   ProductCardComponent,
+   ProductViewComponent,
+   ProductReviewComponent,
+   ShoppingCartComponent,
+   StoreBackendComponent,
+   StoreBackendEditComponent,
+   StoreBackendTableviewerComponent,
+   StoreShipmentComponent
   ],
   imports: [
     BrowserModule,
@@ -92,8 +116,8 @@ import { MeetComponent } from './chat/meet/meet.component';
     ReactiveFormsModule,
     HttpClientModule,
     NgChartjsModule,
-    FullCalendarModule  
-    
+    FullCalendarModule , 
+    AutocompleteLibModule
   ],
   providers: [ authInterceptorProviders],
   bootstrap: [AppComponent]

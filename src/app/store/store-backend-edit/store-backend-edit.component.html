@@ -1,0 +1,165 @@
+
+
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+<div *ngIf="product">
+    <div class="container mt-5">
+        <h2>Edit Product</h2>
+        <form (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label for="productName">Product Name</label>
+            <input [(ngModel)]="product.name" [ngModelOptions]="{standalone: true}" type="text" class="form-control" id="productName" placeholder="Enter product name" required>
+          </div>
+          <div class="form-group">
+            <label for="productDescription">Product Description</label>
+            <textarea [(ngModel)]="product.description" [ngModelOptions]="{standalone: true}" class="form-control" id="productDescription" rows="3" placeholder="Enter product description"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="productMark">Product Mark</label>
+            <select class="form-control" id="productMark" *ngIf="productMarks" [(ngModel)]="product.mark" [ngModelOptions]="{standalone: true}">
+                <option *ngFor="let mark of productMarks" [ngValue]="mark">{{ mark.name }}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="productTechnicalName">Technical Name</label>
+            <input [(ngModel)]="product.technicalName" [ngModelOptions]="{standalone: true}" type="text" class="form-control" id="productTechnicalName" placeholder="Enter technical name">
+          </div>
+          <div class="form-group">
+            <label for="productTechnicalDescription">Technical Description</label>
+            <textarea [(ngModel)]="product.technicalDescription" [ngModelOptions]="{standalone: true}" class="form-control" id="productTechnicalDescription" rows="3" placeholder="Enter technical description"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="productPrice">Price</label>
+            <input [(ngModel)]="product.price" [ngModelOptions]="{standalone: true}" type="number" class="form-control" id="productPrice" min="0" placeholder="Enter price" required>
+          </div>
+          <div class="form-group">
+            <label for="productQuantity">Quantity</label>
+            <input [(ngModel)]="product.quantity" [ngModelOptions]="{standalone: true}" type="number" class="form-control" id="productQuantity" placeholder="Enter quantity" min="0" required>
+          </div>
+          <div class="form-group">
+            <label for="productCategory">Select Category</label>
+            <select class="form-control" id="productCategory" [(ngModel)]="product.category" [ngModelOptions]="{standalone: true}">
+              <option *ngFor="let key of productCategoryKeys" [ngValue]="key">
+                {{ key }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="productDisponibility">Select Disponibility</label>
+            <select class="form-control" id="productDisponibility" [(ngModel)]="product.disponibility" [ngModelOptions]="{standalone: true}">
+              <option *ngFor="let key of productDisponibilityKeys" [ngValue]="key">
+                {{ key }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="sellerUser">Select Seller User</label>
+            <select class="form-control" id="sellerUser" *ngIf="users" [(ngModel)]="product.seller" [ngModelOptions]="{standalone: true}">
+                <option *ngFor="let user of users" [ngValue]="user">{{ user.username }}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="storesAvailable">Select Stores Where It's Available</label>
+            
+            <select class="form-control" id="storesAvailable" *ngIf="physicalStores" [(ngModel)]="product.stores" [ngModelOptions]="{standalone: true}" multiple>
+                <option *ngFor="let store of physicalStores" [ngValue]="store">{{ store.name }}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="productImage">Upload Product Images</label>
+            <input type="file" class="form-control-file" id="productImages" (change)="onImagesChange($event)" multiple>
+          </div>
+          <!-- Additional fields can be added based on your requirements -->
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+</div>
+
+
+<div *ngIf="physicalStore">
+  <div class="container mt-5">
+    <h2>Edit Physical Store</h2>
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="storeName">Store Name</label>
+        <input [(ngModel)]="physicalStore.name" [ngModelOptions]="{standalone: true}" type="text" class="form-control" id="storeName" placeholder="Enter store name" required>
+      </div>
+      <div class="form-group">
+        <label for="storeDescription">Store Description</label>
+        <textarea [(ngModel)]="physicalStore.description" [ngModelOptions]="{standalone: true}" class="form-control" id="storeDescription" rows="3" placeholder="Enter store description"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="storeLocation">Store Location</label>
+        <input [(ngModel)]="physicalStore.location" [ngModelOptions]="{standalone: true}" type="text" class="form-control" id="storeLocation" placeholder="Enter store location" required>
+      </div>
+      <div class="form-group">
+        <label for="storeWorkHours">Store Work Hours</label>
+        <input [(ngModel)]="physicalStore.workHours" [ngModelOptions]="{standalone: true}" type="text" class="form-control" id="storeWorkHours" placeholder="Enter store work hours">
+      </div>
+      <!--div class="form-group">
+        <label for="storeImages">Upload Store Image</label>
+        <input type="file" class="form-control-file" id="storeImage" (change)="onImagesChange($event)">
+      </div-->
+      <!-- Additional fields can be added based on your requirements -->
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</div>
+
+<div *ngIf="productMark">
+  <div class="container mt-5">
+    <h2>Edit Mark</h2>
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="markName">Mark Name</label>
+        <input [(ngModel)]="productMark.name" [ngModelOptions]="{standalone: true}" type="text" class="form-control" id="markName" placeholder="Enter mark name" required>
+      </div>
+      <div class="form-group">
+        <label for="markDescription">Mark Description</label>
+        <textarea [(ngModel)]="productMark.description" [ngModelOptions]="{standalone: true}" class="form-control" id="markDescription" rows="3" placeholder="Enter mark description"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</div>
+
+<div *ngIf="productReview">
+  <div class="container mt-5">
+    <h2>Edit Product Review</h2>
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="rating">Rating</label>
+        <input [(ngModel)]="productReview.rating" [ngModelOptions]="{standalone: true}" type="number" class="form-control" id="rating" placeholder="Enter rating (1-5)" min="1" max="5" required>
+      </div>
+      <div class="form-group">
+        <label for="comment">Comment</label>
+        <textarea [(ngModel)]="productReview.comment" [ngModelOptions]="{standalone: true}" class="form-control" id="comment" rows="3" placeholder="Enter your comment"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="reviewDate">Review Date</label>
+        <input [(ngModel)]="productReview.reviewDate" [ngModelOptions]="{standalone: true}" type="date" class="form-control" id="reviewDate" required>
+      </div>
+      <!-- Additional fields can be added based on your requirements -->
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</div>
+
+<div *ngIf="shipmentUser">
+  <div class="container mt-5">
+    <h2>Edit Shipment-User</h2>
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="user">Select User that will ship the product</label>
+        <select class="form-control" id="user" *ngIf="users" [(ngModel)]="shipmentUser.user" [ngModelOptions]="{standalone: true}">
+            <option *ngFor="let user of users" [ngValue]="user">{{ user.username }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="available">is available for shipping right now ?</label>
+        <input [(ngModel)]="shipmentUser.available" [ngModelOptions]="{standalone: true}" type="checkbox" class="form-control" id="available" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</div>

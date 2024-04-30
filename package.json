@@ -23,6 +23,7 @@
     "@fullcalendar/interaction": "^6.1.11",
     "@zegocloud/zego-uikit-prebuilt": "^2.0.1",
     "angular-calendar": "^0.31.0",
+    "angular-ng-autocomplete": "^2.0.12",
     "bad-words": "^3.0.4",
     "bootstrap": "^5.3.3",
     "chart.js": "^4.4.2",

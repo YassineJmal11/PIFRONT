@@ -29,8 +29,24 @@ import { ViewPostComponent } from './forum/community/view-post/view-post.compone
 import { ChatComponent } from './chat/chat/chat.component';
 import { CustomerComponent } from './user/customer/customer.component';
 import { MeetComponent } from './chat/meet/meet.component';
+import { ProductViewComponent } from './store/product-view/product-view.component';
+import { ShoppingCartComponent } from './store/shopping-cart/shopping-cart.component';
+import { StoreBackendEditComponent } from './store/store-backend-edit/store-backend-edit.component';
+import { StoreBackendTableviewerComponent } from './store/store-backend-tableviewer/store-backend-tableviewer.component';
+import { StoreShipmentComponent } from './store/store-shipment/store-shipment.component';
+import { StoreComponent } from './store/store/store.component';
 
 const routes: Routes = [
+
+  
+  {path: 'store', component: StoreComponent},
+  {path: 'product-view/:id', component: ProductViewComponent},
+  {path: 'shopping-cart/:userId', component: ShoppingCartComponent},
+  {path: 'store-backend-tableviewer/:type', component: StoreBackendTableviewerComponent},
+  {path: 'store-backend-edit/:type/:id', component: StoreBackendEditComponent},
+  {path: 'store-backend-new/:type', component: StoreBackendEditComponent},
+  {path: 'store-shipment', component: StoreShipmentComponent},
+
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeAComponent },
   { path: 'signup', component: SignupComponent },

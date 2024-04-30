@@ -1,0 +1,205 @@
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>View Products</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<div *ngIf="products">
+  <div class="container mt-5">
+    <h2>View Products</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Product Name</th>
+          <th>Description</th>
+          <th>Mark</th>
+          <th>Technical Name</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Availability</th>
+          <th>Seller User</th>
+          <th>Stores Available</th>
+          <th>Images</th>
+          <th>Actions</th> <!-- New column for Edit/Delete buttons -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products">
+          <td>{{product.name}}</td>
+          <td>{{product.description}}</td>
+          <td *ngIf="product.mark">{{product.mark.name}}</td>
+          <td *ngIf="!product.mark">Unknown</td>
+          <td>{{product.technicalName}}</td>
+          <td>{{product.price}}</td>
+          <td>{{product.quantity}}</td>
+          <td>{{product.disponibility}}</td>
+          <td *ngIf="product.seller">{{product.seller.username}}</td>
+          <td *ngIf="!product.seller">Unknown</td>
+          <td>
+            <!-- Loop over stores available -->
+            <div *ngFor="let store of product.stores">{{store.name}}, </div>
+          </td>
+          <td>
+            <!-- Loop over product images -->
+            <div *ngFor="let image of product.images">
+              <img [src]="image" width="50">
+            </div>
+          </td>
+          <td>
+            <!-- Edit and Delete buttons -->
+            <button type="button" class="btn btn-primary" (click)='onEdit(product)'>Edit</button>
+            <button type="button" class="btn btn-danger" (click)='onDelete(product)'>Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+
+<div *ngIf="physicalStores">
+  <div class="container mt-5">
+    <h2>View Physical Stores</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Store Name</th>
+          <th>Description</th>
+          <th>Location</th>
+          <th>Work Hours</th>
+          <th>Image</th>
+          <th>Actions</th> <!-- New column for Edit/Delete buttons -->
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Sample row, replace with dynamic data from backend -->
+        
+        <tr *ngFor="let store of physicalStores">
+          <td>{{store.name}}</td>
+          <td>{{store.description}}</td>
+          <td>{{store.location}}</td>
+          <td>{{store.workHours}}</td>
+          <td><img [src]="store.image" alt="Store Image" width="100"></td>
+          <td>
+            <!-- Edit and Delete buttons -->
+            <button type="button" class="btn btn-primary" (click)='onEdit(store)'>Edit</button>
+            <button type="button" class="btn btn-danger" (click)='onDelete(store)'>Delete</button>
+          </td>
+        </tr>
+        <!-- Repeat the above row structure for each store -->
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+
+<div *ngIf="productReviews">
+  <div class="container mt-5">
+    <h2>View Product Reviews</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Product</th>
+          <th>Rating</th>
+          <th>Comment</th>
+          <th>Review Date</th>
+          <th>Actions</th> <!-- New column for Edit/Delete buttons -->
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Sample row, replace with dynamic data from backend -->
+        <tr *ngFor="let review of productReviews">
+          <td *ngIf="review.user">{{review.user.username}}</td>
+          <td *ngIf="!review.user">Unknown</td>
+          <td *ngIf="review.product">{{review.product.name}}</td>
+          <td *ngIf="!review.product">Unknown</td>
+          <td>{{review.rating}}</td>
+          <td>{{review.comment}}</td>
+          <td>{{review.reviewDate}}</td>
+          <td>
+            <!-- Edit and Delete buttons -->
+            <button type="button" class="btn btn-primary" (click)='onEdit(review)'>Edit</button>
+            <button type="button" class="btn btn-danger" (click)='onDelete(review)'>Delete</button>
+          </td>
+        </tr>
+        <!-- Repeat the above row structure for each review -->
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+
+<div *ngIf="productMarks">
+  <div class="container mt-5">
+    <h2>View Marks</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Mark Name</th>
+          <th>Description</th>
+          <th>Actions</th> <!-- New column for Edit/Delete buttons -->
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Sample row, replace with dynamic data from backend -->
+        <tr *ngFor="let mark of productMarks">
+          <td>{{mark.name}}</td>
+          <td>{{mark.description}}</td>
+          <td>
+            <!-- Edit and Delete buttons -->
+            <button type="button" class="btn btn-primary" (click)='onEdit(mark)'>Edit</button>
+            <button type="button" class="btn btn-danger" (click)='onDelete(mark)'>Delete</button>
+          </td>
+        </tr>
+        <!-- Repeat the above row structure for each mark -->
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<div *ngIf="shipmentUsers">
+  <div class="container mt-5">
+    <h2>View Product Reviews</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Available?</th>
+          <th>Actions</th> <!-- New column for Edit/Delete buttons -->
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Sample row, replace with dynamic data from backend -->
+        <tr *ngFor="let shipmentUser of shipmentUsers">
+          <td *ngIf="shipmentUser.user">{{shipmentUser.user.username}}</td>
+          <td *ngIf="!shipmentUser.user">Unknown</td>
+          <td>{{shipmentUser.available ? true : false}}</td>
+          <td>
+            <!-- Edit and Delete buttons -->
+            <button type="button" class="btn btn-primary" (click)='onEdit(shipmentUser)'>Edit</button>
+            <button type="button" class="btn btn-danger" (click)='onDelete(shipmentUser)'>Delete</button>
+          </td>
+        </tr>
+        <!-- Repeat the above row structure for each review -->
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="text-center">
+  <button type="button" class="btn btn-primary" (click)="onCreateNew()">Add New</button>
+</div>
+
+<div class="container mt-5">
+  <h2>Product Sales Chart</h2>
+  <canvas id="myChart" width="400" height="200" #myChart></canvas>
+  <button type="button" class="btn btn-primary" (click)="chartsToPDF()">Download charts as PDF</button>
+  <div style="padding: 10%;"></div>
+</div>
