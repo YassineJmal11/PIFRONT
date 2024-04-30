@@ -1,0 +1,67 @@
+.container {
+  margin-top: 20px;
+}
+
+.container .row {
+  justify-content: center;
+}
+
+.container .col-md-12 {
+  margin-bottom: 20px;
+}
+
+.container .card {
+  margin-bottom: 20px;
+}
+
+.container h2,
+.user-container h2 {
+  color: #333;
+}
+
+.user-container {
+  margin-top: 20px;
+}
+
+.user-container .row {
+  justify-content: center;
+}
+
+.user-container .col-md-12 {
+  margin-bottom: 20px;
+}
+
+.user-container .card {
+  margin-bottom: 20px;
+}
+
+.exercices-list {
+  margin-top: 20px;
+}
+
+.exercices-list h2 {
+  color: #333;
+}
+
+.exercices-list ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.exercices-list li {
+  background-color: #f4f4f4;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.exercices-list li h3 {
+  margin-top: 0;
+}
+
+.exercices-list li p {
+  margin: 5px 0;
+}
+.clickable-user-card {
+  cursor: pointer;
+}

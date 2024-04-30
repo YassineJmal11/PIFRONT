@@ -55,6 +55,14 @@ import { StoreBackendTableviewerComponent } from './store/store-backend-tablevie
 import { StoreShipmentComponent } from './store/store-shipment/store-shipment.component';
 import { StoreComponent } from './store/store/store.component';
 import {AutocompleteLibModule} from 'angular-ng-autocomplete';
+import { ListExerciceComponent } from './workout/list-exercice/list-exercice.component';
+import { ClientWorkoutprofileComponent } from './workout/client-workoutprofile/client-workoutprofile.component';
+import { AllFoodsComponent } from './diet/all-foods/all-foods.component';
+import { ListmealsComponent } from './diet/listmeals/listmeals.component';
+import { ClientProfileComponent } from './diet/client-profile/client-profile.component';
+import { AddMealComponent } from './diet/add-meal/add-meal.component';
+import { WorkoutclientComponent } from './workout/workoutclient/workoutclient.component';
+import { AddWorkoutComponent } from './workout/add-workout/add-workout.component';
 
 
 
@@ -96,7 +104,14 @@ import {AutocompleteLibModule} from 'angular-ng-autocomplete';
    ChatComponent,
    CustomerComponent,
    MeetComponent,
-
+   AllFoodsComponent,
+   ListmealsComponent,
+   ClientProfileComponent,
+   AddMealComponent,
+   WorkoutclientComponent,
+   AddWorkoutComponent,
+   ListExerciceComponent,
+   ClientWorkoutprofileComponent,
    
    StoreComponent,
    ProductCardComponent,

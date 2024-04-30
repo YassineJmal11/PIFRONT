@@ -1,0 +1,78 @@
+.background {
+    background-image: url('\src\assets\images\hedhi.jpg'); /* Add the path to your background image */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+.container {
+    width: 80%;
+    margin: auto;
+    background-color: rgba(148, 157, 168, 0.842)
+  }
+  
+  .workout-form {
+    width: 100%;
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  input[type="text"],
+  input[type="file"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  button[type="submit"] {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  ul li {
+    padding: 5px 10px;
+    cursor: pointer;
+    color: #1146d8;
+  }
+  
+  ul li:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .muscle-input ul {
+    display: none;
+  }
+  
+  .muscle-input ul.show {
+    display: block;
+  }
+  

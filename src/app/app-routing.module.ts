@@ -35,6 +35,14 @@ import { StoreBackendEditComponent } from './store/store-backend-edit/store-back
 import { StoreBackendTableviewerComponent } from './store/store-backend-tableviewer/store-backend-tableviewer.component';
 import { StoreShipmentComponent } from './store/store-shipment/store-shipment.component';
 import { StoreComponent } from './store/store/store.component';
+import { ListExerciceComponent } from './workout/list-exercice/list-exercice.component';
+import { ClientWorkoutprofileComponent } from './workout/client-workoutprofile/client-workoutprofile.component';
+import { ClientProfileComponent } from './diet/client-profile/client-profile.component';
+import { WorkoutclientComponent } from './workout/workoutclient/workoutclient.component';
+import { ListmealsComponent } from './diet/listmeals/listmeals.component';
+import { AllFoodsComponent } from './diet/all-foods/all-foods.component';
+import { AddMealComponent } from './diet/add-meal/add-meal.component';
+import { AddWorkoutComponent } from './workout/add-workout/add-workout.component';
 
 const routes: Routes = [
 
@@ -56,6 +64,11 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'customer', component: CustomerComponent },
   { path: 'chat', component: ChatComponent },
+
+  { path: 'exercises/:muscleType', component: ListExerciceComponent },
+  { path: 'client-workoutprofile/:userId', component: ClientWorkoutprofileComponent },
+  { path: 'client-profile/:userId', component: ClientProfileComponent },
+  { path: 'user/:userId/meals', component: ClientProfileComponent},
   
   { path: 'homeadmin', component: TemplateBackComponent },
   { path: 'ALL', component: AlluserComponent },
@@ -109,11 +122,32 @@ const routes: Routes = [
   component:AfterLoginComponent
   },
  
+  {
+    path:'clientworkout',
+  component:WorkoutclientComponent
+  },
 
+  {
+    path:"allmeals",
+    component:ListmealsComponent
+  },
+  {
+    path:"allfoods",
+    component:AllFoodsComponent
+  },
 
-  
-
-  
+  {
+    path:"allfoods",
+    component:AllFoodsComponent
+  },
+  {
+    path:"addmeal",
+    component:AddMealComponent
+  },
+  {
+    path:"addExercice",
+    component:AddWorkoutComponent
+  },
 
 ];
 

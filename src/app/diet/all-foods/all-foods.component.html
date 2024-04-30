@@ -1,0 +1,13 @@
+<!-- all-foods.component.html -->
+<div class="background-image">
+  <div class="container">
+    <h1>All Foods</h1>
+    <input type="text" placeholder="Search by food name" (input)="searchFood($event)">
+
+    <ul>
+      <li *ngFor="let food of listFood" (click)="handleFoodClick(food.foodId)">
+        {{ food.foodName }} - Calories: {{ food.Cals }}, Carbs: {{ food.Carbs }}, Proteins: {{ food.prots }}
+      </li>
+    </ul>
+  </div>
+</div>

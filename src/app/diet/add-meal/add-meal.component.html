@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload Meal Form</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"> <!-- Bootstrap CSS -->
+</head>
+<body>
+
+  <div class="container">
+    <h2>Upload Meal</h2>
+  
+    <form class="upload-form" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="mealName">Meal Name:</label>
+        <input type="text" id="mealName" name="mealName" [(ngModel)]="mealName" class="form-control" required>
+      </div>
+  
+      <div class="form-group">
+        <label for="totalCals">Total Calories:</label>
+        <input type="number" id="totalCals" name="totalCals" [(ngModel)]="totalCals" class="form-control" required>
+      </div>
+  
+      <div class="form-group">
+        <label for="totalCarbs">Total Carbs:</label>
+        <input type="number" id="totalCarbs" name="totalCarbs" [(ngModel)]="totalCarbs" class="form-control" required>
+      </div>
+  
+      <div class="form-group">
+        <label for="totalProts">Total Proteins:</label>
+        <input type="number" id="totalProts" name="totalProts" [(ngModel)]="totalProts" class="form-control" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="recipe">Recipe:</label>
+        <textarea id="recipe" name="recipe" [(ngModel)]="recipe" class="form-control" rows="5"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="file">Choose Image:</label>
+        <input type="file" id="file" name="file" (change)="onFileChange($event)" class="form-control-file" required>
+      </div>
+  
+      <button type="submit" class="btn btn-primary">Upload</button>
+    </form>
+  </div>
+  
+  </body>
+  </html>

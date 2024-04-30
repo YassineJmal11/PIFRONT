@@ -1,0 +1,207 @@
+.container {
+    display: flex;
+    justify-content: space-between; /* Distribute items to the start and end of the container */
+    align-items: center;
+    height: 200vh; /* Adjust the height as needed */
+    box-shadow: 0px 0px 20px rgba(214, 233, 209, 0.336); /* Initial shadow effect */
+    transition: box-shadow 0.3s ease; /* Transition effect for shadow */
+    background-color: rgba(218, 205, 190, 0.692); /* Set background color to white */
+}
+
+.container:hover {
+    box-shadow: 0px 0px 30px rgba(141, 196, 116, 0.3); /* Shadow effect on hover */
+}
+
+.centered-container {
+    margin-top: 50px; /* Add space from above */
+}
+.user-container {
+    width: 30%; /* Set width for the user container */
+    margin-right: 50px; /* Add some space between the containers */
+}
+
+.meal-container {
+    width: 65%; /* Set width for the meal container */
+}
+
+.card-deck {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Two columns */
+    gap: 20px; /* Add some space between cards */
+}
+
+.card {
+    width: 100%; /* Each card takes up full width */
+}
+
+.card:nth-child(odd) {
+    grid-row: span 2; /* Every odd card spans two rows */
+}
+
+.clickable-image {
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.clickable-image:hover {
+    transform: scale(1.05);
+}
+
+.user-list,
+.meal-list {
+    flex-basis: 100%; /* Take up full width of container */
+}
+
+.user-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px; /* Add space between user items */
+}
+
+.user-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.user-details {
+    flex-grow: 1; /* Allow details to grow to fill remaining space */
+}
+
+/* Check button and Delete button style */
+.bi-check,
+.bi-trash {
+    font-size: 1.5rem; /* Adjust the size of both the check and delete icons */
+}
+
+/* Adjust the margin for the delete button to match the check button */
+.btn-check,
+.btn-trash {
+    margin-left: 5px;
+}
+
+/* Change the color of the check button on hover */
+.btn-check:hover {
+    color: #0d6efd; /* Change to your preferred color */
+}
+
+/* Change the background color of the check button on focus */
+.btn-check:focus {
+    background-color: #0d6efd; /* Change to your preferred color */
+    border-color: #0d6efd; /* Change to your preferred color */
+}
+
+/* User card style */
+.user-card {
+    cursor: pointer;
+    transition: transform 0.2s;
+    background-color: rgba(255, 246, 255, 0.918); /* Set the background color to blue */
+    color: rgb(228, 57, 57); /* Set text color to white */
+    border-radius: 10px; /* Add border radius for rounded corners */
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.user-card:hover {
+    transform: scale(1.05);
+}
+
+/* Adjust margin and padding for user details */
+.user-item {
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+/* Ensure user details fill the available space */
+.user-details {
+    flex-grow: 1;
+}
+
+/* "Show Profile" button style */
+.btn-orange {
+    background-color: rgba(255, 102, 0, 0.918);
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn-orange:hover {
+    background-color: darkorange;
+}
+/* Add this code to your CSS file */
+
+body {
+    background-image: url('src/assets/images/plsss.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+.container {
+    margin-top: 50px; /* Adjust this value as needed */
+}
+
+.card {
+    border: none;
+}
+
+.user-details p {
+    margin-bottom: 5px;
+}
+
+.meal-list {
+    margin-top: 20px; /* Adjust this value as needed */
+}
+
+.clickable-image {
+    cursor: pointer;
+}
+a.btn.btn-primary {
+    /* Your CSS styles here */
+    /* For example: */
+    background-color: #ff3c00a2; /* Blue background color */
+    color: #fff; /* White text color */
+    padding: 10px 20px; /* Padding for the button */
+    border-radius: 5px; /* Rounded corners */
+    text-decoration: none; /* Remove underline */
+  }
+  
+  a.btn.btn-primary:hover {
+    /* Hover styles */
+    background-color: #b30000; /* Darker blue background color on hover */
+  }
+  .clickable-food {
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Add transition for smoother effect */
+}
+
+.clickable-food:hover {
+    background-color: #f0f0f0; /* Change background color on hover */
+}
+.popover {
+    max-width: 250px; /* Adjust the maximum width as needed */
+    font-size: 14px; /* Adjust the font size as needed */
+    background-color: #fff; /* Background color for popover */
+    color: #333; /* Text color for popover */
+    border: 1px solid #ddd; /* Border color for popover */
+}
+
+.popover-header {
+    background-color: #007bff; /* Background color for popover header */
+    color: #fff; /* Text color for popover header */
+    border-bottom: none; /* Remove border bottom for popover header */
+    padding: 10px 15px; /* Padding for popover header */
+    border-radius: 5px 5px 0 0; /* Border radius for popover header */
+}
+
+.popover-body {
+    padding: 10px 15px; /* Padding for popover body */
+}
