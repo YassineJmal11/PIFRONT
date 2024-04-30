@@ -12,6 +12,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { content } from 'html2canvas/dist/types/css/property-descriptors/content';
 import { Comment } from '../../model/Comment';
 import { CommentLikeServiceService } from '../services/comment-like-service.service';
+import BadWords from 'bad-words'; 
+
 
 @Component({
   selector: 'app-view-post',
@@ -27,6 +29,8 @@ export class ViewPostComponent implements OnInit {
   comments: any[] = []; 
   showReplyInputForCommentId: number | null = null;
   currentUser!:any;
+  profanityFilter = new BadWords(); 
+
 
 
   constructor(
@@ -63,20 +67,96 @@ export class ViewPostComponent implements OnInit {
     }
   }
   
+  createComment() {
+    let sanitizedContent :string="" ;
+    if (this.commentForm.valid) {
+       sanitizedContent = this.replaceBadWords(this.commentForm.value.content); 
 
-    createReply(comment : any) {
-      const userId = this.userId; // Replace with actual user ID
-      const postId = this.postId; // Assuming postId is defined in your component
+      if (this.containsProfanity(this.commentForm.value.content)) {
+        console.log("bad words detected")
+        this.usersService.updateUserBadWordsCount(this.userId).subscribe(
+          () => {
+            console.log('Bad words count updated successfully');
+            // Do something after successful update
+           // this.submitPost(sanitizedTextContent);
+          },
+          (error) => {
+            console.error('Error updating bad words count:', error);
+            // Handle error
+          }
+        );
+      } else {
+        //this.submitPost(sanitizedTextContent);
+      }
+    } else {
+      console.log('Form is invalid');
+    }
+      
+        const comment: Comment = {
+          commentId: 0,
+          content: sanitizedContent,
+          user: this.currentUser,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          post:this.post,
+          replies:[],
+          reply:false,
+          commentLikes:[],
+          commentLikesCount:0,
+          liked:false
+
+        };
+        this.commentService.createComment(comment, this.userId, this.postId).subscribe(() => {
+
+       
+        this.fetchPostAndComments();
+        this.commentForm.reset(); // Reset the comment form
+      });
+    } 
+
+   
+
+    createReply(comment: any) {
+      let sanitizedContent :string="" ;
+
     
       if (this.replyForm.valid && comment !== null) {
-        this.commentService.createReply(comment.commentId, userId, this.replyForm.value as any)
-          .subscribe(() => {
-            this.fetchPostAndComments();
-            this.replyForm.reset();
-            this.showReplyInputForCommentId = null; // Reset to hide reply input
+         sanitizedContent = this.replaceBadWords(this.replyForm.value.content); 
+         if (this.containsProfanity(this.replyForm.value.content)) {
+          console.log("bad words detected")
+          this.usersService.updateUserBadWordsCount(this.userId).subscribe(
+            () => {
+              console.log('Bad words count updated successfully');
+              // Do something after successful update
+             // this.submitPost(sanitizedTextContent);
+            },
+            (error) => {
+              console.error('Error updating bad words count:', error);
+              // Handle error
+            }
+          );
+        }
 
-            
-          });
+        const reply: Comment = {
+          commentId: 0,
+          content: sanitizedContent,
+          user: this.currentUser,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          post:this.post,
+          replies:[],
+          reply:true,
+          commentLikes:[],
+          commentLikesCount:0,
+          liked:false
+
+        };
+
+        this.commentService.createReply(comment.commentId, this.userId, reply).subscribe(() => {
+          this.fetchPostAndComments();
+          this.replyForm.reset();
+          this.showReplyInputForCommentId = null; // Reset to hide reply input
+        });
       } else {
         console.error('Selected comment is null or reply form is invalid.');
       }
@@ -105,8 +185,36 @@ export class ViewPostComponent implements OnInit {
       }
     );
 
+
+
    
   }
+
+  deletePost(postId:number): void {
+    this.ps.deletePost(postId)
+      .subscribe(() => {
+        console.log('Post deleted successfully');
+        this.router.navigate(['/feed']);
+        
+      }, error => {
+        console.error('Error deleting post:', error);
+
+      });
+  }
+
+  deleteComment(commentId:number): void {
+    this.commentService.deleteComment(commentId)
+      .subscribe(() => {
+        console.log('comment deleted successfully');
+        this.fetchPostAndComments();
+        
+      }, error => {
+        console.error('Error deleting comment:', error);
+
+      });
+  }
+
+  
 
   fetchPostAndComments() {
     // Fetch the post details
@@ -129,6 +237,8 @@ export class ViewPostComponent implements OnInit {
             this.comments = comments;
             // Iterate through each comment to fetch the comment likes count and user's like status
             this.comments.forEach((comment) => {
+
+              console.log(comment.replies.length)
                 // Fetch comment likes count
                 this.commentLikeService.findByComment_CommentId(comment.commentId).subscribe((commentLikes) => {
                     comment.commentLikesCount = commentLikes.length;
@@ -204,13 +314,22 @@ export class ViewPostComponent implements OnInit {
     });
   }
 
-  createComment() {
-    this.commentService.createComment(this.commentForm.value as any, this.userId, this.postId).subscribe(() => {
-      this.fetchPostAndComments();
-      this.commentForm.reset(); // Reset the comment form
 
-    });
+  replaceBadWords(text: any): string {
+    return this.profanityFilter.clean(text); // Replace bad words with asterisks
   }
+
+  containsProfanity(text: any): boolean {
+    const isProfane = this.profanityFilter.isProfane(text);
+    console.log('Text:', text);
+    console.log('Is Profane:', isProfane);
+    return isProfane;
+  }
+
+  
+  
+
+
   
 
   calculateTimeSinceCreation(createdAt: Date) {

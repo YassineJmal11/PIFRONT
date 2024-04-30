@@ -12,8 +12,6 @@ import { HttpClient } from '@angular/common/http'; // Import HttpClient
 import { catchError, throwError } from 'rxjs';
 import BadWords from 'bad-words';
 
-
-
 @Component({
   selector: 'app-create-post',
   templateUrl: './create-post.component.html',
@@ -28,35 +26,30 @@ export class CreatePostComponent implements OnInit {
   selectedCommunity: any = {}; // Initialize with an empty object
   postTypes = Object.values(PostType);
   profanityError: boolean = false;
-   profanityFilter = new BadWords();
+  profanityFilter = new BadWords();
 
   constructor(
     private cs: CommunityServiceService,
     private token: TokenStorageService,
     private usersService: UsersService,
     private router: Router,
-    private postService : PostServiceService,
-    private route : ActivatedRoute,
+    private postService: PostServiceService,
+    private route: ActivatedRoute,
     private cdr: ChangeDetectorRef,
-    private http: HttpClient ,
-    private userService: UsersService
-
+    private http: HttpClient
   ) {}
 
   ngOnInit() {
     this.currentUser = this.token.getUser();
-    this.userService.getUserIdByUsername(this.currentUser.username).subscribe(
+    this.usersService.getUserIdByUsername(this.currentUser.username).subscribe(
       (data) => {
         this.currentUser = data;
-        this.userId = this.currentUser.userId; 
-        console.log( this.currentUser)
-        
+        this.userId = this.currentUser.userId;
+
         this.route.queryParams.subscribe(params => {
-          console.log(params); // Log the entire queryParams object
           const id = params['id'];
           this.fetchCommunities();
           if (id) {
-            console.log(id);
             this.fetchCommunity(id);
           }
         });
@@ -64,26 +57,22 @@ export class CreatePostComponent implements OnInit {
         this.initForm();
       }
     );
-   
   }
 
   initForm() {
     this.postForm = new FormGroup({
       textContent: new FormControl('', []),
       text: new FormControl('', [Validators.required, Validators.minLength(4)]),
-
       community: new FormControl('', Validators.required),
       postType: new FormControl('', Validators.required)
     });
   }
-  
+
   fetchCommunity(communityId: number) {
     this.cs.getByCommunityId(communityId).subscribe({
       next: (data) => {
         this.selectedCommunity = data;
-        console.log('Selected community:', this.selectedCommunity);
         this.postForm.patchValue({ community: this.selectedCommunity });
-        console.log('Form value after patching:', this.postForm.value);
 
         // Trigger change detection manually
         this.cdr.detectChanges();
@@ -106,59 +95,77 @@ export class CreatePostComponent implements OnInit {
       complete: () => console.log('Joined communities fetched successfully')
     });
   }
+
   containsProfanity(text: string): boolean {
     const isProfane = this.profanityFilter.isProfane(text);
     console.log('Text:', text);
     console.log('Is Profane:', isProfane);
     return isProfane;
   }
-  
+
   onSubmit() {
     if (this.postForm.valid) {
-      // Check for profanity before submitting
+      const sanitizedTextContent = this.replaceBadWords(this.postForm.value.text);
+      
       if (this.containsProfanity(this.postForm.value.text)) {
-        this.profanityError = true;
-        return; // Stop submission if profanity found
+        console.log("bad words detected")
+        this.usersService.updateUserBadWordsCount(this.userId).subscribe(
+          () => {
+            console.log('Bad words count updated successfully');
+            // Do something after successful update
+            this.submitPost(sanitizedTextContent);
+          },
+          (error) => {
+            console.error('Error updating bad words count:', error);
+            // Handle error
+          }
+        );
+      } else {
+        this.submitPost(sanitizedTextContent);
       }
-
-      // Continue with post submission if no profanity found
-      const userId = this.userId;
-      const communityId = this.postForm.value.community.communityId;
-      const textContent = this.postForm.value.text;
-
-      const post: Post = {
-        postId: 0,
-        textContent: textContent,
-        user: this.currentUser,
-        attachment: '',
-        createdAt: new Date(),
-        updatedAt: new Date(),
-        community: this.postForm.value.community,
-        postType: this.postForm.value.postType,
-        votes: [],
-        upvoteCount: 0,
-        downvoteCount: 0,
-        downvoted: false,
-        upvoted: false,
-        totalVotes: 0
-      };
-
-      const attachment = this.attachments ? this.attachments[0] : undefined;
-
-      this.postService.createPost(userId, communityId, attachment, post).subscribe({
-        next: (response) => {
-          console.log('Post created successfully:', response);
-          this.router.navigate(['/community', communityId]);
-        },
-        error: (error) => {
-          console.error('Error creating post:', error);
-        }
-      });
     } else {
       console.log('Form is invalid');
     }
   }
+
+  submitPost(sanitizedTextContent: string) {
+    const userId = this.userId;
+    const communityId = this.postForm.value.community.communityId;
   
+    const post: Post = {
+      postId: 0,
+      textContent: sanitizedTextContent,
+      user: this.currentUser,
+      attachment: '',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      community: this.postForm.value.community,
+      postType: this.postForm.value.postType,
+      votes: [],
+      upvoteCount: 0,
+      downvoteCount: 0,
+      downvoted: false,
+      upvoted: false,
+      totalVotes: 0,
+      comments:[]
+    };
+
+    const attachment = this.attachments ? this.attachments[0] : undefined;
+
+    this.postService.createPost(userId, communityId, attachment, post).subscribe({
+      next: (response) => {
+        console.log('Post created successfully:', response);
+        this.router.navigate(['/community', communityId]);
+      },
+      error: (error) => {
+        console.error('Error creating post:', error);
+      }
+    });
+  }
+  
+  replaceBadWords(text: string): string {
+    return this.profanityFilter.clean(text); // Replace bad words with asterisks
+  }
 
   onFileChange(event: any) {
     console.log(event.target.files);
@@ -166,7 +173,6 @@ export class CreatePostComponent implements OnInit {
   }
 
   isSelected(community: any): boolean {
-    // Check if the selectedCommunity is initialized and if the community ID matches
     return this.selectedCommunity && community.communityId === this.selectedCommunity.communityId;
   }
 }

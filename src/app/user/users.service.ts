@@ -50,8 +50,7 @@ export class UsersService {
     return this.http.put(url, null, { params });
   }
 
-  
-  
+
 
   checkAccountStatus(id: number): Observable<AccountStatus> {
     return this.http.get<AccountStatus>(`${this.authUrl}/${id}/status`);
@@ -70,5 +69,10 @@ export class UsersService {
   }
   getCustomers(): Observable<User[]> {
     return this.http.get<User[]>(`${this.authUrl}/customers`);
+  }
+
+  updateUserBadWordsCount(userId: number): Observable<void> {
+    const url = `${this.authUrl}/users/${userId}/bad-words`; // Endpoint for updating bad words count
+    return this.http.put<void>(url, {});
   }
 }

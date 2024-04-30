@@ -15,118 +15,190 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8" #postContainer>
-              <div *ngIf="loading" class="text-center">
-                <div class="spinner-border" role="status">
-                  <span class="sr-only">Loading...</span>
+                <div *ngIf="loading" class="text-center">
+                    <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
                 </div>
-              </div>
-                <ng-container *ngIf="posts.length > 0; else noPosts">
-
-        
-                    <!-- Display posts -->
-                    <div *ngFor="let post of posts" class="post p-3 mb-4 rounded "  >
-                      <!-- Post content -->
-                      <div class="community-card" [routerLink]="['/viewPost', post.postId]">
-                      <div class="d-flex align-items-center mb-2">
-                        <img src="https://via.placeholder.com/30" alt="User Avatar" class="rounded-circle mr-2">
-                        <span class="font-weight-bold mr-2">{{post.user.firstName}}</span>
-                        <a [routerLink]="['/community', post.community.communityId]" class="community-link">/{{post.community.communityName}}</a>
-                        <small class="text-muted">{{this.calculateTimeSinceCreation(post.createdAt)}}</small> <!-- Display time since creation -->
-            
-            
-                      </div>
-                      
-                      <div class="badge badge-pill badge-info ml-2">{{post.postType}}</div>
-            
-                      <p>{{post.textContent}}</p>
-                      
-                      <img *ngIf="post.attachment" src={{post.attachment}} alt="Post Image" class="img-fluid rounded mb-2">
-                    </div>
-                      <div class="d-flex justify-content-between align-items-center">
-                        <div>
-                    
-                   <!-- Upvote button -->
-<!-- Upvote button -->
-<button class="btn btn-outline-dark btn-sm mr-2"
-  (click)="upvote(post)"
-  [ngClass]="{'btn-success': post.upvoted, 'btn-outline-dark': !post.upvoted}">
-  <i class="fas fa-arrow-up"></i> {{ post.upvoteCount }}
-</button>
-
-<!-- Downvote button -->
-<button class="btn btn-outline-dark btn-sm mr-2"
-  (click)="downvote(post)"
-  [ngClass]="{'btn-danger': post.downvoted, 'btn-outline-dark': !post.downvoted}">
-  <i class="fas fa-arrow-down"></i> {{ post.downvoteCount }}
-</button>
-
-
-
-                       
-                          <button  [routerLink]="['/viewPost', post.postId]" class="btn btn-outline-dark btn-sm"><i class="fas fa-comment"></i> Comment</button>
-                          <button class="btn btn-outline-dark btn-sm" (click)="speak(post)">
-                            <i class="bi bi-soundwave"></i> 
-                          </button> 
+                
+                <div>
+                    <div class="input-group mb-3">
+                        <input type="text" [(ngModel)]="searchText" class="form-control search" placeholder="Search..." aria-label="Search" aria-describedby="search-button" (keyup)="getSearchSuggestions()">
+                        <div class="input-group-append">
+                            <button class="icn btn btn-outline-secondary" type="button" id="search-button" (click)="search()">
+                                <i class="bi bi-search"></i>
+                            </button>
+                            <button class="icn btn btn-outline-secondary" (click)="startVoiceRecognition()">
+                                <i class="bi bi-mic"></i>
+                            </button>
                         </div>
-                      </div>
                     </div>
-                  </ng-container>
-                  <ng-template #noPosts>
+                    
+                    <!-- Display search suggestions -->
+                    <div *ngIf="searchSuggestions.length > 0" class="search-suggestions">
+                        <ul class="suggestion">
+                            <li *ngFor="let suggestion of searchSuggestions" class="list-group-item" (click)="selectSuggestion(suggestion)">{{ suggestion }}</li>
+                        </ul>
+                    </div>
+                    
+                   
+                </div>
+                
+  
+                  
+                <ng-container *ngIf="posts.length > 0; else noPosts">
+                    <!-- Display posts -->
+                    <div *ngFor="let post of posts" class="post" >
+                        <div class="clikPost" [routerLink]="['/viewPost', post.postId]">
+                        <div class="post-header">
+                            <img [src]="post.user.profileImageUrl" alt="User Avatar">
+                            <span class="user-name">{{post.user.firstName}}</span>
+                            <a [routerLink]="['/community', post.community.communityId]" class="community-link">/{{post.community.communityName}}</a>
+                            <small class="text-muted ml-auto">{{this.calculateTimeSinceCreation(post.createdAt)}}</small>
+                        </div>
+                        <div class="post-content">
+                            <div class="badge badge-pill badge-info">{{post.postType}}</div>
+                            <p>{{post.textContent}}</p>
+                            <img *ngIf="post.attachment" src={{post.attachment}} alt="Post Image" class="img-fluid rounded mb-2">
+                        </div>
+                        <!-- Display comments -->
+                        <div *ngFor="let comment of post.comments.slice(0, 2)" class="comment">
+                            <div class="comment-content">
+                          
+
+                                <div class="post-header">
+                                    <img [src]="comment.user.profileImageUrl" alt="User Avatar">
+                                    <span class="user-name">{{comment.user.firstName}}</span>
+                                    <span style="font-weight: lighter;" class="user-name">{{comment.content}}</span>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        <!-- Buttons -->
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <button class="btn btn-outline-dark btn-sm"
+                                    (click)="upvote(post)"
+                                    [ngClass]="{'btn-success': post.upvoted, 'btn-outline-dark': !post.upvoted}">
+                                    <i class="bi bi-arrow-up"></i> {{ post.upvoteCount }}
+                                </button>
+                                <button class="btn btn-outline-dark btn-sm"
+                                    (click)="downvote(post)"
+                                    [ngClass]="{'btn-danger': post.downvoted, 'btn-outline-dark': !post.downvoted}">
+                                    <i class="bi bi-arrow-down"></i> {{ post.downvoteCount }}
+                                </button>
+                                <button [routerLink]="['/viewPost', post.postId]" class="btn btn-outline-dark btn-sm">
+                                    <i class="bi bi-chat-dots"></i> {{post.comments.length}}
+                                </button>
+                                <button class="btn btn-outline-dark btn-sm" (click)="speak(post)">
+                                    <i class="bi bi-soundwave"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+                <ng-template #noPosts>
                     <!-- Display a message if no posts -->
-                    <div class="post p-3 mb-4 rounded">
-                      <h1>No posts yet, be the first to post!</h1>
-                      <a [routerLink]="['/addPost']" class="community-link">
-                        <button class="btn btn-outline-dark btn-sm mr-2">
-                          <i class="bi bi-plus-square-fill"></i> create Post
-                        </button>
-                    </a>                    </div>
-                  </ng-template>
-                <!-- Repeat the post block for multiple posts -->
+                    <div *ngFor="let post of popularPosts" class="post" >
+                        <div class="clikPost" [routerLink]="['/viewPost', post.postId]">
+                        <div class="post-header">
+                            <img [src]="post.user.profileImageUrl" alt="User Avatar">
+                            <span class="user-name">{{post.user.firstName}}</span>
+                            <a [routerLink]="['/community', post.community.communityId]" class="community-link">/{{post.community.communityName}}</a>
+                            <small class="text-muted ml-auto">{{this.calculateTimeSinceCreation(post.createdAt)}}</small>
+                        </div>
+                        <div class="post-content">
+                            <div class="badge badge-pill badge-info">{{post.postType}}</div>
+                            <p>{{post.textContent}}</p>
+                            <img *ngIf="post.attachment" src={{post.attachment}} alt="Post Image" class="img-fluid rounded mb-2">
+                        </div>
+                        <!-- Display comments -->
+                        <div *ngFor="let comment of post.comments.slice(0, 2)" class="comment">
+                            <div class="comment-content">
+                          
+
+                                <div class="post-header">
+                                    <img [src]="comment.user.profileImageUrl" alt="User Avatar">
+                                    <span class="user-name">{{comment.user.firstName}}</span>
+                                    <span style="font-weight: lighter;" class="user-name">{{comment.content}}</span>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        <!-- Buttons -->
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <button class="btn btn-outline-dark btn-sm"
+                                    (click)="upvote(post)"
+                                    [ngClass]="{'btn-success': post.upvoted, 'btn-outline-dark': !post.upvoted}">
+                                    <i class="bi bi-arrow-up"></i> {{ post.upvoteCount }}
+                                </button>
+                                <button class="btn btn-outline-dark btn-sm"
+                                    (click)="downvote(post)"
+                                    [ngClass]="{'btn-danger': post.downvoted, 'btn-outline-dark': !post.downvoted}">
+                                    <i class="bi bi-arrow-down"></i> {{ post.downvoteCount }}
+                                </button>
+                                <button [routerLink]="['/viewPost', post.postId]" class="btn btn-outline-dark btn-sm">
+                                    <i class="bi bi-chat-dots"></i> {{post.comments.length}}
+                                </button>
+                                <button class="btn btn-outline-dark btn-sm" (click)="speak(post)">
+                                    <i class="bi bi-soundwave"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
             </div>
             <div class="col-md-4">
-                <div class="sidebar p-3 rounded mb-4">
+                <div class="sidebar">
                     <h5>Joined communities</h5>
-
                     <a [routerLink]="['/addPost']" class="community-link">
-                        <button class="btn btn-outline-dark btn-sm mr-2">
-                          <i class="bi bi-plus-square-fill"></i> create Post
+                        <button class="btn btn-outline-dark btn-sm">
+                            <i class="bi bi-plus-square-fill"></i> create Post
                         </button>
                     </a>
-
                     <div>
                         <div *ngFor="let c of joinedCommunities" class="community-card" [routerLink]="['/community', c.communityId]">
                             <span>{{c.communityName}}</span>
                         </div>
                     </div>
-
                 </div>
-                <div class="sidebar p-3 rounded">
+
+                <div class="sidebar">
+                    <h5>Popular communities</h5>
+                    <div>
+                        <div *ngFor="let c of popularCommunities" class="community-card" [routerLink]="['/community', c.communityId]">
+                            <span>{{c.communityName}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar">
                     <h5>Created Communities</h5>
                     <a [routerLink]="['/addCommunity']" class="community-link">
-                      <button class="btn btn-outline-dark btn-sm mr-2">
-                        <i class="bi bi-plus-square-fill"></i> create community
-                      </button>
-                  </a>
+                        <button class="btn btn-outline-dark btn-sm">
+                            <i class="bi bi-plus-square-fill"></i> create community
+                        </button>
+                    </a>
                     <div *ngFor="let c of createdCommunities; let i = index" class="community-card">
-                      <div class="d-flex justify-content-between">
-                          <div>
-                              <span [routerLink]="['/community', c.communityId]">{{c.communityName}}</span>
-                          </div>
-                          <div>
-                              <button class="btn btn-danger" type="button" (click)="showConfirmation[i] = !showConfirmation[i]">
-                                  <i class="bi bi-trash"></i>
-                              </button>
-                          </div>
-                      </div>
-                      <!-- Confirmation div -->
-                      <div *ngIf="showConfirmation[i]" class="confirmation-div">
-                          <p>Are you sure you want to delete '{{c.communityName}}'?</p>
-                          <button class="btn btn-danger" (click)="delete(c.communityId); showConfirmation[i] = false">Yes</button>
-                          <button class="btn btn-secondary" (click)="showConfirmation[i] = false">No</button>
-                      </div>
-                  </div>
-                  
-                  
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <span [routerLink]="['/community', c.communityId]">{{c.communityName}}</span>
+                            </div>
+                            <div>
+                                <button class="btn btn-danger" type="button" (click)="showConfirmation[i] = !showConfirmation[i]">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Confirmation div -->
+                        <div *ngIf="showConfirmation[i]" class="confirmation-div">
+                            <p>Are you sure you want to delete '{{c.communityName}}'?</p>
+                            <button class="btn btn-danger" (click)="delete(c.communityId); showConfirmation[i] = false">Yes</button>
+                            <button class="btn btn-secondary" (click)="showConfirmation[i] = false">No</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

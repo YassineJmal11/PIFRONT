@@ -46,7 +46,23 @@ export class PostServiceService {
   findByUserJoinedCommunitiesPaginated(userId: number, page: number, size: number): Observable<Page<Post>> {
     return this.http.get<Page<Post>>(`${this.baseUrl}/user/${userId}/communities?page=${page}&size=${size}`);
   }
+  deletePost(postId: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/delete/${postId}`);
+  }
 
+  findByTextContentContaining(text: string): Observable<Post[]> {
+    return this.http.get<Post[]>(`${this.baseUrl}/search/${text}`);
+  }
+
+
+  findTop50ByOrderByVotesDesc(page: number, size: number): Observable<Page<Post>> {
+    return this.http.get<Page<Post>>(`${this.baseUrl}/popularPosts?page=${page}&size=${size}`);
+  }
+
+  getSearchSuggestions(text: string): Observable<string[]> {
+    return this.http.get<string[]>(`${this.baseUrl}/searchSuggestions/${text}`);
+  }
+  
   
 
   
