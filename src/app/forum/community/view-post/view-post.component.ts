@@ -75,15 +75,16 @@ export class ViewPostComponent implements OnInit {
       if (this.containsProfanity(this.commentForm.value.content)) {
         console.log("bad words detected")
         this.usersService.updateUserBadWordsCount(this.userId).subscribe(
-          () => {
+          (action:number) => {
+            if(action===1){
+              console.log("yetbana")
+              this.token.signOut();
+              this.router.navigate(['/home']);
+            }
             console.log('Bad words count updated successfully');
             // Do something after successful update
            // this.submitPost(sanitizedTextContent);
           },
-          (error) => {
-            console.error('Error updating bad words count:', error);
-            // Handle error
-          }
         );
       } else {
         //this.submitPost(sanitizedTextContent);
@@ -125,15 +126,16 @@ export class ViewPostComponent implements OnInit {
          if (this.containsProfanity(this.replyForm.value.content)) {
           console.log("bad words detected")
           this.usersService.updateUserBadWordsCount(this.userId).subscribe(
-            () => {
-              console.log('Bad words count updated successfully');
-              // Do something after successful update
-             // this.submitPost(sanitizedTextContent);
-            },
-            (error) => {
-              console.error('Error updating bad words count:', error);
-              // Handle error
+            (action:number) => { 
+              if(action===1){
+              console.log("yetbana")
+              this.token.signOut();
+              this.router.navigate(['/home']);
             }
+            
+              console.log('Bad words count updated successfully');
+            },
+
           );
         }
 

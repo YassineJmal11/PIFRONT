@@ -38,11 +38,6 @@ export class FeedComponent  {
   searchText: string = '';
   searchSuggestions: string[] = [];
 
-
-
-
-
-
   constructor(
     private cs: CommunityServiceService,
     private token: TokenStorageService,

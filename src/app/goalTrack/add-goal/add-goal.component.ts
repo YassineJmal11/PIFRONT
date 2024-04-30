@@ -24,7 +24,7 @@ export class AddGoalComponent implements OnInit{
     private ts: TaskServiceService,
     private token: TokenStorageService,
     private usersService: UsersService,
-    private route: ActivatedRoute, // Import ActivatedRoute instead of Router
+    private route: ActivatedRoute, 
     private router: Router,
     private userService: UsersService
   ) {}
