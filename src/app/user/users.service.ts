@@ -75,4 +75,13 @@ export class UsersService {
     const url = `${this.authUrl}/users/${userId}/bad-words`; // Endpoint for updating bad words count
     return this.http.put<void>(url, {});
   }
+
+
+  getUserIdByUsernames(username: string): Observable<number> {
+    const url = `${this.authUrl}/getUserIdByUsernames/${username}`;
+    return this.http.get<number>(url);
+  }
+  getAllPsychologistsForCustomer(customerId: number): Observable<User[]> {
+    return this.http.get<User[]>(`${this.authUrl}/psychologists/${customerId}`);
+  }
 }

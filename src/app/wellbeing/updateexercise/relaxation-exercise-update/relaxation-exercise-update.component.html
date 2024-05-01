@@ -1,0 +1,33 @@
+<app-header></app-header>
+
+<div class="container">
+  <div class="form-wrapper">
+    <form (submit)="updateExercise()">
+      <div class="form-group">
+        <label for="exerciseName">Exercise Name</label>
+        <input type="text" id="exerciseName" [(ngModel)]="exercise.exerciseRelaxationName" name="exerciseName" required>
+      </div>
+      <div class="form-group">
+        <label for="exerciseInstructions">Exercise Instructions</label>
+        <textarea id="exerciseInstructions" [(ngModel)]="exercise.instructions" name="exerciseInstructions" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="exerciseDuration">Exercise Duration (in seconds)</label>
+        <input type="number" id="exerciseDuration" [(ngModel)]="exercise.duration" name="exerciseDuration" required>
+      </div>
+      <div class="form-group">
+        <label for="exerciseType">Exercise Type</label>
+        <select id="exerciseType" [(ngModel)]="exercise.relaxationExerciceType" name="exerciseType" required>
+          <option value="DeepMuscleRelaxation">Deep Muscle Relaxation</option>
+          <option value="ProgressiveMuscleRelaxation">Progressive Muscle Relaxation</option>
+          <option value="YogaForRelaxation">Yoga For Relaxation</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="videoFile">Séelect video</label>
+        <input type="file" id="videoFile" (change)="onFileSelected($event)" accept="video/*">
+      </div>
+      <button type="submit">Update Exercise</button>
+    </form>
+  </div>
+</div>

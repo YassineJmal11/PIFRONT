@@ -34,7 +34,7 @@
 								<li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
 									<a class="nav-link" href="store-shipment">Shipment</a>
 								</li>
-								<li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+								<li  class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
 									<a class="nav-link" href="#">Workout</a>
 								</li>
 
@@ -43,6 +43,17 @@
 								</li>
 								<li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
 									<a class="nav-link" href="customer">Customer</a>
+								</li>
+
+								<li *ngIf="isCustomer" class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+									<a class="nav-link" href="professionals">Professionals</a>
+								</li>
+								<li *ngIf="!isCustomer" class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+									<a class="nav-link" href="PsyCustomers">My Customers</a>
+								</li>
+
+								<li *ngIf="isCustomer" class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+									<a class="nav-link" href="customerexerciselist">Relaxation Exercise</a>
 								</li>
 							</ul>
 						</div>

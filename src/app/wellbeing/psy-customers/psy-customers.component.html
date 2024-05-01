@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Psy Customers</title>
+    <link rel="stylesheet" href="./psy-customers.component.css">
+</head>
+<body>
+    <div class="container">
+        <app-after-login></app-after-login>
+
+        <div *ngIf="customers.length > 0">
+            <h2>Your Customers:</h2>
+            <ul>
+                <li *ngFor="let customer of customers">
+                    <!-- Intégration de la carte utilisateur -->
+                    <div class="user-card">
+                        <div class="profile-image">
+                            <img [src]="customer.profileImageUrl" alt="Profile Image">
+                        </div>
+                        <div class="user-details">
+                            <h3>{{ 'Username: ' + customer.username }}</h3>
+                            <p>{{ 'Firstname: ' + customer.firstName }}</p>
+                            <p>{{ 'Lastname: ' + customer.lastName }}</p>
+                            <p>{{ 'Email: ' + customer.email }}</p>
+                        </div>
+                        <!-- Bouton de redirection vers CustomerExerciseComponent avec l'ID de l'utilisateur -->
+                        <button (click)="redirectToCustomerExercises(customer.userId)">View Exercises</button>
+                         <!-- Bouton de redirection vers ListExercisesComponent avec l'ID du client -->
+                         <button (click)="assignExercises(customer.userId)">Assign Exercise</button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div *ngIf="customers.length === 0">
+            <p>No customers found.</p>
+        </div>
+    </div>
+</body>
+</html>

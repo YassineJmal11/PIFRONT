@@ -64,7 +64,16 @@ import { AddMealComponent } from './diet/add-meal/add-meal.component';
 import { WorkoutclientComponent } from './workout/workoutclient/workoutclient.component';
 import { AddWorkoutComponent } from './workout/add-workout/add-workout.component';
 
-
+////Wellbeing////
+import { RelaxationExerciseAddComponent } from './wellbeing/addexercise/relaxation-exercise-add/relaxation-exercise-add.component';
+import { RelaxationExerciseListComponent } from './wellbeing/allexercise/relaxation-exercise-list/relaxation-exercise-list.component';
+import { RelaxationExerciseUpdateComponent } from './wellbeing/updateexercise/relaxation-exercise-update/relaxation-exercise-update.component';
+import { TipComponent } from './wellbeing/tip/tip/tip.component';
+import { ProfessionalComponent } from './wellbeing/professional/professional.component';
+import { PsyCustomersComponent } from './wellbeing/psy-customers/psy-customers.component';
+import { CustomerExerciseComponent } from './wellbeing/customer-exercise/customer-exercise.component';
+import { ListExerciseCustomerComponent } from './wellbeing/list-exercise-customer/list-exercise-customer.component';
+////////
 
 @NgModule({
   declarations: [
@@ -120,7 +129,16 @@ import { AddWorkoutComponent } from './workout/add-workout/add-workout.component
    ShoppingCartComponent,
    StoreBackendEditComponent,
    StoreBackendTableviewerComponent,
-   StoreShipmentComponent
+   StoreShipmentComponent,
+
+   RelaxationExerciseAddComponent,
+   RelaxationExerciseListComponent,
+   RelaxationExerciseUpdateComponent,
+   TipComponent,
+   ProfessionalComponent,
+   PsyCustomersComponent,
+   CustomerExerciseComponent,
+   ListExerciseCustomerComponent,
   ],
   imports: [
     BrowserModule,
@@ -130,7 +148,9 @@ import { AddWorkoutComponent } from './workout/add-workout/add-workout.component
     HttpClientModule,
     NgChartjsModule,
     FullCalendarModule , 
-    AutocompleteLibModule
+    AutocompleteLibModule,
+
+    
   ],
   providers: [ authInterceptorProviders],
   bootstrap: [AppComponent]
