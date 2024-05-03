@@ -45,6 +45,8 @@ import { AddMealComponent } from './diet/add-meal/add-meal.component';
 import { AddWorkoutComponent } from './workout/add-workout/add-workout.component';
 ////////WellBeing////////
 
+
+
 import { RelaxationExerciseAddComponent } from './wellbeing/addexercise/relaxation-exercise-add/relaxation-exercise-add.component';
 import { RelaxationExerciseListComponent } from './wellbeing/allexercise/relaxation-exercise-list/relaxation-exercise-list.component';
 import { RelaxationExerciseUpdateComponent } from './wellbeing/updateexercise/relaxation-exercise-update/relaxation-exercise-update.component';
@@ -53,6 +55,8 @@ import { ProfessionalComponent } from './wellbeing/professional/professional.com
 import { PsyCustomersComponent } from './wellbeing/psy-customers/psy-customers.component';
 import { CustomerExerciseComponent } from './wellbeing/customer-exercise/customer-exercise.component';
 import { ListExerciseCustomerComponent } from './wellbeing/list-exercise-customer/list-exercise-customer.component';
+import { MyProfileDietComponent } from './diet/my-profile-diet/my-profile-diet.component';
+import { MyProfileWorkoutComponent } from './workout/my-profile-workout/my-profile-workout.component';
 //////////End WellBeing /////////
 const routes: Routes = [
 
@@ -159,6 +163,7 @@ const routes: Routes = [
     component:AddWorkoutComponent
   },
 
+
    //////////Wellbeing////////////
    { path: 'addexercise', component: RelaxationExerciseAddComponent },
    { path: 'listexercises/:userId', component: RelaxationExerciseListComponent },
@@ -169,6 +174,16 @@ const routes: Routes = [
    {path : 'customerexercise/:userId',component: CustomerExerciseComponent},
    {path : 'customerexerciselist',component: ListExerciseCustomerComponent},
    ///////////////////////////////////////
+
+
+  {
+    path:"myworkout",
+    component:MyProfileWorkoutComponent
+  },
+  {
+    path:"mydiet",
+    component:MyProfileDietComponent
+  },
 
 ];
 

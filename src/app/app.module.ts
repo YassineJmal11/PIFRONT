@@ -63,6 +63,9 @@ import { ClientProfileComponent } from './diet/client-profile/client-profile.com
 import { AddMealComponent } from './diet/add-meal/add-meal.component';
 import { WorkoutclientComponent } from './workout/workoutclient/workoutclient.component';
 import { AddWorkoutComponent } from './workout/add-workout/add-workout.component';
+import { MyProfileWorkoutComponent } from './workout/my-profile-workout/my-profile-workout.component';
+import { MyProfileDietComponent } from './diet/my-profile-diet/my-profile-diet.component';
+
 
 ////Wellbeing////
 import { RelaxationExerciseAddComponent } from './wellbeing/addexercise/relaxation-exercise-add/relaxation-exercise-add.component';
@@ -131,6 +134,7 @@ import { ListExerciseCustomerComponent } from './wellbeing/list-exercise-custome
    StoreBackendTableviewerComponent,
    StoreShipmentComponent,
 
+
    RelaxationExerciseAddComponent,
    RelaxationExerciseListComponent,
    RelaxationExerciseUpdateComponent,
@@ -139,6 +143,11 @@ import { ListExerciseCustomerComponent } from './wellbeing/list-exercise-custome
    PsyCustomersComponent,
    CustomerExerciseComponent,
    ListExerciseCustomerComponent,
+
+   MyProfileWorkoutComponent,
+   MyProfileDietComponent,
+  
+
   ],
   imports: [
     BrowserModule,

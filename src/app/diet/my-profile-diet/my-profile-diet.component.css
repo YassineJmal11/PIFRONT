@@ -1,0 +1,283 @@
+/* Styles for User Profile */
+
+.user-card {
+    width: 300px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  .user-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .user-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+  }
+  
+  .user-details h5 {
+    margin-bottom: 5px;
+    font-size: 1.2em;
+  }
+  
+  /* Styles for Meal Card */
+  .meal-card {
+    width: 18rem;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  .meal-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .clickable-image {
+    cursor: pointer;
+  }
+  
+  /* Styles for Buttons */
+  .btn-orange {
+    background-color: orange;
+    color: #fff;
+    border: none;
+  }
+  
+  .btn-orange:hover {
+    background-color: darkorange;
+  }
+  
+  .btn-outline-success {
+    color: green;
+    border-color: green;
+  }
+  
+  .btn-outline-success:hover {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  .btn-outline-danger {
+    color: red;
+    border-color: red;
+  }
+  
+  .btn-outline-danger:hover {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  /* Additional Styles */
+  .centered-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .card-deck {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .card {
+    margin: 10px;
+  }
+  
+  .card-body {
+    padding: 20px;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  body {
+    background-color: #000000;
+}
+
+.padding {
+    padding: 3rem !important;
+    margin-left: 200px;
+}
+
+.card-img-top {
+    height: 300px;
+}
+
+.card-no-border .card {
+    border-color: #d7dfe3;
+    border-radius: 4px;
+    margin-bottom: 30px;
+    -webkit-box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05);
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+.card-body {
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 1.25rem;
+}
+
+.pro-img {
+    margin-top: -80px;
+    margin-bottom: 20px;
+}
+
+.little-profile .pro-img img {
+    width: 128px;
+    height: 128px;
+    -webkit-box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    border-radius: 100%;
+}
+
+html body .m-b-0 {
+    margin-bottom: 0px;
+}
+
+h3 {
+    line-height: 30px;
+    font-size: 21px;
+}
+
+.btn-rounded.btn-md {
+    padding: 12px 35px;
+    font-size: 16px;
+}
+
+html body .m-t-10 {
+    margin-top: 10px;
+}
+
+.btn-primary,
+.btn-primary.disabled {
+    background: #7460ee;
+    border: 1px solid #7460ee;
+    -webkit-box-shadow: 0 2px 2px 0 rgba(116, 96, 238, 0.14), 0 3px 1px -2px rgba(116, 96, 238, 0.2), 0 1px 5px 0 rgba(116, 96, 238, 0.12);
+    box-shadow: 0 2px 2px 0 rgba(116, 96, 238, 0.14), 0 3px 1px -2px rgba(116, 96, 238, 0.2), 0 1px 5px 0 rgba(116, 96, 238, 0.12);
+    -webkit-transition: 0.2s ease-in;
+    -o-transition: 0.2s ease-in;
+    transition: 0.2s ease-in;
+}
+
+.btn-rounded {
+    border-radius: 60px;
+    padding: 7px 18px;
+}
+
+.m-t-20 {
+    margin-top: 20px;
+}
+
+.text-center {
+    text-align: center !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #455a64;
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+.padding {
+    padding: 3rem !important;
+    margin-left: 200px;
+    
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+/* Your existing CSS styles */
+
+.doughnut-chart {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.slice {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  clip: rect(0, 100px, 200px, 0);
+}
+
+.intake-slice {
+  background-color: #ff4d4d; /* Red color for protein intake */
+}
+
+.needed-slice {
+  background-color: #4da6ff; /* Blue color for protein needed */
+}
+
+.chart-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.chart-text {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.dot {
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.red-dot {
+  background-color: red;
+}
+
+.blue-dot {
+  background-color: blue;
+}
+
+.calendar-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.day-number {
+  font-weight: bold;
+}
+
+.day-events {
+  font-size: 0.8em;
+}
+
+.calendar-event {
+  padding: 2px 6px;
+  border-radius: 3px;
+  color: white;
+  cursor: pointer;
+}
