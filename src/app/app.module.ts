@@ -63,6 +63,9 @@ import { ClientProfileComponent } from './diet/client-profile/client-profile.com
 import { AddMealComponent } from './diet/add-meal/add-meal.component';
 import { WorkoutclientComponent } from './workout/workoutclient/workoutclient.component';
 import { AddWorkoutComponent } from './workout/add-workout/add-workout.component';
+import { MyProfileWorkoutComponent } from './workout/my-profile-workout/my-profile-workout.component';
+import { MyProfileDietComponent } from './diet/my-profile-diet/my-profile-diet.component';
+
 
 
 
@@ -120,7 +123,10 @@ import { AddWorkoutComponent } from './workout/add-workout/add-workout.component
    ShoppingCartComponent,
    StoreBackendEditComponent,
    StoreBackendTableviewerComponent,
-   StoreShipmentComponent
+   StoreShipmentComponent,
+   MyProfileWorkoutComponent,
+   MyProfileDietComponent,
+  
   ],
   imports: [
     BrowserModule,

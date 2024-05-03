@@ -43,6 +43,8 @@ import { ListmealsComponent } from './diet/listmeals/listmeals.component';
 import { AllFoodsComponent } from './diet/all-foods/all-foods.component';
 import { AddMealComponent } from './diet/add-meal/add-meal.component';
 import { AddWorkoutComponent } from './workout/add-workout/add-workout.component';
+import { MyProfileWorkoutComponent } from './workout/my-profile-workout/my-profile-workout.component';
+import { MyProfileDietComponent } from './diet/my-profile-diet/my-profile-diet.component';
 
 const routes: Routes = [
 
@@ -148,7 +150,14 @@ const routes: Routes = [
     path:"addExercice",
     component:AddWorkoutComponent
   },
-
+  {
+    path:"myworkout",
+    component:MyProfileWorkoutComponent
+  },
+  {
+    path:"mydiet",
+    component:MyProfileDietComponent
+  },
 ];
 
 @NgModule({
