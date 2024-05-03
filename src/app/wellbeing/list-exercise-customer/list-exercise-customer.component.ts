@@ -69,10 +69,26 @@ export class ListExerciseCustomerComponent implements OnInit {
           console.error('ID de l\'utilisateur non trouvé.');
           return;
         }
-
+  
         this.relaxationExerciseService.getRelaxationExercisesForUser(customerId).subscribe(
           (exercises: RelaxationExercise[]) => {
             this.exercises = exercises;
+  
+            // Nouvelle partie pour vérifier si chaque exercice est terminé
+            this.exercises.forEach(exercise => {
+              this.relaxationExerciseService.isRelaxationExerciseCompleted(customerId, exercise.relaxationExerciceId).subscribe(
+                (completed: boolean) => {
+                  exercise.completed = completed;
+                  if (completed) {
+                    this.completedExercisesCount++;
+                  }
+                  this.updateProgress();
+                },
+                error => {
+                  console.error('Erreur lors de la vérification de la complétion de l\'exercice:', error);
+                }
+              );
+            });
           },
           error => {
             console.error('Erreur lors du chargement des exercices de relaxation:', error);
@@ -84,6 +100,7 @@ export class ListExerciseCustomerComponent implements OnInit {
       }
     );
   }
+  
 
   markExerciseAsWatched(exercise: RelaxationExercise): void {
     if (!exercise.completed) {

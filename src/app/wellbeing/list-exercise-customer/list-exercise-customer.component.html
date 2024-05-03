@@ -1,12 +1,11 @@
 <app-after-login></app-after-login>
 
 <div class="exercise-container">
-  <!-- Barre de progression -->
   <div class="alert alert-success mx-5 mt-4 border border-success total-progress" role="alert">
     <h4 class="alert-heading">Exercise Progress</h4>
     <div class="progress">
-      <div class="progress-bar bg-success" role="progressbar" [style.width.%]="averageProgress" [attr.aria-valuenow]="averageProgress" aria-valuemin="0" aria-valuemax="100">
-        {{ averageProgress | number: '1.0-0' }}%
+      <div class="progress-bar bg-success" role="progressbar" [style.width.%]="(completedExercisesCount / totalExercisesCount) * 100" [attr.aria-valuenow]="(completedExercisesCount / totalExercisesCount) * 100" aria-valuemin="0" aria-valuemax="100">
+        {{ (completedExercisesCount / totalExercisesCount) * 100 | number: '1.0-0' }}%
       </div>
     </div>
   </div>
@@ -27,8 +26,8 @@
         <p class="card-text">{{ exercise.instructions }}</p>
       </div>
       <div class="card-body">
-      <button class="btn btn-primary" (click)="markExerciseAsWatched(exercise)" [disabled]="exercise.completed">Done</button>
-    </div>
+        <button class="btn btn-primary" (click)="markExerciseAsWatched(exercise)" [disabled]="exercise.completed">Done</button>
+      </div>
 
     </div>
   </div>

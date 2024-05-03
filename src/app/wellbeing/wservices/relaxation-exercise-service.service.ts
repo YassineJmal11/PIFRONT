@@ -45,16 +45,13 @@ export class RelaxationExerciseServiceService {
     return this.http.delete(`${this.baseUrl}/delete/${id}`);
   }
 
-  updateExercise(exercise: RelaxationExercise): Observable<RelaxationExercise> {
-    return this.http.put<RelaxationExercise>(`${this.baseUrl}/update`, exercise).pipe(
-      tap((updatedExercise: RelaxationExercise) => {
-        alert('Exercise updated successfully.'); // Afficher le message de succès
+  updateExercise(exercise: RelaxationExercise): Observable<any> {
+    const url = `${this.baseUrl}/update-exercise/${exercise.relaxationExerciceId}`; // Utilisation de la nouvelle URL avec l'identifiant de l'exercice
+    return this.http.put<any>(url, exercise).pipe(
+      tap(() => {
+        alert('Exercise updated successfully.');
       }),
-      catchError((error: any) => {
-        console.error('Erreur lors de la mise à jour de l\'exercice:', error);
-        alert('Une erreur s\'est produite lors de la mise à jour de l\'exercice. Veuillez réessayer.');
-        return throwError(error); // Rejeter l'erreur pour la transmettre au subscriber
-      })
+     
     );
   }
   getRelaxationExercisesForUser(userId: number): Observable<RelaxationExercise[]> {
@@ -67,5 +64,9 @@ export class RelaxationExerciseServiceService {
 
   countExercisesForUser(userId: number): Observable<number> {
     return this.http.get<number>(`${this.baseUrl}/exercises-count/${userId}`);
+  }
+
+  isRelaxationExerciseCompleted(userId: number, exerciseId: number): Observable<boolean> {
+    return this.http.get<boolean>(`${this.baseUrl}/relaxation-completed/${userId}/${exerciseId}`);
   }
 }
