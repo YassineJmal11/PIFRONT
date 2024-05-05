@@ -1,0 +1,39 @@
+
+<body>
+  <app-after-login></app-after-login>
+<div class="tracking-container">
+  <div class="shipmentTracking">
+    Shipment Tracking
+  </div>
+  <div *ngIf="!payment">You have no payment awaiting currently.</div>
+  <div *ngIf="payment">
+  <div class="progress-bar">
+    <div class="progress-bar-fill" [style.width.%]="locationData.progress"></div>
+  </div>
+  <div class="delivery-info">
+    <span *ngIf="payment">Payment #{{payment.paymentId}}</span>
+    <br>
+    Expected Delivery Time: <span class="distance" id="delivery-time">{{locationData.expectedDeliveryDate}}</span>
+    <br>
+    Current distance between delivery and you: <span class="distance" id="delivery-time">{{locationData.currentDistance}}</span>
+  </div>
+  <div class="tracking-details">
+    <h3>Tracking Details:</h3>
+    <ul id="tracking-list">
+        <li *ngFor="let location of locationData.shipLocationHistory">
+            {{location}}
+        </li>
+    </ul>
+    <div style="text-align: left;">
+      Your details: {{getLocationString(locationData)}}
+    </div>
+    <br>
+  </div>
+  <div class="turnGPS" *ngIf="isGeolocationNotSupported">Your browser doesn't support GPS</div>
+  <div class="turnGPS" *ngIf="isGeolocationDenied">Please turn on your GPS</div>
+</div>
+</div>
+
+<div class="delivery-over" *ngIf="payment" (click)="deliveryDoneClick()">CLICK HERE WHEN DELIEVERY IS DONE</div>
+
+</body>

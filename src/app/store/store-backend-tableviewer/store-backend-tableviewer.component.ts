@@ -5,7 +5,6 @@ import { HttpClient } from '@angular/common/http';
 import Chart from 'chart.js/auto';
 import API from '../api';
 import jsPDF from "jspdf";
-import "jspdf-autotable";
 
 @Component({
   selector: 'app-store-backend-tableviewer',
@@ -18,6 +17,7 @@ export class StoreBackendTableviewerComponent implements AfterViewInit {
   physicalStores?: PhysicalStore[];
   productMarks?: ProductMark[];
   productReviews?: ProductReview[];
+  shipmentUsers?: any[]
 
   constructor(private route: ActivatedRoute, 
     private http: HttpClient,
@@ -32,6 +32,7 @@ export class StoreBackendTableviewerComponent implements AfterViewInit {
       if(type == 'store') this.getAllXXX(API.getAllPhysicalStores, 'physicalStores');
       if(type == 'mark') this.getAllXXX(API.getAllProductMarks, 'productMarks');
       if(type == 'review') this.getAllXXX(API.getAllProductReviews, 'productReviews');
+      if(type == 'shipment-user') this.getAllXXX(API.getAllShipmentUsers, 'shipmentUsers');
     });
   }
   
@@ -46,6 +47,7 @@ export class StoreBackendTableviewerComponent implements AfterViewInit {
     if(this.productReviews) this.router.navigate(['/store-backend-edit', 'review', obj.productReviewId]);
     if(this.physicalStores) this.router.navigate(['/store-backend-edit', 'store', obj.physicalStoreId]);
     if(this.productMarks) this.router.navigate(['/store-backend-edit', 'mark', obj.productMarkId]);
+    if(this.shipmentUsers) this.router.navigate(['/store-backend-edit', 'shipment-user', obj.shipmentUserId]);
   }
   onDelete(obj: any)
   {
@@ -57,6 +59,7 @@ export class StoreBackendTableviewerComponent implements AfterViewInit {
     if(this.productReviews) this.deleteXXXById(API.deleteProductReview, obj.reviewId);
     if(this.physicalStores) this.deleteXXXById(API.deletePhysicalStore, obj.physicalStoreId);
     if(this.productMarks) this.deleteXXXById(API.deleteProductMark, obj.productMarkId);
+    if(this.shipmentUsers) this.deleteXXXById(API.deleteShipmentUser, obj.shipmentUserId);
   }
   onCreateNew()
   {
@@ -64,6 +67,7 @@ export class StoreBackendTableviewerComponent implements AfterViewInit {
     if(this.productReviews) this.router.navigate(['/store-backend-new', 'review']);
     if(this.physicalStores) this.router.navigate(['/store-backend-new', 'store']);
     if(this.productMarks) this.router.navigate(['/store-backend-new', 'mark']);
+    if(this.shipmentUsers) this.router.navigate(['/store-backend-new', 'shipment-user']);
   }
 
   deleteXXXById(url: string, id: number)

@@ -1,0 +1,85 @@
+/* Style pour le conteneur du formulaire */
+.signup-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  /* Style pour les titres */
+  h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  /* Style pour les labels */
+  label {
+    font-weight: bold;
+  }
+  
+  /* Style pour les inputs */
+  .input-group {
+    margin-bottom: 15px;
+  }
+  
+  .input-group label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .input-group input,
+  .input-group select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  /* Style pour les boutons */
+  .btn-primary {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Style pour les messages d'erreur */
+  .alert {
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+  }
+  /* styles.css (ou votre fichier de style personnalisé) */
+.bg-image {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+body {
+  background-image: url('https://img.freepik.com/free-photo/flat-lay-pink-sporty-aesthetics-with-dark-background_23-2148259100.jpg?w=996&t=st=1711151874~exp=1711152474~hmac=e4d6ad10bc47c85266e98d85d76a14707c2386d5772e6f76851e067af6ce8f83');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* Pour fixer l'image de fond */
+}
+.error-message {
+  color: red;
+  font-size: 14px;
+}

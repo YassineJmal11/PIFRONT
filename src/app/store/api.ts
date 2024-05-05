@@ -1,11 +1,13 @@
 
 
-const URL = "http://localhost:8080";
+const URL = "http://localhost:8081";
 const products = URL + '/api/store/products';
 const products_reviews = URL + '/api/store/product-reviews';
 const product_marks = URL + '/api/store/product-mark'
 const shopping_cart = URL + '/api/store/shopping-cart'
 const physical_stores = URL + '/api/store/physical-stores'
+const payment = URL + '/api/store/payment'
+const shipmentUser = URL + '/api/store/shipmentUser'
 
 const API = 
 {
@@ -50,9 +52,25 @@ const API =
     getShoppingCartById : shopping_cart + '/getShoppingCartById',
     getShoppingCartByUserId : shopping_cart + '/getShoppingCartByUserId',
     addProductToCart : shopping_cart + '/addProductToCart',
+    checkoutCart : shopping_cart + '/checkoutCart',
 
+    //crud
+    getPaymentById: payment + '/getPaymentById',
+    deletePayment: payment + '/deletePayment',
+    //misc
+    getPaymentByUserId: payment + '/getPaymentByUserId',
+    getShipDistance: payment + '/getShipDistance',
+    setShipLocation: payment + '/setShipLocation',
+    
+    //crud
+    createShipmentUser: shipmentUser + "/createShipmentUser",
+    getShipmentUserById: shipmentUser + "/getShipmentUserById",
+    updateShipmentUser: shipmentUser + '/updateShipmentUser',
+    deleteShipmentUser: shipmentUser + '/deleteShipmentUser',
+    //misc
+    getAllShipmentUsers: shipmentUser + '/getAllShipmentUsers',
 
-    getAllUsers: URL + '/api/users'
+    getAllUsers: URL + '/api/auth'
 };
 
 export default API;

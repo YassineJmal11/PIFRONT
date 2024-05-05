@@ -23,6 +23,7 @@ export class StoreBackendEditComponent {
   physicalStore?: PhysicalStore;
   productMark?: ProductMark;
   productReview?: ProductReview;
+  shipmentUser?: any;
 
   users?: User[];
   productMarks?: ProductMark[];
@@ -79,12 +80,14 @@ export class StoreBackendEditComponent {
       if(this.physicalStore) this.updateXXXById(API.updatePhysicalStore, this.physicalStore.physicalStoreId, this.physicalStore);
       if(this.productMark) this.updateXXXById(API.updateProductMark, this.productMark.productMarkId, this.productMark);
       if(this.productReview) this.updateXXXById(API.updateProductReview, this.productReview.productReviewId, this.productReview);
+      if(this.shipmentUser) this.updateXXXById(API.updateShipmentUser, this.shipmentUser.shipmentUserId, this.shipmentUser);
     }
     if(this.mode == 'new')
     {
       if(this.product)this.createXXX(API.createProduct, this.product, (response: any)=>{ this.product=response; updateProductImages() });
       if(this.physicalStore)this.createXXX(API.createPhysicalStore, this.physicalStore);
       if(this.productMark)this.createXXX(API.createProductMark, this.productMark);
+      if(this.shipmentUser)this.createXXX(API.createShipmentUser, this.shipmentUser);
     }
   }
 
@@ -99,6 +102,7 @@ export class StoreBackendEditComponent {
     if(type == 'product') this.product = new Product();
     if(type == 'store') this.physicalStore = new PhysicalStore();
     if(type == 'mark') this.productMark = new ProductMark();
+    if(type == 'shipment-user') this.shipmentUser = {};
   }
 
   beginEdit(type:string, id: number)
@@ -107,6 +111,7 @@ export class StoreBackendEditComponent {
     if(type == 'mark') this.getXXXById(API.getProductMarkById, id, 'productMark')
     if(type == 'store') this.getXXXById(API.getPhysicalStoreById, id, 'physicalStore')
     if(type == 'review') this.getXXXById(API.getProductReviewById, id, 'productReview')
+    if(type == 'shipment-user') this.getXXXById(API.getShipmentUserById, id, 'shipmentUser')
   }
 
   updateProductImages()

@@ -19,6 +19,7 @@ export class ProductViewComponent implements AfterViewInit {
   @ViewChildren('productContainerInfoLeft') infoLeft!: QueryList<any>;
   currentImageIdx: number = 0;
   @ViewChildren('productTechnicalDescription') ref!: QueryList<any>;
+  userId : number = -1;
 
   constructor(private route: ActivatedRoute, 
     private http: HttpClient,
@@ -27,6 +28,8 @@ export class ProductViewComponent implements AfterViewInit {
 
   ngAfterViewInit() 
   {
+    this.userId = parseInt(localStorage.getItem("userId") ?? "-1");
+
     this.infoLeft.changes.subscribe( (result) => 
     {
       const infoLeft = result.first.nativeElement;
@@ -49,7 +52,7 @@ export class ProductViewComponent implements AfterViewInit {
 
   addToCartButtonClicked()
   {
-    this.addProductToCart(2, this.product.productId); //hardcoded user id for now
+    this.addProductToCart(this.userId, this.product.productId);
   }
 
   addProductToCart(userId: number, productId: number): void {
@@ -59,7 +62,7 @@ export class ProductViewComponent implements AfterViewInit {
         (response) => {
           // Handle successful response
           console.log('Product added to cart:', response);
-          this.router.navigate(['/shopping-cart', userId]); 
+          this.router.navigate(['/shopping-cart']); 
         },
         (error) => {
           // Handle error
@@ -81,7 +84,43 @@ export class ProductViewComponent implements AfterViewInit {
     return safeUrl;
   }
 
-
+  zoom(e: MouseEvent | TouchEvent, zoomRatio: number=3): void {
+    const zoomer = e.currentTarget as HTMLElement;
+    let offsetX: number;
+    let offsetY: number;
+  
+    if (e instanceof MouseEvent) {
+      offsetX = e.offsetX;
+      offsetY = e.offsetY;
+    } else if (e instanceof TouchEvent) {
+      offsetX = e.touches[0].pageX;
+      offsetY = e.touches[0].pageY;
+    } else {
+      throw new Error('Unsupported event type');
+    }
+  
+    const img = new Image();
+    img.onload = () => {
+      const aspectRatio = img.width / img.height;
+      const newWidth = img.width * zoomRatio;
+      const newHeight = newWidth / aspectRatio;
+  
+      const x = (offsetX / zoomer.offsetWidth) * 100;
+      const y = (offsetY / zoomer.offsetHeight) * 100;
+  
+      zoomer.style.backgroundSize = `${newWidth}px ${newHeight}px`;
+      zoomer.style.backgroundPosition = `${x}% ${y}%`;
+    };
+    img.src = zoomer.style.backgroundImage.replace(/url\(['"]?([^'"]*)['"]?\)/, '$1');
+  }
+  unzoom(e: MouseEvent)
+  {
+    const zoomer = e.currentTarget as HTMLElement;
+    zoomer.style.backgroundSize = "cover"
+    zoomer.style.backgroundPosition = ""
+  }
+  
+  
 
   showProductImage(offset: number = 1, infoLeft: HTMLElement) 
   {

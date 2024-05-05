@@ -1,0 +1,127 @@
+<!-- SIDEBAR -->...
+<head>
+  <!-- Boxicons -->
+   <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+ </head>
+ ...
+<section id="sidebar" [ngClass]="status ? 'hide' : ''">
+    <a href="home" class="brand">
+      <i class='bx bxs-smile'></i>
+      <span class="text">vita</span>
+    </a>
+    <ul class="side-menu top">
+      <li class="active">
+        <a href="#">
+          <i class='bx bxs-dashboard' ></i>
+          <span class="text">Dashboard</span>
+        </a>
+      </li>
+      <li>
+        <a href="/store">
+          <i class='bx bxs-shopping-bag-alt' ></i>
+          <span class="text">My Store</span>
+        </a>
+      </li>
+
+      <li> <!--class="active"-->
+        <a [routerLink]="['/ALL']">
+          <i class='bx bxs-doughnut-chart' ></i>
+          <span class="text">All Users</span>
+        </a>
+      </li>
+
+      
+      <li>
+        <a [routerLink]="['/store-backend-tableviewer/product']">
+          <i class='bx bxs-doughnut-chart' ></i>
+          <span class="text">Store products</span>
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="['/store-backend-tableviewer/mark']">
+          <i class='bx bxs-doughnut-chart' ></i>
+          <span class="text">Product marks</span>
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="['/store-backend-tableviewer/review']">
+          <i class='bx bxs-doughnut-chart' ></i>
+          <span class="text">Product reviews</span>
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="['/store-backend-tableviewer/store']">
+          <i class='bx bxs-doughnut-chart' ></i>
+          <span class="text">Physical Stores</span>
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="['/store-backend-tableviewer/shipment-user']">
+          <i class='bx bxs-doughnut-chart' ></i>
+          <span class="text">Product Shipment users</span>
+        </a>
+      </li>
+
+
+
+      <li>
+        <a href="#">
+          <i class='bx bxs-message-dots' ></i>
+          <span class="text">Message</span>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <i class='bx bxs-group' ></i>
+          <span class="text">Team</span>
+        </a>
+      </li>
+    </ul>
+    <ul class="side-menu">
+      <li>
+        <a href="#">
+          <i class='bx bxs-cog' ></i>
+          <span class="text">Settings</span>
+        </a>
+      </li>
+      <li>
+        <a href="#" class="logout" (click)="logout()">
+          <i class='bx bxs-log-out-circle'></i>
+          <span class="text">Logout</span>
+        </a>
+      </li>
+    </ul>
+  </section>
+  <!-- SIDEBAR -->
+  
+  
+  
+  <!-- CONTENT -->
+  <section id="content">
+    <!-- NAVBAR -->
+    <nav>
+      <i (click)="addToggle()" class='bx bx-menu' ></i>
+      <a href="#" class="nav-link">Categories</a>
+      <form action="#">
+        <div class="form-input">
+          <input type="search" placeholder="Search...">
+          <button type="button" class="search-btn"><i class='bx bx-search' ></i></button>
+        </div>
+      </form>
+      <a href="#" class="notification">
+        <i class='bx bxs-bell' ></i>
+        <span class="num">8</span>
+      </a>
+      <a href="#" class="profile">
+        <img src="https://secure.gravatar.com/avatar/d09eaad01aea86c51b4f892b4f8abf6f?s=100&d=wavatar&r=g">
+      </a>
+    </nav>
+    <!-- NAVBAR -->
+  
+    <!-- MAIN -->
+    <main>
+      <iframe [src]="iframeSource" width="100%" height="500px"></iframe>
+    </main>
+    <!-- MAIN -->
+  </section>
+  <!-- CONTENT -->

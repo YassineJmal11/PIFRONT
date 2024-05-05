@@ -1,0 +1,24 @@
+/* Style pour le conteneur du tip */
+.tip-container {
+    position: relative; /* Position relative pour les éléments enfants positionnés en absolu */
+}
+
+/* Style pour l'icône de la cloche */
+#bellIcon {
+    cursor: pointer; /* Curseur en forme de main lors du survol */
+    color: #ff0000; /* Couleur de l'icône */
+    position: absolute; /* Position absolue par rapport à son conteneur */
+    top: 100px; /* Distance depuis le haut */
+    left: 200px; /* Distance depuis la gauche */
+}
+
+/* Style pour le contenu du tip */
+.tip-content {
+    position: absolute; /* Position absolue par rapport à son conteneur */
+    top: 120px; /* Distance depuis le haut */
+    left: 200px; /* Distance depuis la gauche */
+    background-color: #f8f9fa; /* Couleur de fond */
+    padding: 10px; /* Espacement intérieur */
+    border-radius: 5px; /* Coins arrondis */
+    border: 1px solid #ced4da; /* Bordure */
+}

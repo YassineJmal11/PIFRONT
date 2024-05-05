@@ -1,0 +1,125 @@
+/* Styles for User Profile */
+
+.user-card {
+  width: 300px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.user-card:hover {
+  transform: translateY(-5px);
+}
+
+.user-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.user-details h5 {
+  margin-bottom: 5px;
+  font-size: 1.2em;
+}
+
+/* Styles for Meal Card */
+.meal-card {
+  width: 18rem;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.meal-card:hover {
+  transform: translateY(-5px);
+}
+
+.clickable-image {
+  cursor: pointer;
+}
+
+/* Styles for Buttons */
+.btn-rounded {
+  border-radius: 50px;
+  padding: 10px 20px;
+  font-size: 1em;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary {
+  background-color: #7460ee;
+  border: 1px solid #7460ee;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background-color: #5e4ad6;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  border: 1px solid #dc3545;
+  color: #fff;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+}
+
+/* Additional Styles */
+.centered-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem 0;
+}
+
+.card-deck {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card {
+  margin: 10px;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.padding {
+  padding: 3rem;
+}
+
+.card-img-top {
+  height: 300px;
+}
+
+.card-no-border .card {
+  border-color: #d7dfe3;
+  border-radius: 4px;
+  margin-bottom: 30px;
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+.pro-img img {
+  width: 128px;
+  height: 128px;
+  border-radius: 100%;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+h3 {
+  line-height: 30px;
+  font-size: 21px;
+}
+
+.m-t-20 {
+  margin-top: 20px;
+}

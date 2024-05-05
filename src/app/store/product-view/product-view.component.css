@@ -53,7 +53,7 @@ body
     width: 100%;
     height: auto;
 
-    padding: 20%;
+    padding: min(100px, 20%);
     box-sizing: border-box;
 }
 .productTechnicalName

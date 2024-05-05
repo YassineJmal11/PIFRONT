@@ -144,3 +144,22 @@
     </form>
   </div>
 </div>
+
+<div *ngIf="shipmentUser">
+  <div class="container mt-5">
+    <h2>Edit Shipment-User</h2>
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="user">Select User that will ship the product</label>
+        <select class="form-control" id="user" *ngIf="users" [(ngModel)]="shipmentUser.user" [ngModelOptions]="{standalone: true}">
+            <option *ngFor="let user of users" [ngValue]="user">{{ user.username }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="available">is available for shipping right now ?</label>
+        <input [(ngModel)]="shipmentUser.available" [ngModelOptions]="{standalone: true}" type="checkbox" class="form-control" id="available" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</div>

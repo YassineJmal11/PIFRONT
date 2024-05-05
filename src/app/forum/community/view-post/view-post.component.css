@@ -1,0 +1,98 @@
+html, body {
+    background-color: #f8f9fa; /* Light background color */
+    color: #343a40; /* Dark text color */
+    margin: 0;
+    padding: 0;
+  }
+
+  .container {
+    margin-bottom: 0; /* Set the bottom margin to 0 */
+}
+
+section {
+    margin-top: 0;
+    padding-top: 0;
+}
+
+
+  .navbar {
+    background-color: #007bff !important; /* Light navbar background color */
+  }
+
+  body {
+    padding-top: 100px; /* Height of the fixed navbar */
+  }
+
+  .post {
+    background-color: #fff; /* White background for posts */
+    border: 1px solid #ced4da; /* Border color for posts */
+  }
+
+
+  /* Custom styles */
+  body {
+      font-family: Arial, sans-serif;
+  }
+
+  .post {
+      background-color: #f8f9fa;
+      border: 1px solid #545658;
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 20px;
+  }
+
+  .post-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+  }
+
+  .post-header img {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      margin-right: 10px;
+  }
+
+  .post-header .user-name {
+      font-weight: bold;
+      margin-right: 5px;
+  }
+
+  .badge {
+      margin-bottom: 10px;
+  }
+
+  .comment .reply {
+      margin-left: 30px;
+      margin-top: 10px;
+      border-top: 1px solid #ced4da;
+      padding-top: 10px;
+  }
+
+  .comment .reply .reply-content {
+      margin-left: 30px;
+  }
+
+  .comment .reply .reply-actions {
+      margin-top: 10px;
+  }
+
+  .btn {
+      margin-right: 5px;
+      border: 0px;
+  }
+
+ 
+  .form-group {
+      margin-bottom: 10px;
+  }
+
+  .goback{
+    margin-bottom:10px ;
+    border: 0px;
+
+  }
+
+

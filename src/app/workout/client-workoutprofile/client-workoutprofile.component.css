@@ -1,0 +1,71 @@
+/* Adjust the size and position of the calendar container */
+.calendar-container {
+    width: 90%;
+    height: 600px; /* Adjust the height as needed */
+    margin-bottom: 20px;
+    margin-left: 40px; /* Adjust the left margin */
+    margin-right: 200px;
+    margin-top: 150px;
+  }
+  
+  /* Style the calendar */
+  .fullcalendar {
+    width: 100%;
+    height: 100%;
+  }
+  
+  /* Style the calendar header */
+  .fc-toolbar {
+    margin-bottom: 20px;
+  }
+  
+  /* Style the calendar day cells */
+  .fc-daygrid-day {
+    cursor: pointer; /* Ensure that day cells are clickable */
+  }
+  
+  /* Style the calendar events */
+  .fc-event {
+    cursor: pointer; /* Ensure that events are clickable */
+    background-color: #3788d8; /* Set event background color */
+    color: #fff; /* Set event text color */
+    border: none; /* Remove event border */
+    border-radius: 3px; /* Add border radius to event */
+    padding: 3px 5px; /* Add padding to event */
+  }
+  
+  /* Style the calendar event titles */
+  .fc-event-title {
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
+  /* Style the selected date */
+  .fc-day-today {
+    background-color: #f0f0f0; /* Change background color of today's date */
+  }
+ 
+    .col-md-6 {
+      .col-md-9 {
+        background-color: #2abde256; /* Light grey background */
+        border-radius: 10px; /* Rounded corners */
+        padding: 20px; /* Add some padding */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow */
+        margin-top: 20px;
+      }
+       /* Adjusted to account for margins */
+    }
+  
+  
+  .exercices-list {
+    height: 100%; /* Ensure that the exercises list fills the available height */
+    margin-left: 80px; /* Adjust the left margin */
+    margin-right: 40px; /* Adjust the right margin */
+    margin-top: 100px;
+  }
+
+  h2 {
+    color: #2b7ce6;
+    text-align: center;
+    margin-bottom: 20px;
+  }

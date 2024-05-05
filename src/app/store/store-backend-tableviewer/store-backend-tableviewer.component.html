@@ -163,10 +163,39 @@
   </div>
 </div>
 
+
+<div *ngIf="shipmentUsers">
+  <div class="container mt-5">
+    <h2>View Product Reviews</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Available?</th>
+          <th>Actions</th> <!-- New column for Edit/Delete buttons -->
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Sample row, replace with dynamic data from backend -->
+        <tr *ngFor="let shipmentUser of shipmentUsers">
+          <td *ngIf="shipmentUser.user">{{shipmentUser.user.username}}</td>
+          <td *ngIf="!shipmentUser.user">Unknown</td>
+          <td>{{shipmentUser.available ? true : false}}</td>
+          <td>
+            <!-- Edit and Delete buttons -->
+            <button type="button" class="btn btn-primary" (click)='onEdit(shipmentUser)'>Edit</button>
+            <button type="button" class="btn btn-danger" (click)='onDelete(shipmentUser)'>Delete</button>
+          </td>
+        </tr>
+        <!-- Repeat the above row structure for each review -->
+      </tbody>
+    </table>
+  </div>
+</div>
+
 <div class="text-center">
   <button type="button" class="btn btn-primary" (click)="onCreateNew()">Add New</button>
 </div>
-
 
 <div class="container mt-5">
   <h2>Product Sales Chart</h2>

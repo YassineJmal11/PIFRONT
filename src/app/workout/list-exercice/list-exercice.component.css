@@ -1,0 +1,100 @@
+.background {
+  background-image: url('\src\assets\images\hedhi.jpg'); /* Add the path to your background image */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container {
+  margin-top: 100px;
+  
+ 
+  
+  
+}
+.container .row {
+  justify-content: center;
+}
+
+.container .col-md-12 {
+  margin-bottom: 20px;
+}
+
+.col-md-9 {
+  background-color: #2abde256; /* Light grey background */
+  border-radius: 10px; /* Rounded corners */
+  padding: 20px; /* Add some padding */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  margin-top: 20px;
+}
+
+.container .card {
+  margin-bottom: 20px;
+}
+
+.container h2,
+.user-container h2 {
+  color: #fafafa;
+}
+
+.user-container {
+  width: 400px;
+  background-color: #7ee27e; /* Light grey background */
+  border-radius: 10px; /* Rounded corners */
+  padding: 20px; /* Add some padding */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.514); /* Soft shadow */
+  margin-top: 20px;
+}
+
+.user-container .row {
+  justify-content: center;
+}
+
+.user-container .col-md-12 {
+  margin-bottom: 20px;
+}
+
+.user-container .card {
+  cursor: pointer;
+  transition: transform 0.2s;
+  background-color: rgba(99, 219, 255, 0.61); /* Set the background color to a light shade */
+  color: rgb(228, 57, 57); /* Set text color to a shade of red */
+  border-radius: 10px; /* Add border radius for rounded corners */
+  padding: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0px 0px 20px rgba(214, 233, 209, 0.336);  /* Soft shadow */
+}
+
+.user-container h2 {
+  color: #74a8db; /* Dark grey text color */
+  font-size: 24px; /* Larger font size */
+  margin-bottom: 20px; /* Spacing */
+}
+
+.user-container .card-title {
+  color: #343a40; /* Dark color for card titles */
+  font-size: 13px; /* Font size for titles */
+}
+
+.user-container .card-text {
+  color: #3a80bd; /* Text color */
+  font-size: 10px; /* Font size for text */
+  margin-bottom: 8px; /* Spacing */
+}
+
+.user-container .btn-orange {
+  background-color: #0fff5fe8; /* Orange button */
+  color: #fff; /* White text */
+  border: none; /* No border */
+}
+
+.user-container .btn-orange:hover {
+  background-color: #26e600; /* Darker orange on hover */
+}
+
+.clickable-user-card {
+  cursor: pointer;
+}

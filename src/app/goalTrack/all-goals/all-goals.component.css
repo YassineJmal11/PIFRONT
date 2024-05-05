@@ -1,0 +1,221 @@
+.navbar {
+  position: relative;
+}
+
+
+
+
+
+
+
+
+
+
+
+.d-none {
+  display: none !important;
+}
+
+/* Styles for cards */
+.two {
+  width: 100%;
+  max-width: 300px; /* Adjust max-width as needed */
+  margin: 20px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Styles for container */
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+  .two {
+    max-width: 100%;
+  }
+}
+
+/* General styles */
+.main {
+  padding: 20px;
+}
+
+/* Styles for buttons */
+.btn {
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+/* Styles for progress bars */
+.progress {
+  margin-top: 10px;
+}
+
+/* Styles for alert boxes */
+.alert {
+  margin-top: 20px;
+}
+
+/* Styles for navigation */
+.navbar {
+  margin-bottom: 20px;
+}
+
+/* Additional styles for specific elements */
+.star {
+  color: gold;
+}
+
+.dot {
+  color: #555;
+}
+
+.pic1, .pic2, .pic3, .pic4 {
+  margin-right: 5px;
+}
+
+/* Adjustments for select elements */
+select {
+  width: 150px;
+}
+
+
+
+/* Styles for quotes */
+.quote {
+  font-style: italic;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.quote2 {
+  font-style: italic;
+}
+
+/* Adjustments for images */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+
+/* Styles for total progress */
+.total-progress {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.total-progress .alert-heading {
+  font-size: 1.25rem;
+}
+
+.total-progress .progress {
+  height: 40px; /* Match the height of the alert box */
+}
+
+/* Add this CSS to adjust the position and styling of the search input */
+.navbar {
+  position: relative;
+}
+
+
+
+
+
+.d-none {
+  display: none !important;
+}
+
+/* Styles for search and filters */
+.search-filter-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.search-filter-container > div {
+  flex: 1;
+  margin-right: 10px;
+}
+
+/* Styles for search input */
+
+
+
+/* Styles for select elements */
+select ,.search{
+  width: 100%;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+  .search-input {
+    width: calc(100% - 90px);
+  }
+
+  .search {
+    width: 70px;
+  }
+}
+
+/* Additional styles for specific elements */
+.star {
+  color: gold;
+}
+
+.dot {
+  color: #555;
+}
+
+/* Adjustments for images */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Add this CSS to ensure content stays below the navbar */
+.container {
+  padding-top: 80px; /* Adjust according to the height of your navbar */
+}
+
+/* Adjust padding for main content */
+.main {
+  padding: 20px;
+}
+
+/* General adjustments for responsiveness */
+@media screen and (max-width: 768px) {
+  .container {
+    padding-top: 100px; /* Adjust for smaller screens */
+  }
+}
+
+.calendar-container {
+  width: 100%;
+  margin-top: 20px;
+}
+
+/* Adjustments for the calendar header */
+.fc-header-toolbar {
+  padding: 0 20px;
+}
+
+/* Adjustments for the calendar */
+.fc-daygrid-event {
+  background-color: #1976d2;
+  color: #fff;
+}
+
+
+
+

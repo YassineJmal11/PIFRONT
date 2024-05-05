@@ -1,0 +1,91 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body style="padding-top: 56px;">
+    <!-- Navbar -->
+<app-after-login></app-after-login>
+    <!-- Main content -->
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-header-actions">
+                            <i class="fa fa-ellipsis-h"></i>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup]="postForm" (ngSubmit)="onSubmit()" class="mt-4">
+                            <div class="form-group">
+                              <label for="textContent">title</label>
+                              <input type="text" class="form-control" formControlName="textContent" id="textContent" placeholder="Enter your post title" rows="4">
+                              <div class="alert alert-danger" *ngIf="postForm.controls['textContent'].invalid && postForm.controls['textContent'].touched">
+                                <p *ngIf="postForm.controls['textContent'].errors?.['required']">Content is required</p>
+                                <p *ngIf="postForm.controls['textContent'].errors?.['minlength']">Content must be at least 5 characters long</p>
+                               
+                              </div>
+                              <div *ngIf="profanityError" class="alert alert-danger">
+                                <p >Content contains profanity</p>
+                              </div>
+                            </div>
+
+
+                            <div class="form-group">
+                              <label for="text">Content</label>
+                              <textarea type="text" class="form-control" formControlName="text" id="text" placeholder="Enter your post content" rows="4"></textarea>
+                              <div class="alert alert-danger" *ngIf="postForm.controls['text'].invalid && postForm.controls['text'].touched">
+                                <p *ngIf="postForm.controls['text'].errors?.['required']">Content is required</p>
+                                <p *ngIf="postForm.controls['text'].errors?.['minlength']">Content must be at least 5 characters long</p>
+                               
+                              </div>
+                              <div *ngIf="profanityError" class="alert alert-danger">
+                                <p >Content contains profanity</p>
+                              </div>
+                            </div>
+                          
+                            <div class="form-group">
+                              <label for="community">Community</label>
+                              <select class="form-control" id="community" formControlName="community">
+                                <option *ngFor="let community of joinedCommunities" [ngValue]="community">{{ community.communityName }}</option>
+                              </select>
+                              <div class="alert alert-danger" *ngIf="postForm.controls['community'].invalid && postForm.controls['community'].touched">
+                                <p *ngIf="postForm.controls['community'].errors?.['required']">Community is required</p>
+                              </div>
+                            </div>
+                          
+                            <div class="form-group">
+                              <label for="postType">Post Type</label>
+                              <select class="form-control" id="postType" formControlName="postType">
+                                <option *ngFor="let type of postTypes" [ngValue]="type">{{ type }}</option>
+                              </select>
+                              <div class="alert alert-danger" *ngIf="postForm.controls['postType'].invalid && postForm.controls['postType'].touched">
+                                <p *ngIf="postForm.controls['postType'].errors?.['required']">Post Type is required</p>
+                              </div>
+                            </div>
+                          
+                            <div class="form-group">
+                              <label for="attachments">Attachment</label>
+                              <input type="file" class="form-control-file" id="attachments" (change)="onFileChange($event)">
+                            </div>
+                          
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                          </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add any additional scripts here -->
+</body>
+</html>

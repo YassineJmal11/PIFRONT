@@ -1,0 +1,150 @@
+html, body {
+  background-color: #f8f9fa; /* Light background color */
+  color: #343a40; /* Dark text color */
+  margin: 0;
+  padding: 0;
+}
+
+.navbar {
+  background-color: #007bff !important; /* Light navbar background color */
+}
+
+body {
+  padding-top: 100px; /* Height of the fixed navbar */
+}
+
+.post {
+  background-color: #fff; /* White background for posts */
+  border: 1px solid #ced4da; /* Border color for posts */
+}
+
+.sidebar {
+  background-color: #fff; /* White background for sidebar */
+}
+
+.community-link {
+  color: #007bff; /* Blue color for community links */
+}
+
+.community-link:hover {
+  color: #0056b3; /* Darker blue color on hover */
+  text-decoration: none;
+}
+
+.community-card {
+  cursor: pointer;
+  transition: background-color 0.3s;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+.community-card:hover {
+  background-color: #f5f5f5;
+}
+
+
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+.post {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #a3a7aa;
+  border-top: 0px solid #545658;
+  border-right: 0px solid #545658;
+  border-left: 0px solid #545658;
+
+
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.post-header img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.post-header .user-name {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.post-content {
+  margin-bottom: 10px;
+}
+
+.comment {
+  border-bottom: 1px solid #ced4da;
+  padding: 5px 0;
+  margin-bottom: 10px;
+}
+
+.comment-content {
+  margin-left: 40px;
+}
+
+.comment-view-more {
+  color: blue;
+  cursor: pointer;
+}
+
+
+
+.sidebar {
+  background-color: #f8f9fa;
+  border-top: 0px solid #dee2e6;
+
+  border-left: 1px solid #606467;
+  border-right: 0px solid #dee2e6;
+
+  border-bottom: 1px solid #dee2e6;
+  padding: 15px;
+
+}
+
+.community-card {
+  margin-bottom: 10px;
+  cursor: pointer;
+  
+}
+
+.confirmation-div {
+  margin-top: 10px;
+}
+
+.input-group{
+  border-bottom: 1px solid #545658;
+
+}
+.icn{
+  border: 0px ;
+
+}
+
+.btn{
+  border: 0px;
+  margin-right: 10px;
+
+}
+.search{
+  border: 0px solid #545658;
+  background-color: #f8f9fa;
+
+}
+
+.clikPost:hover {
+  cursor: pointer;
+}
+
+
+

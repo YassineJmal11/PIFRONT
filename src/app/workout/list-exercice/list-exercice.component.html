@@ -1,0 +1,56 @@
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap Icons CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css" rel="stylesheet">
+<app-after-login></app-after-login>
+<div class="background">
+<div class="container">
+  <div class="row">
+    <!-- Exercises Section -->
+    <div class="col-md-9">
+      <div class="exercices-list" style="background-color: #f8f9fa00;">
+        <h2>List of Exercises</h2>
+        <div class="row">
+          <div class="col-md-4" *ngFor="let exercice of exercices; let i = index">
+            <div class="card mb-3">
+              <img class="card-img-top" [src]="exercice.exerciceImageUrl" alt="Exercise Image">
+              <div class="card-body">
+                <h5 class="card-title">{{ exercice.exerciceName }}</h5>
+                <p class="card-text"><strong>Muscle Type:</strong> {{ exercice.muscle }}</p>
+                
+                <button type="button" class="bi bi-check btn btn-outline-primary" style="margin-left: 5px;" (click)="associateExerciseWithUser(exercice.exerciceId, selectedUserId || 0)"></button>
+              </div>
+            </div>
+            <!-- Close row and open new row after every 3 exercises -->
+            <div *ngIf="(i + 1) % 3 === 0" class="w-100"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Users Section -->
+    <div class="col-md-3">
+      <div class="user-container" style="background-color: #dee2e646;">
+        <h2>List of Users</h2>
+        <div class="row">
+          <!-- Arrange every two users in the same line -->
+          <div class="col-md-6" *ngFor="let user of userList; let i = index">
+            <div class="clickable-user-card">
+              <div class="card mb-3" (click)="selectUser(user.userId)">
+                <img class="card-img-top" [src]="user.profileImageUrl" alt="User Image">
+                <div class="card-body">
+                  <h5 class="card-title">{{ user.firstName }} {{ user.lastName }}</h5>
+                  <p class="card-text"><strong>Weight:</strong> {{ user.weight }} kg</p>
+                  <p class="card-text"><strong>Height:</strong> {{ user.height }} cm</p>
+                  <a [routerLink]="['/client-workoutprofile', user.userId]" class="btn btn-orange">Profile</a>
+                </div>
+              </div>
+            </div>
+            <!-- Close row and open new row after every 2 users -->
+            <div *ngIf="(i + 1) % 2 === 0" class="w-100"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

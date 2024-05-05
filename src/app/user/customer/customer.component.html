@@ -1,0 +1,17 @@
+<app-after-login></app-after-login>
+<div class="centered-content">
+  <h1>Our Customers</h1>
+  <div class="coach-item" *ngFor="let customer of Customers">
+    <div class="coach-list">
+      <div class="coach-item">
+        <div class="profile-image">
+          <img [src]="customer.profileImageUrl" alt="Profile Image" class="rounded-image">
+        </div>
+        <div class="username">
+          <span>{{ customer.username }}</span>
+          <button class="btn btn-primary" (click)="goToChat(customer.username)">Chat</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

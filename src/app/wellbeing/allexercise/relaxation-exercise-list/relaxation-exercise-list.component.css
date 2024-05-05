@@ -1,0 +1,75 @@
+/* Container des exercices */
+.exercise-container {
+  overflow-x: auto; /* Activer le défilement horizontal */
+  white-space: nowrap; /* Empêcher le renvoi à la ligne des éléments */
+  width: 100%; /* Utiliser toute la largeur disponible */
+  height: calc(100vh - 20px); /* Calculer la hauteur de la fenêtre moins une marge de 20px */
+  padding: 10px; /* Ajouter une marge intérieure */
+  display: flex;
+  justify-content: center; /* Centrer horizontalement les vidéos */
+  align-items: center; /* Centrer verticalement les vidéos */
+  background-image: url('/assets/images/Meditation.jpeg'); /* Chemin vers votre image de fond */
+  background-size: cover; /* Ajuster la taille de l'image pour couvrir tout le conteneur */
+  background-position: center; /* Centrer l'image de fond */
+}
+
+
+/* Carte */
+.card {
+  margin-right: 20px; /* Espacement entre chaque carte */
+  width: 250px; /* Largeur des cartes */
+  display: inline-block; /* Permettre l'affichage en ligne pour les cartes */
+  vertical-align: top; /* Aligner les cartes en haut */
+  position: relative; /* Position relative pour les vidéos */
+  background-color: #fff; /* Couleur d'arrière-plan des cartes */
+}
+
+/* Groupe de cartes */
+.card-deck {
+  white-space: nowrap; /* Empêcher le renvoi à la ligne des cartes */
+}
+
+/* Corps de la carte */
+.card-body {
+  text-align: center; /* Centrer le contenu de la carte */
+}
+
+/* Vidéo */
+.card-img-top {
+  max-width: 100%; /* Limiter la largeur de la vidéo à 100% de la largeur de la carte */
+  height: auto; /* Ajuster la hauteur en fonction de la largeur */
+  opacity: 0.8; /* Opacité par défaut */
+  transition: all 0.3s ease; /* Transition fluide */
+}
+
+/* Animation lorsque la souris survole la vidéo */
+.card:hover .card-img-top {
+  transform: scale(1.1); /* Agrandir la vidéo au survol */
+  opacity: 1; /* Augmenter l'opacité */
+}
+
+/* Styles pour la barre de défilement */
+::-webkit-scrollbar {
+  width: 10px; /* Largeur de la barre de défilement */
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* Couleur de fond de la barre de défilement */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #888; /* Couleur de la poignée de défilement */
+  border-radius: 5px; /* Rayon de la poignée de défilement */
+}
+.add-button {
+  position: absolute;
+  top: 140px; /* Ajustez la position verticale selon vos besoins */
+  left: 690px; /* Ajustez la position horizontale selon vos besoins */
+  z-index: 1000; /* Assurez-vous que le bouton est au-dessus de tous les autres éléments */
+}
+/* CSS pour limiter la hauteur du texte dans la carte */
+.card-text {
+  max-height: 200px; /* Limiter la hauteur du texte à 100 pixels */
+  overflow-y: auto; /* Activer le défilement vertical si nécessaire */
+  text-overflow: ellipsis; /* Afficher des points de suspension (...) lorsque le texte est coupé */
+}

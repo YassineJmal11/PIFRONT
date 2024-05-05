@@ -1,0 +1,24 @@
+<div class="background">
+<div class="container">
+    <h2>Add Workout</h2>
+    <form (ngSubmit)="onSubmit()">
+        <div>
+          <label for="exerciceName">Exercice Name:</label>
+          <input type="text" id="exerciceName" name="exerciceName" [(ngModel)]="exerciceName" required>
+        </div>
+        <div>
+          <label for="muscle">Muscle:</label>
+          <input type="text" id="muscle" name="muscle" [(ngModel)]="muscle" required>
+          <ul>
+            <li *ngFor="let muscleItem of musclesList" (click)="muscle = muscleItem">{{ muscleItem }}</li>
+          </ul>
+        </div>
+        <div>
+          <label for="file">Select File:</label>
+          <input type="file" id="file" name="file" (change)="onFileChange($event)" required>
+        </div>
+        <button type="submit">Upload Exercise</button>
+      </form>
+  </div>
+</div>
+  

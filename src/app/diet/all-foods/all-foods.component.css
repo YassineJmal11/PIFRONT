@@ -1,0 +1,56 @@
+.background-image {
+  background-image: url('src/assets/images/plsss.webp'); /* URL of your background image */
+  background-size: cover; /* Cover the entire viewport */
+  background-position: center; /* Center the background image */
+  background-repeat: no-repeat; /* Do not repeat the background image */
+  height: 100vh; /* Set the height to the viewport height */
+}
+
+.container {
+  max-width: 800px; /* Adjust the maximum width as needed */
+  margin: auto; /* Center the container horizontally */
+  padding: 20px; /* Add padding to the container */
+}
+  
+  h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  li {
+    cursor: pointer; /* Change cursor to pointer on hover */
+    padding: 10px;
+    margin-bottom: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    transition: background-color 0.3s; /* Smooth transition for background color */
+  }
+  
+  li:hover {
+    background-color: #e0e0e0; /* Change background color on hover */
+  }
+
+  /* all-foods.component.css */
+
+/* Style for the input */
+input[type="text"] {
+  width: 100%; /* Set the width to 100% */
+  padding: 10px; /* Add padding */
+  border: 1px solid #ccc; /* Add border */
+  border-radius: 5px; /* Add border radius */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+/* Style for the input on focus */
+input[type="text"]:focus {
+  outline: none; /* Remove the default focus outline */
+  border-color: #007bff; /* Change border color on focus */
+}
+
+  

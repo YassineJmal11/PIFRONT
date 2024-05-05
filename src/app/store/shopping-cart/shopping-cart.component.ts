@@ -10,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ShoppingCartComponent {
   
-  @Input() userId!: number;
+  userId : number = -1;
   shoppingCart: any;
   
   constructor(private route: ActivatedRoute,
@@ -19,17 +19,25 @@ export class ShoppingCartComponent {
 
   ngOnInit() 
   {
-    this.route.params.subscribe(params => {
-      const userId = params['userId'];
-      this.userId = userId;
+    
+    this.userId = parseInt(localStorage.getItem("userId") ?? "-1");
       this.getShoppingCart();
-    });
 
   }
 
   onCheckoutButtonClick()
   {
-    alert("Success")
+    const url = API.checkoutCart + "/" + this.userId
+    this.http.get(url).subscribe(
+      (response) => {
+        alert("checkout was successful. please check your email.")
+      },
+      (error) =>
+      {
+        alert("there was an error processing your checkout request. \n or maybe there's no shipment available right now. \nplease try later.")
+      }
+    )
+    console.log("checking out cart...")
   }
 
   getShoppingCart() {
