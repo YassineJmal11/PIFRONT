@@ -76,6 +76,8 @@ import { ProfessionalComponent } from './wellbeing/professional/professional.com
 import { PsyCustomersComponent } from './wellbeing/psy-customers/psy-customers.component';
 import { CustomerExerciseComponent } from './wellbeing/customer-exercise/customer-exercise.component';
 import { ListExerciseCustomerComponent } from './wellbeing/list-exercise-customer/list-exercise-customer.component';
+import { RatingComponent } from './rating/rating.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 ////////
 
 @NgModule({
@@ -146,6 +148,8 @@ import { ListExerciseCustomerComponent } from './wellbeing/list-exercise-custome
 
    MyProfileWorkoutComponent,
    MyProfileDietComponent,
+   RatingComponent,
+
   
 
   ],
@@ -157,7 +161,7 @@ import { ListExerciseCustomerComponent } from './wellbeing/list-exercise-custome
     HttpClientModule,
     NgChartjsModule,
     FullCalendarModule , 
-    AutocompleteLibModule,
+    AutocompleteLibModule, NgbModule,
 
     
   ],

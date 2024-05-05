@@ -83,15 +83,15 @@
     margin-top: 10px;
   }
   /* Styles for total progress */
-.total-progress {
-    width: 100%;
-    margin-top: 200px;
+  .total-progress {
     position: absolute; /* Position absolue */
-  top: 70px; /* Placer la barre de progression en haut de exercise-container */
-  left: 0; /* Aligner la barre de progression sur le côté gauche */
-  width: 70%; /* Utiliser toute la largeur de exercise-container */
-  z-index: 1; 
+    top: 25%; /* Positionner la barre de progression à 50% de la hauteur du conteneur parent */
+    left: 0; /* Aligner la barre de progression sur le côté gauche */
+    width: 70%; /* Utiliser 70% de la largeur du conteneur parent */
+    transform: translateY(-10%); /* Déplacer la barre de progression vers le haut de moitié de sa propre hauteur */
+    z-index: 1;
   }
+  
 
   .total-progress .alert-heading {
     font-size: 1.25rem;
@@ -104,3 +104,47 @@
   .alert {
     position: relative; /* Assurez-vous que la barre de progression est positionnée relativement à son parent */
   }
+  /* Styles pour le conteneur du calendrier */
+.calendar-container {
+  width: 60%;
+  height: 70px; /* Hauteur du calendrier */
+  border: 1px solid #ccc; /* Bordure autour du calendrier */ 
+   position: absolute; /* Position absolue pour permettre le positionnement personnalisé */
+  left: 50%; /* Positionner à 50% de la largeur de la fenêtre */
+  transform: translate(-50%); /* Déplacer le calendrier de moitié de sa propre largeur et hauteur vers le haut et la gauche pour le centrer */
+}
+
+/* Styles pour les jours de la semaine (dimanche à samedi) */
+.fc-day-header {
+  background-color: #f0f0f0; /* Couleur de fond */
+  color: #333; /* Couleur du texte */
+  font-weight: bold; /* Gras */
+}
+
+/* Styles pour les jours dans le mois */
+.fc-day {
+  border: 1px solid #ccc; /* Bordure */
+  padding: 5px; /* Espacement intérieur */
+}
+
+/* Styles pour les jours hors du mois */
+.fc-other-month .fc-day {
+  opacity: 0.5; /* Opacité pour les jours hors du mois */
+}
+
+/* Styles pour les événements */
+.fc-event {
+  background-color: #007bff; /* Couleur de fond */
+  color: #fff; /* Couleur du texte */
+  border: none; /* Supprimer la bordure */
+  border-radius: 5px; /* Coins arrondis */
+  padding: 2px 5px; /* Espacement intérieur */
+}
+
+/* Styles pour le titre de l'événement */
+.fc-title {
+  font-size: 12px; /* Taille de police */
+  white-space: nowrap; /* Empêcher le retour à la ligne */
+  overflow: hidden; /* Masquer le dépassement */
+  text-overflow: ellipsis; /* Afficher les points de suspension pour le dépassement */
+}

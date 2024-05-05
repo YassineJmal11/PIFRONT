@@ -28,8 +28,8 @@ export class RelaxationExerciseServiceService {
     formData.append('instructions', instructions);
     formData.append('duration', duration.toString());
     formData.append('type', type);
-
-    return this.http.post<any>(`${this.baseUrl}/upload-exercise`, formData).pipe(
+  
+    return this.http.post(`${this.baseUrl}/upload-exercise`, formData, { responseType: 'text' }).pipe(
       tap((response: any) => {
         alert('Exercise uploaded successfully.'); // Afficher le message de succès
       }),
@@ -40,9 +40,12 @@ export class RelaxationExerciseServiceService {
       })
     );
   }
+  
+  
 
-  deleteExercise(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/delete/${id}`);
+ 
+  deleteExerciceAndUserProgress(id: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/${id}`);
   }
 
   updateExercise(exercise: RelaxationExercise): Observable<any> {

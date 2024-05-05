@@ -1,5 +1,7 @@
 import { AccountStatus } from "./AccountStatus";
 export interface User {
+selectedRating: number;
+    averageRating: number;
     userId: number;
     username: string;
     firstName: string;

@@ -26,12 +26,12 @@ export class RelaxationExerciseUpdateComponent implements OnInit {
     this.relaxationExerciseService.updateExercise(this.exercise).subscribe(
       () => {
         // Redirection vers la liste des exercices après une tentative de mise à jour
-        this.router.navigate(['/listexercises']);
+        this.router.navigate(['/PsyCustomers']);
       },
       error => {
         // Gestion des erreurs
         // Redirection vers la liste des exercices en cas d'erreur
-        this.router.navigate(['/listexercises']);
+        this.router.navigate(['/PsyCustomers']);
       }
     );
   }

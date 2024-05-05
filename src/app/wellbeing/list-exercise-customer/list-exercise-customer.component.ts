@@ -3,7 +3,13 @@ import { RelaxationExercise } from '../model/RelaxationExercise';
 import { RelaxationExerciseServiceService } from '../wservices/relaxation-exercise-service.service';
 import { TokenStorageService } from 'src/app/user/token-storage.service';
 import { UsersService } from 'src/app/user/users.service';
-
+import { ActivatedRoute, Router } from '@angular/router';
+import { CalendarOptions } from '@fullcalendar/core';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import interactionPlugin from '@fullcalendar/interaction'; 
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { Notes } from '../model/Notes';
+import { NotesService } from '../wservices/notes.service';
 @Component({
   selector: 'app-list-exercise-customer',
   templateUrl: './list-exercise-customer.component.html',
@@ -15,16 +21,78 @@ export class ListExerciseCustomerComponent implements OnInit {
   totalExercisesCount: number = 0;
   completedExercisesCount: number = 0;
   averageProgress: number = 0;
-
+  notename: string = 'new note';
+  notes: Notes[] = [];
   constructor(
     private relaxationExerciseService: RelaxationExerciseServiceService,
     private tokenstorageservice: TokenStorageService,
-    private userservice: UsersService
+    private userservice: UsersService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private notesservice: NotesService
   ) { }
 
   ngOnInit(): void {
     this.loadExercises();
     this.getTotalExercisesCount();
+    this.loadNotes();
+      this.initCalendarOptions();
+  }
+  
+  initCalendarOptions(): void {
+    this.calendarOptions = {
+      plugins: [dayGridPlugin, interactionPlugin],
+      dateClick: this.handleDateClick.bind(this),
+      events: this.notes 
+    };
+  }
+
+  calendarOptions: CalendarOptions = {
+    plugins: [dayGridPlugin, interactionPlugin],
+    dateClick: this.handleDateClick.bind(this),
+    events: this.notes // Set the events array
+  };
+
+  handleDateClick(info: any) {
+    const noteName = prompt('Enter the Note name:', this.notename);
+    if (noteName !== null && noteName.trim() !== '') {
+      const note: Notes = {
+        notename: noteName.trim(),
+        notedate: info.date.toISOString()
+      };
+      
+      this.notesservice.addNoteWithUser(note, this.userId).subscribe(
+        (createdNote: Notes) => {
+          console.log('Note created successfully:', createdNote);
+          this.notes.push(createdNote); // Ajouter la nouvelle note à la liste locale
+          this.updateCalendarEvents(); // Mettre à jour les événements du calendrier
+        },
+        (error: any) => {
+          console.error('Error creating note:', error);
+          // Gérer l'erreur
+        }
+      );
+    }
+  }
+
+  loadNotes(): void {
+    this.notesservice.getNotesByUserId(this.userId)
+      .subscribe(
+        (notes: Notes[]) => {
+          this.notes = notes; 
+          this.updateCalendarEvents(); // Mettre à jour les événements du calendrier avec les notes récupérées
+        },
+        (error: any) => {
+          console.error('Error loading Notes:', error);
+        }
+      );
+  }
+
+  updateCalendarEvents(): void {
+    this.calendarOptions.events = this.notes.map(note => ({
+      title: note.notename,
+      date: new Date(note.notedate)
+    }));
   }
 
   getTotalExercisesCount(): void {

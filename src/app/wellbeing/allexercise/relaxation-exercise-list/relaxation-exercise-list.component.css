@@ -11,6 +11,8 @@
   background-image: url('/assets/images/Meditation.jpeg'); /* Chemin vers votre image de fond */
   background-size: cover; /* Ajuster la taille de l'image pour couvrir tout le conteneur */
   background-position: center; /* Centrer l'image de fond */
+  margin-top: 80px; /* Augmente la marge en haut des cartes */
+
 }
 
 
@@ -64,7 +66,7 @@
 .add-button {
   position: absolute;
   top: 140px; /* Ajustez la position verticale selon vos besoins */
-  left: 690px; /* Ajustez la position horizontale selon vos besoins */
+  left: 540px; /* Ajustez la position horizontale selon vos besoins */
   z-index: 1000; /* Assurez-vous que le bouton est au-dessus de tous les autres éléments */
 }
 /* CSS pour limiter la hauteur du texte dans la carte */

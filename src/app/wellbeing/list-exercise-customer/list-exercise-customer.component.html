@@ -31,4 +31,11 @@
 
     </div>
   </div>
+ 
+</div>
+<div class="calendar-container">
+  <full-calendar
+      [options]="calendarOptions"
+      (dateClick)="handleDateClick($event)"
+  ></full-calendar>
 </div>

@@ -4,7 +4,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Centrer verticalement */
+    height: 150vh; /* Centrer verticalement */
     background-image: url('/assets/images/Meditation.jpeg'); /* Chemin vers votre image de fond */
     background-size: 100% ; /* Ajuster la taille de l'image pour couvrir tout le corps de la page */
     background-position: center; /* Centrer l'image de fond */

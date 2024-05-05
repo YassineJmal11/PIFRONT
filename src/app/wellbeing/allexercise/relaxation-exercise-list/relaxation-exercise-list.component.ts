@@ -33,7 +33,7 @@ export class RelaxationExerciseListComponent implements OnInit {
   }
 
   deleteExercise(id: number): void {
-    this.relaxationExerciseService.deleteExercise(id).subscribe(() => {
+    this.relaxationExerciseService.deleteExerciceAndUserProgress(id).subscribe(() => {
       this.loadExercises();
     });
   }

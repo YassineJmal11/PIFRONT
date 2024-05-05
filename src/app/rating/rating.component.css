@@ -1,0 +1,69 @@
+ngb-rating{
+    color: #FFC107;
+
+}
+/* rating.component.css */
+.container {
+    padding: 20px;
+    margin-top: 100px
+  }
+  
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .col {
+    flex: 0 0 calc(33.33% - 20px);
+    max-width: calc(33.33% - 20px);
+    margin-bottom: 20px;
+  }
+  
+  .coach-list, .nutritionist-list, .psychologist-list {
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    padding: 10px;
+  }
+  
+  .coach-item, .nutritionist-item, .psychologist-item {
+    margin-bottom: 10px;
+  }
+  
+  .profile-image {
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin: 0 auto;
+  }
+  
+  .profile-img {
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+  }
+  
+  ngb-rating {
+    margin-top: 5px;
+  }
+  /* rating.component.css */
+
+/* Styles spécifiques pour les étoiles d'avis moyens */
+.average-rating {
+  margin-top: 10px; /* Ajoute une marge entre les étoiles d'avis moyens et les autres éléments */
+}
+
+/* Styles spécifiques pour les boutons */
+.buttons {
+  display: flex;
+  justify-content: space-between; /* Aligne les boutons horizontalement avec un espacement égal */
+  margin-top: 10px; /* Ajoute une marge au-dessus des boutons */
+}
+.buttons button {
+  flex: 1; /* Ajuste la taille des boutons pour qu'ils occupent la même largeur */
+  margin-right: 10px; /* Ajoute une marge entre les boutons */
+}
+.buttons button:last-child {
+  margin-right: 0; /* Supprime la marge à droite du dernier bouton */
+}

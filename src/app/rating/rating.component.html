@@ -1,0 +1,70 @@
+<app-after-login></app-after-login>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1>Coaches</h1>
+      <div class="coach-list">
+        <div class="coach-item" *ngFor="let coach of coaches" (click)="selectUser(coach.userId)">
+          <div class="profile-image" (click)="selectUser(coach.userId)">
+            <img [src]="coach.profileImageUrl" alt="Profile Image" class="profile-img">
+          </div>
+          <p>{{ coach.firstName }} {{ coach.lastName }}</p>
+          <div class="ratings-section">
+            <!-- NgbRating pour afficher les étoiles de notation -->
+            <ngb-rating [max]="5" [(rate)]="coach.selectedRating" (rateChange)="rateChange(coach.userId, $event)"></ngb-rating>
+         
+          </div>
+          <ngb-rating [max]="5" [rate]="coach.averageRating || 0" [readonly]="true" class="average-rating"></ngb-rating>
+          <div class="buttons">
+            <button class="btn btn-primary">Chat</button>
+            <button class="btn btn-info" (click)="followProfessional(coach.userId, 'coach')">Follow</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <h1>Nutritionists</h1>
+      <div class="nutritionist-list">
+        <div class="nutritionist-item" *ngFor="let nutritionist of nutritionists" (click)="selectUser(nutritionist.userId)">
+          <div class="profile-image" (click)="selectUser(nutritionist.userId)">
+            <img [src]="nutritionist.profileImageUrl" alt="Profile Image" class="profile-img">
+          </div>
+          <p>{{ nutritionist.firstName }} {{ nutritionist.lastName }}</p>
+          <div class="ratings-section">
+            <!-- NgbRating pour afficher les étoiles de notation -->
+            <ngb-rating [max]="5" [(rate)]="nutritionist.selectedRating" (rateChange)="rateChange(nutritionist.userId, $event)"></ngb-rating>
+           
+          </div>
+          <ngb-rating [max]="5" [rate]="nutritionist.averageRating || 0" [readonly]="true" class="average-rating"></ngb-rating>
+          <div class="buttons">
+            <button class="btn btn-primary">Chat</button>
+            <button class="btn btn-info" (click)="followProfessional(nutritionist.userId, 'nutritionist')">Follow</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <h1>Psychologists</h1>
+      <div class="psychologist-list">
+        <div class="psychologist-item" *ngFor="let psychologist of psychologists" (click)="selectUser(psychologist.userId)">
+          <div class="profile-image" (click)="selectUser(psychologist.userId)">
+            <img [src]="psychologist.profileImageUrl" alt="Profile Image" class="profile-img">
+          </div>
+          <p>{{ psychologist.firstName }} {{ psychologist.lastName }}</p>
+          <div class="ratings-section">
+            <!-- NgbRating pour afficher les étoiles de notation -->
+            <ngb-rating [max]="5" [(rate)]="psychologist.selectedRating" (rateChange)="rateChange(psychologist.userId, $event)"></ngb-rating>
+       
+          </div>
+          <ngb-rating [max]="5" [rate]="psychologist.averageRating || 0" [readonly]="true" class="average-rating"></ngb-rating>
+          <div class="buttons">
+            <button class="btn btn-primary">Chat</button>
+            <button class="btn btn-info" (click)="followProfessional(psychologist.userId, 'psychologist')">Follow</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

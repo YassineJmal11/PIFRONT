@@ -19,12 +19,13 @@ export class CustomerExerciseComponent {
   exercises: RelaxationExercise[] = [];
   userId !: number;
   notename: string = 'new note';
-  notes: Notes[]=[];
+  notes: Notes[] = [];
+
   constructor(
     private route: ActivatedRoute,
     private relaxationExerciseService: RelaxationExerciseServiceService,
-    private router : Router,
-    private notesservice : NotesService
+    private router: Router,
+    private notesservice: NotesService
   ) { }
 
   ngOnInit(): void {
@@ -51,39 +52,33 @@ export class CustomerExerciseComponent {
   };
 
   handleDateClick(info: any) {
-    const noteName = prompt('Enter the Note name:', this.notename); // Prompt user for note name
-    console.log('Note name entered:', noteName); // Log the note name
-    if (noteName !== null && noteName.trim() !== '') { // Check if note name is provided
-        // Create a new note object with the provided name and date
-        const note: Notes = {
-            notename: noteName.trim(),
-            notedate: info.date.toISOString() // Convert date to ISO string format
-        };
-        
-        // Call the note service method to add the note
-        this.notesservice.addNoteWithUser(note, this.userId).subscribe(
-            (createdNote: Notes) => {
-                console.log('Note created successfully:', createdNote);
-                // Provide feedback to the user, such as displaying a success message
-            },
-            (error: any) => {
-                console.error('Error creating note:', error);
-                // Handle the error and provide feedback to the user
-            }
-        );
+    const noteName = prompt('Enter the Note name:', this.notename);
+    if (noteName !== null && noteName.trim() !== '') {
+      const note: Notes = {
+        notename: noteName.trim(),
+        notedate: info.date.toISOString()
+      };
+      
+      this.notesservice.addNoteWithUser(note, this.userId).subscribe(
+        (createdNote: Notes) => {
+          console.log('Note created successfully:', createdNote);
+          this.notes.push(createdNote); // Ajouter la nouvelle note à la liste locale
+          this.updateCalendarEvents(); // Mettre à jour les événements du calendrier
+        },
+        (error: any) => {
+          console.error('Error creating note:', error);
+          // Gérer l'erreur
+        }
+      );
     }
-}
+  }
 
   loadNotes(): void {
     this.notesservice.getNotesByUserId(this.userId)
       .subscribe(
         (notes: Notes[]) => {
           this.notes = notes; 
-          
-          this.calendarOptions.events = this.notes.map(note => ({
-            title: note.notename, // Set the session name as the title
-            date: new Date(note.notedate) // Convert date string to Date object
-          }));
+          this.updateCalendarEvents(); // Mettre à jour les événements du calendrier avec les notes récupérées
         },
         (error: any) => {
           console.error('Error loading Notes:', error);
@@ -91,32 +86,41 @@ export class CustomerExerciseComponent {
       );
   }
 
-
-
-
-
+  updateCalendarEvents(): void {
+    this.calendarOptions.events = this.notes.map(note => ({
+      title: note.notename,
+      date: new Date(note.notedate)
+    }));
+  }
 
   loadExercises(): void {
     if (this.userId) {
-      this.relaxationExerciseService.getRelaxationExercisesForUser(this.userId).subscribe(
-        (exercises: RelaxationExercise[]) => {
-          this.exercises = exercises;
-        },
-        error => {
-          console.log('Erreur lors du chargement des exercices de relaxation:', error);
-        }
-      );
+      const userExercises = localStorage.getItem('userExercises');
+      if (userExercises) {
+        this.exercises = JSON.parse(userExercises);
+      } else {
+        this.relaxationExerciseService.getRelaxationExercisesForUser(this.userId).subscribe(
+          (exercises: RelaxationExercise[]) => {
+            this.exercises = exercises;
+            localStorage.setItem('userExercises', JSON.stringify(exercises));
+          },
+          error => {
+            console.log('Erreur lors du chargement des exercices de relaxation:', error);
+          }
+        );
+      }
     } else {
       console.log('ID de l\'utilisateur non trouvé.');
     }
   }
+
   deleteExercise(id: number): void {
-    this.relaxationExerciseService.deleteExercise(id).subscribe(() => {
+    this.relaxationExerciseService.deleteExerciceAndUserProgress(id).subscribe(() => {
       this.loadExercises();
     });
   }
 
   updateExercise(exercise: RelaxationExercise): void {
-    this.router.navigate(['/relaxation-exercise-update', exercise.relaxationExerciceId]); // Redirection avec l'ID de l'exercice
+    this.router.navigate(['/relaxation-exercise-update', exercise.relaxationExerciceId]);
   }
 }

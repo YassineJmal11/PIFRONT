@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 import { User } from 'src/app/user/user';
@@ -14,8 +14,23 @@ export class ProfessionalService {
 
   constructor(private http: HttpClient) { }
 
+  removePsychologistCustomerRelation(psychologistId: number, customerId: number): Observable<string> {
+    const url = `${this.baseUrl}/psychologist/${psychologistId}/customer/${customerId}`;
+    return this.http.delete(url, { responseType: 'text' })
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          console.error('Error deleting psychologist-customer relation:', error);
+          return throwError(error.message || 'Server error');
+        })
+      );
+  }
+
+  isUserSubscribedToProfessionalRole(userId: number, professionalId: number, professionalRole: string): Observable<boolean> {
+    const url = `${this.baseUrl}/check/${userId}/${professionalId}/${professionalRole}`;
+    return this.http.get<boolean>(url);
+  }
   assignPsychologistToCustomer(psychologistId: number, customerId: number): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}/assign/${psychologistId}/${customerId}`, {}).pipe(
+    return this.http.post(`${this.baseUrl}/assign/${psychologistId}/${customerId}`, {}, { responseType: 'text' }).pipe(
       tap(() => {
         alert('Psychologist assigned to customer successfully.');
       }),
@@ -25,7 +40,7 @@ export class ProfessionalService {
         return throwError(error);
       })
     );
-  }
+}
 
  
 

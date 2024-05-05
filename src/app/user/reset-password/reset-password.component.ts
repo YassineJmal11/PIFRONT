@@ -13,7 +13,7 @@ export class ResetPasswordComponent {
   constructor(private userService: UsersService, private router: Router) { }
 
   onSubmit(): void {
-    this.userService.setPasswordWithVerification(this.form.email, this.form.verificationCode, this.form.newPassword)
+    this.userService.setPasswordWithVerification(this.form.verificationCode, this.form.newPassword)
       .subscribe(
         () => {
           this.error = ''; // Réinitialiser le message d'erreur

@@ -1,49 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professional</title>
-    <link rel="stylesheet" href="professional.component.css">
-</head>
-<body>
-    <div class="container">
-        <app-after-login></app-after-login>
+<div class="container">
+    <app-after-login></app-after-login>
 
-        <div *ngIf="psychologists.length > 0">
-            <h2>Your PsyChologist :</h2>
-            <ul>
-                <li *ngFor="let psychologist of psychologists">
-                    <!-- Intégration de la carte utilisateur -->
-                    <div class="user-card">
-                        <div class="profile-image">
-                            <img [src]="psychologist.profileImageUrl" alt="Profile Image" (click)="enlargeImage(psychologist.profileImageUrl)">
-                        </div>
-                        <div class="user-details">
-                            <h3>{{ 'Username: ' + psychologist.username }}</h3>
-                            <p>{{ 'Firstname: ' + psychologist.firstName }}</p>
-                            <p>{{ 'Lastname: ' + psychologist.lastName }}</p>
-                            <p>{{ 'Email: ' + psychologist.email }}</p>
-                        </div>
-                        
-                        <div class="diploma-card">
-                            <img [src]="psychologist.diploma" alt="Diploma Image" (click)="enlargeImage(psychologist.diploma)">
-                        </div>
-
-                          
+    <div class="row" *ngIf="psychologists.length > 0; else noProfessionals">
+        <div class="col">
+            <div class="psychologist-list">
+                <div class="psychologist-item" *ngFor="let psychologist of psychologists">
+                    <div class="profile-image" (click)="selectUser(psychologist.userId)">
+                        <img [src]="psychologist.profileImageUrl" alt="Profile Image">
                     </div>
-                </li>
-            </ul>
-        </div>
-
-        <div *ngIf="psychologists.length === 0">
-            <p>Aucun psychologue trouvé.</p>
-        </div>
-
-        <!-- Affichage de l'image agrandie en plein écran -->
-        <div class="enlarged-image-overlay" *ngIf="enlargedImage" (click)="reduceImage()">
-            <img [src]="enlargedImage" alt="Enlarged Image">
+                    <div class="user-details">
+                        <h2>{{ 'Username: ' + psychologist.username }}</h2>
+                        <p>{{ 'Firstname: ' + psychologist.firstName }}</p>
+                        <p>{{ 'Lastname: ' + psychologist.lastName }}</p>
+                        <p>{{ 'Email: ' + psychologist.email }}</p>
+                    </div>
+                    <div class="buttons">
+                        <button class="btn btn-success">Chat</button>
+                        <button class="btn btn-danger" (click)="unfollow()">Unfollow</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</body>
-</html>
+
+    <!-- Affichage de l'image agrandie en plein écran -->
+    <div class="enlarged-image-overlay" *ngIf="enlargedImage" (click)="reduceImage()">
+        <img [src]="enlargedImage" alt="Enlarged Image">
+    </div>
+
+<ng-template #noProfessionals>
+    <div class="row">
+        <div class="col d-flex justify-content-center align-items-center" style="height: 70vh;">
+            <p class="text-center">You have no followed professionals.</p>
+        </div>
+    </div>
+</ng-template>
+
+
+
+</div>

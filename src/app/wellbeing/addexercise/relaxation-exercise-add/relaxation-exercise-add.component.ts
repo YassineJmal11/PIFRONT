@@ -13,6 +13,8 @@ export class RelaxationExerciseAddComponent {
   exerciseInstructions = '';
   exerciseDuration = 0;
   exerciseType = '';
+ 
+  videoFile: File | null = null; // Déclaration de la variable videoFile
 
   constructor(private relaxationExerciseService: RelaxationExerciseServiceService, private router: Router) { }
   
@@ -37,7 +39,7 @@ export class RelaxationExerciseAddComponent {
         this.exerciseType = '';
 
        
-        this.router.navigate(['/listexercises']);
+        this.router.navigate(['/PsyCustomers']);
 
       });
     } else {

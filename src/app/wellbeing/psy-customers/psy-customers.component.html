@@ -24,12 +24,13 @@
                             <p>{{ 'Firstname: ' + customer.firstName }}</p>
                             <p>{{ 'Lastname: ' + customer.lastName }}</p>
                             <p>{{ 'Email: ' + customer.email }}</p>
+                            <div class="button-container">
+                                <button class="btn btn-primary" (click)="redirectToCustomerExercises(customer.userId)">View Exercises</button>
+                                <button class="btn btn-primary" (click)="assignExercises(customer.userId)">Assign Exercise</button>
+                            </div>
                         </div>
-                        <!-- Bouton de redirection vers CustomerExerciseComponent avec l'ID de l'utilisateur -->
-                        <button (click)="redirectToCustomerExercises(customer.userId)">View Exercises</button>
-                         <!-- Bouton de redirection vers ListExercisesComponent avec l'ID du client -->
-                         <button (click)="assignExercises(customer.userId)">Assign Exercise</button>
                     </div>
+
                 </li>
             </ul>
         </div>

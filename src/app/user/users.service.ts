@@ -37,12 +37,12 @@ export class UsersService {
     return this.http.get<User>(url);
   }
 
-  setPasswordWithVerification(email: string, verificationCode: string, newPassword: string): Observable<any> {
+  setPasswordWithVerification(verificationCode: string, newPassword: string): Observable<any> {
     const url = `${this.authUrl}/set-password-with-verification`;
 
     // Créer un objet HttpParams pour inclure les paramètres dans la requête
     const params = new HttpParams()
-      .set('email', email)
+      
       .set('verificationCode', verificationCode)
       .set('newPassword', newPassword);
 
@@ -83,5 +83,19 @@ export class UsersService {
   }
   getAllPsychologistsForCustomer(customerId: number): Observable<User[]> {
     return this.http.get<User[]>(`${this.authUrl}/psychologists/${customerId}`);
+  }
+  
+  getcoaches(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.authUrl}/coaches`);
+  }
+  getnutritionists(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.authUrl}/nutritionists`);
+  }
+  getpsychologists(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.authUrl}/psychologists`);
+  }
+
+  getUserRoleById(userId: number): Observable<string> {
+    return this.http.get<string>(`${this.authUrl}/${userId}/role`);
   }
 }

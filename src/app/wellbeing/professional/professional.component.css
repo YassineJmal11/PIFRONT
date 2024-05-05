@@ -1,92 +1,120 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    margin: 0;
-    padding: 0;
-}
+/* professional.component.css */
 
 .container {
-    max-width: 960px;
-    margin: 150px auto;
-    padding: 50px;
-}
-
-h2 {
-    color: #333;
-}
-
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.user-card {
-    display: flex;
-    align-items: center;
-    border: 1px solid #ccc;
-    border-radius: 10px;
     padding: 20px;
-    margin-bottom: 20px;
-}
-
-.profile-image img {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    margin-right: 20px;
-    cursor: pointer; /* Ajout d'un curseur pointer pour indiquer que l'image est cliquable */
-}
-
-.user-details {
-    flex: 1;
+    margin-top: 100px;
+  }
+  
+  .row {
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
-}
+  }
+  
+  .psychologist-list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+ 
+  
+  .psychologist-item:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  /* professional.component.css */
 
-.user-details h3 {
-    margin: 0;
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-.user-details p {
-    margin: 0;
-    font-size: 16px;
-    color: #666;
-}
-
-.diploma-card {
-    width: 200px; /* Largeur du rectangle */
-    height: 120px; /* Hauteur du rectangle */
+.psychologist-item {
+    width: 300px;
     border: 1px solid #ccc;
-    border-radius: 10px;
+    border-radius: 5px;
+    margin: 10px;
     overflow: hidden;
-}
-
-.diploma-card img {
-    width: 100%;
-    height: 100%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex; /* Utiliser un modèle de boîte flexible */
+    flex-direction: column; /* Afficher les éléments enfants en colonne */
+    justify-content: center; /* Centrer horizontalement */
+    align-items: center; /* Centrer verticalement */
+  }
+  
+  .profile-image {
+    width: 150px; /* Assurez-vous que la largeur et la hauteur sont égales */
+    height: 150px; /* Assurez-vous que la largeur et la hauteur sont égales */
+    overflow: hidden;
+    border-radius: 50%; /* Cadre circulaire */
+    display: flex; /* Utiliser un modèle de boîte flexible */
+    justify-content: center; /* Centrer horizontalement */
+    align-items: center; /* Centrer verticalement */
+  }
+  
+  .profile-image img {
+    width: auto;
+    height: auto;
+    max-width: 100%; /* Assurez-vous que l'image reste dans les limites du cercle */
+    max-height: 100%; /* Assurez-vous que l'image reste dans les limites du cercle */
     object-fit: cover;
-}
-
-.enlarged-image-overlay {
+    border-radius: 50%; /* Cette ligne est facultative, elle garantit que l'image est également un cercle */
+  }
+  
+  .user-details {
+    padding: 10px;
+  }
+  
+  .user-details h3 {
+    margin: 0;
+  }
+  
+  .diploma-card img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .enlarged-image-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.8); /* Fond semi-transparent noir */
+    background-color: rgba(0, 0, 0, 0.8);
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
-    cursor: pointer; /* Ajout d'un curseur pointer pour indiquer que l'image est cliquable */
+    z-index: 9999;
+  }
+  
+  .enlarged-image-overlay img {
+    max-width: 90%;
+    max-height: 90%;
+    border: 4px solid #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+  }
+  
+  .buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 5px;
+}
+.buttons button:first-child {
+    margin-right: 10px; /* Ajoute une marge à droite uniquement au premier bouton */
 }
 
-.enlarged-image-overlay img {
-    max-width: 90vw;
-    max-height: 90vh;
+
+.btn {
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.btn-success {
+    background-color: green;
+    color: white;
+}
+
+.btn-danger {
+    background-color: red;
+    color: white;
+}
+.vertical-center {
+  position: relative;
+  top: 50%;
+  transform: translateY(-70%);
 }

@@ -96,7 +96,7 @@ export class SignupadminComponent {
     )
       .subscribe(
         data => {
-          this.router.navigate(['/signin']);
+          this.router.navigate(['/homeadmin']);
         },
         error => {
           this.error = error;
