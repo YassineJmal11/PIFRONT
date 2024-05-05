@@ -3,7 +3,11 @@ import { Router } from '@angular/router';
 import { Meal } from '../model/Meal';
 import { MealService } from '../services/meal.service';
 import { Food } from '../model/Food';
-import { User } from '../model/User';
+
+import { User } from 'src/app/user/user';
+import { TokenStorageService } from 'src/app/user/token-storage.service';
+import { ProfessionalService } from 'src/app/wellbeing/wservices/professional.service';
+import { UsersService } from 'src/app/user/users.service';
 
 declare var $: any;
 
@@ -20,14 +24,22 @@ export class ListmealsComponent implements OnInit {
   mealFoods: { [mealId: number]: Food[] } = {};
   selectedMealId: number | null = null; // Declare selectedMealId property
   userList: User[] = [];
+  
+  
   constructor(
     private router: Router,
-    private mealService: MealService
+    private mealService: MealService,
+    private tokenStorageService: TokenStorageService, 
+    private professionalService: ProfessionalService,
+    private userService: UsersService,
+
+
   ) {}
 
   ngOnInit(): void {
     this.getMeals();
-    this.getAllUsers(); // Fetch users when component initializes
+    this.getAllUsers();
+   
   }
 
   getMeals(): void {
@@ -37,13 +49,32 @@ export class ListmealsComponent implements OnInit {
         this.listMeals.forEach(meal => this.expandedMeals[meal.mealId] = false);
       });
   }
-  getAllUsers(): void {
-    this.mealService.getAllUsers()
-      .subscribe(users => {
-        this.userList = users;
-      });
-  }
 
+  getAllUsers(): void {
+    const currentUser = this.tokenStorageService.getUser();
+    console.log('UserName:', currentUser.username);
+
+    if (currentUser && currentUser.username) {
+      this.userService.getUserIdByUsernames(currentUser.username).subscribe((psychologistId) => {
+        console.log('Psychologist ID:', psychologistId);
+
+        if (psychologistId) {
+          this.professionalService.getAllCustomersForPsychologist(psychologistId).subscribe((customers: User[]) => {
+            console.log('Customers:', customers);
+            this.userList = customers;
+          }, (error) => {
+            console.error('Error fetching customers:', error);
+          });
+        } else {
+          console.error('Psychologist ID not found');
+        }
+      }, (error) => {
+        console.error('Error fetching psychologist ID by username:', error);
+      });
+    } else {
+      console.error('Current user or username not found');
+    }
+  }
   deleteMeal(id: number): void {
     this.mealService.deleteMeal(id)
       .subscribe(() => {

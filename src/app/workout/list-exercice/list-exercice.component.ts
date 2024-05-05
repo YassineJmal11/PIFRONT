@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ExerciceService } from '../serviceworkout/exercice.service';
 import { Exercice } from '../model/Exercice';
-import { User } from 'src/app/diet/model/User';
+import { User } from 'src/app/user/user';
+import { TokenStorageService } from 'src/app/user/token-storage.service';
+import { ProfessionalService } from 'src/app/wellbeing/wservices/professional.service';
+import { UsersService } from 'src/app/user/users.service';
 
 
 
@@ -18,7 +21,10 @@ export class ListExerciceComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private exerciceService: ExerciceService
+    private exerciceService: ExerciceService,
+    private tokenStorageService: TokenStorageService, 
+    private professionalService: ProfessionalService,
+    private userService: UsersService,
   ) { }
 
   ngOnInit(): void {
@@ -42,10 +48,29 @@ export class ListExerciceComponent implements OnInit {
       );
   }
   getAllUsers(): void {
-    this.exerciceService.getAllUsers()
-      .subscribe(users => {
-        this.userList = users;
+    const currentUser = this.tokenStorageService.getUser();
+    console.log('UserName:', currentUser.username);
+
+    if (currentUser && currentUser.username) {
+      this.userService.getUserIdByUsernames(currentUser.username).subscribe((psychologistId) => {
+        console.log('Psychologist ID:', psychologistId);
+
+        if (psychologistId) {
+          this.professionalService.getAllCustomersForPsychologist(psychologistId).subscribe((customers: User[]) => {
+            console.log('Customers:', customers);
+            this.userList = customers;
+          }, (error) => {
+            console.error('Error fetching customers:', error);
+          });
+        } else {
+          console.error('Psychologist ID not found');
+        }
+      }, (error) => {
+        console.error('Error fetching psychologist ID by username:', error);
       });
+    } else {
+      console.error('Current user or username not found');
+    }
   }
   selectedUserId: number | null = null; // Declare selectedUserId property
 

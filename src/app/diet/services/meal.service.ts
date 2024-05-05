@@ -76,4 +76,8 @@ export class MealService {
   removeFoodFromMeal(mealId: number, foodId: number): Observable<any> {
     return this.http.delete<any>(`${this.baseUrl}/${mealId}/foods/${foodId}`);
   }
+  disassociateMealFromUser(mealId: number, userId: number): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/${mealId}/disassociateUser/${userId}`, {});
+  }
+
 }

@@ -154,4 +154,18 @@ export class ClientProfileComponent implements OnInit, OnDestroy {
   handleEventClick(event: CalendarEvent): void {
     console.log('Clicked on event: ', event);
   }
+  disassociateMealFromUser(mealId: number, userId: number): void {
+    this.mealService.disassociateMealFromUser(mealId, userId).subscribe(
+      () => {
+        console.log('Meal disassociated successfully');
+        // Optionally, you can refresh the meal list or handle success in other ways
+        this.fetchUserMeals(); // Auto-refresh user meals
+      },
+      (error) => {
+        console.error('Error disassociating meal:', error);
+        // Handle error, if needed
+      }
+    );
+  }
+  
 }

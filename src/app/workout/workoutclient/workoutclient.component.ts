@@ -13,4 +13,9 @@ export class WorkoutclientComponent {
     // Navigate to the exercise list page with the selected muscle type
     this.router.navigate(['/exercises', muscleType]);
   }
+
+  navigateToAddExercise() {
+    // Navigate to the "addExercise" page
+    this.router.navigate(['/addExercice']);
+  }
 }

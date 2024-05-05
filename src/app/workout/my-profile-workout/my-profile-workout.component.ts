@@ -12,6 +12,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import { Session } from '../model/Session';
 import { SessionService } from '../serviceworkout/session.service';
 
+
 @Component({
   selector: 'app-my-profile-workout',
   templateUrl: './my-profile-workout.component.html',

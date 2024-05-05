@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { ExerciceService } from '../serviceworkout/exercice.service';
-import { Router } from '@angular/router';
+import { Router, Routes } from '@angular/router';
+import { WorkoutclientComponent } from '../workoutclient/workoutclient.component';
+
+
 
 @Component({
   selector: 'app-add-workout',
@@ -29,7 +32,7 @@ export class AddWorkoutComponent {
       .subscribe(
         response => {
           console.log('Upload successful', response);
-          // Add navigation here
+          this.router.navigateByUrl('/clientworkout');
           ;
         },
         error => {
