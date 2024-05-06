@@ -34,7 +34,7 @@ export class ShoppingCartComponent {
       },
       (error) =>
       {
-        alert("there was an error processing your checkout request. please try later.")
+        alert("there was an error processing your checkout request. \n or maybe there's no shipment available right now. \nplease try later.")
       }
     )
     console.log("checking out cart...")

@@ -62,7 +62,7 @@ export class ProductViewComponent implements AfterViewInit {
         (response) => {
           // Handle successful response
           console.log('Product added to cart:', response);
-          this.router.navigate(['/shopping-cart', userId]); 
+          this.router.navigate(['/shopping-cart']); 
         },
         (error) => {
           // Handle error
