@@ -59,14 +59,15 @@ const API =
     deletePayment: payment + '/deletePayment',
     //misc
     getPaymentByUserId: payment + '/getPaymentByUserId',
-    getShipDistance: payment + '/getShipDistance',
-    setShipLocation: payment + '/setShipLocation',
+    getPaymentByShipmentUser: payment + '/getPaymentByShipmentUser',
     
     //crud
     createShipmentUser: shipmentUser + "/createShipmentUser",
     getShipmentUserById: shipmentUser + "/getShipmentUserById",
     updateShipmentUser: shipmentUser + '/updateShipmentUser',
     deleteShipmentUser: shipmentUser + '/deleteShipmentUser',
+    getShipDistance: shipmentUser + '/getShipDistance',
+    setShipLocation: shipmentUser + '/setShipLocation',
     //misc
     getAllShipmentUsers: shipmentUser + '/getAllShipmentUsers',
 
