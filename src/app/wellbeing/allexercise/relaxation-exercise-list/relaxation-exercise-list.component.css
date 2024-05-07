@@ -66,8 +66,10 @@
 .add-button {
   position: absolute;
   top: 140px; /* Ajustez la position verticale selon vos besoins */
-  left: 540px; /* Ajustez la position horizontale selon vos besoins */
-  z-index: 1000; /* Assurez-vous que le bouton est au-dessus de tous les autres éléments */
+  z-index: 800px; /* Assurez-vous que le bouton est au-dessus de tous les autres éléments */
+  left: 50%;/* Ajustez la position horizontale selon vos besoins */
+  top: 200px;
+
 }
 /* CSS pour limiter la hauteur du texte dans la carte */
 .card-text {

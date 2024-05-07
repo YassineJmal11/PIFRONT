@@ -27,7 +27,7 @@ import { ViewCommunityComponent } from './forum/community/view-community/view-co
 import { CreatePostComponent } from './forum/community/post/create-post/create-post.component';
 import { ViewPostComponent } from './forum/community/view-post/view-post.component';
 import { ChatComponent } from './chat/chat/chat.component';
-import { CustomerComponent } from './user/customer/customer.component';
+
 import { MeetComponent } from './chat/meet/meet.component';
 import { ProductViewComponent } from './store/product-view/product-view.component';
 import { ShoppingCartComponent } from './store/shopping-cart/shopping-cart.component';
@@ -56,7 +56,7 @@ import { PsyCustomersComponent } from './wellbeing/psy-customers/psy-customers.c
 import { CustomerExerciseComponent } from './wellbeing/customer-exercise/customer-exercise.component';
 import { ListExerciseCustomerComponent } from './wellbeing/list-exercise-customer/list-exercise-customer.component';
 import { RatingComponent } from './rating/rating.component';
-
+import { AuthGuard } from './user/Authgard';
 import { MyProfileDietComponent } from './diet/my-profile-diet/my-profile-diet.component';
 import { MyProfileWorkoutComponent } from './workout/my-profile-workout/my-profile-workout.component';
 //////////End WellBeing /////////
@@ -78,7 +78,7 @@ const routes: Routes = [
   { path: 'edit', component: EditComponent },
   { path: 'meet', component: MeetComponent },
   { path: 'profile', component: ProfileComponent },
-  { path: 'customer', component: CustomerComponent },
+
   { path: 'chat', component: ChatComponent },
 
   { path: 'exercises/:muscleType', component: ListExerciceComponent },

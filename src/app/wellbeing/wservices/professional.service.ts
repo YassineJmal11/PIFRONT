@@ -4,7 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 import { User } from 'src/app/user/user';
 import { RelaxationExercise } from '../model/RelaxationExercise';
-
+import { of } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -54,7 +54,14 @@ export class ProfessionalService {
       tap(() => {
         alert('Relaxation exercise assigned to customer successfully.');
       }),
-     
+      catchError((error: any) => {
+        // Traitement de l'erreur ici
+        console.error('Error:', error);
+        // Vous pouvez renvoyer une observable avec une valeur par défaut ou simplement retourner null
+        return of(null);
+      })
     );
-  }
+
+ 
+}
 }

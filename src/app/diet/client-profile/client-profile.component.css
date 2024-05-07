@@ -200,7 +200,7 @@ p {
 .padding {
     padding: 3rem !important;
     margin-left: 200px;
-    background-image: url('src/assets/images/nice.jpg');
+  
     background-size: cover;
     background-repeat: no-repeat;
 }

@@ -16,6 +16,13 @@ import dayGridPlugin from '@fullcalendar/daygrid'; // Import DayGridPlugin
   styleUrls: ['./my-profile-diet.component.css']
 })
 export class MyProfileDietComponent implements OnInit, OnDestroy {
+  isCustomer: boolean = false;
+  isCoach: boolean = false;
+  isPsy : boolean = false;
+  isNutri : boolean = false;
+  // Déclarez la variable correctement
+   roles: string[] = [];
+  
   userId: number = 0;
   userMeals: Meal[] = [];
   user: User | undefined;
@@ -43,7 +50,23 @@ export class MyProfileDietComponent implements OnInit, OnDestroy {
     private elementRef: ElementRef,
     private tokenService: TokenStorageService,
     private userService: UsersService
-  ) {}
+
+
+  ) {   
+    
+    this.roles = this.tokenService.getUser().roles; // Utilisez 'this' pour faire référence à la propriété de la classe
+     if (this.roles.includes('CUSTOMER'))
+       this.isCustomer = true;
+
+     this.roles = this.tokenService.getUser().roles; // Utilisez 'this' pour faire référence à la propriété de la classe
+     if (this.roles.includes('COACH'))
+       this.isCoach = true;
+     this.roles = this.tokenService.getUser().roles; // Utilisez 'this' pour faire référence à la propriété de la classe
+     if (this.roles.includes('NUTRITIONIST'))
+       this.isNutri = true;
+     this.roles = this.tokenService.getUser().roles; // Utilisez 'this' pour faire référence à la propriété de la classe
+     if (this.roles.includes('PSYCHOLOGIST'))
+       this.isPsy = true;}
 
   ngOnInit(): void {
     this.routeSub = this.route.paramMap.subscribe((params) => {
@@ -177,4 +200,6 @@ export class MyProfileDietComponent implements OnInit, OnDestroy {
   handleEventClick(event: CalendarEvent): void {
     console.log('Clicked on event: ', event);
   }
+
+  
 }

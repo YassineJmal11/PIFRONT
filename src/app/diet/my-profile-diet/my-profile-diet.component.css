@@ -281,3 +281,9 @@ p {
   color: white;
   cursor: pointer;
 }
+.nav-item-group {
+  display: flex;
+  align-items: center; /* Optional: Align items vertically center */
+}
+
+

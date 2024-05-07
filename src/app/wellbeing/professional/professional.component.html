@@ -15,7 +15,8 @@
                         <p>{{ 'Email: ' + psychologist.email }}</p>
                     </div>
                     <div class="buttons">
-                        <button class="btn btn-success">Chat</button>
+                       
+                        <button class="btn btn-success" (click)="goToChat( psychologist.username)">Chat</button>
                         <button class="btn btn-danger" (click)="unfollow()">Unfollow</button>
                     </div>
                 </div>

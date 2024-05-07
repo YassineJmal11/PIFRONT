@@ -3,7 +3,9 @@ import { UsersService } from 'src/app/user/users.service';
 import { TokenStorageService } from 'src/app/user/token-storage.service';
 import { User } from 'src/app/user/user';
 import { ProfessionalService } from '../wservices/professional.service';
+import { ChatService } from 'src/app/chat/chat.service';
 
+import { Chat } from 'src/app/chat/chat';
 import { Router } from '@angular/router';
 
 @Component({
@@ -25,7 +27,7 @@ export class ProfessionalComponent implements OnInit {
     private professionalService: ProfessionalService,
     private userService: UsersService,
     private tokenStorageService: TokenStorageService,
-    private router: Router
+    private router: Router,private chatService :ChatService,
   ) { }
 
   ngOnInit(): void {
@@ -121,6 +123,41 @@ export class ProfessionalComponent implements OnInit {
     this.router.navigate(['/customerexercise', userId]);
 
   }
+  
 
+  goToChat(selectedUsername: string) {
+    const currentUsername = this.tokenStorageService.getUser().username;
+  
+    // Vérifie si un salon de discussion existe déjà entre ces utilisateurs
+    this.chatService.getChatByFirstUserNameAndSecondUserName(currentUsername, selectedUsername).subscribe(
+      (existingChat: Chat) => {
+        if (existingChat) {
+          // Salon de discussion existant trouvé, rediriger vers le salon de discussion existant
+          sessionStorage.setItem("chatId", String(existingChat.chatId));
+          this.router.navigateByUrl('/chat');
+        } else {
+          // Aucun salon de discussion existant trouvé, créer un nouveau salon de discussion
+          const chatObj: Chat = new Chat();
+          chatObj.firstUserName = currentUsername;
+          chatObj.secondUserName = selectedUsername;
+  
+          this.chatService.createChatRoom(chatObj).subscribe(
+            (data: any) => {
+              const chatId = data.chatId;
+              sessionStorage.setItem("chatId", String(chatId));
+              this.router.navigateByUrl('/chat');
+            },
+            (error) => {
+              console.error("Error occurred while creating chat room:", error);
+            }
+          );
+        }
+      },
+      (error) => {
+        console.error("Error occurred while checking chat room existence:", error);
+      }
+    );
   }
+  
 
+}

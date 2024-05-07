@@ -5,7 +5,7 @@
 			<div class="row">
 				<div class="col-12">
 					<nav class="navbar navbar-expand-md navbar-light">
-					
+
 						<a class="navbar-brand" href="home" >Vita Verse</a>	
 						
 						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -15,15 +15,13 @@
 						<div class="collapse navbar-collapse" id="navbarSupportedContent">
 							<ul class="navbar-nav ml-auto py-4 py-md-0">
 							
-								<li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-									<a class="nav-link" href="/allgoals">Goal Track</a>
+								<li *ngIf="isCustomer" class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+									<a class="nav-link" href="/allgoals">Goals</a>
 								</li>
 								<li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
 									<a class="nav-link" href="chat">MYchat</a>
 								</li>
-								<li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-									<a class="nav-link" href="profile">Profile</a>
-								</li>
+
 							
 								<li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
 									<a class="nav-link" href="store">Store</a>
@@ -34,38 +32,52 @@
 								<li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
 									<a class="nav-link" href="store-shipment">Shipment</a>
 								</li>
-								<li  class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-									<a class="nav-link" href="#">Workout</a>
-								</li>
 
 								<li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
 									<a class="nav-link" href="/feed">Forum</a>
 								</li>
-								<li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-									<a class="nav-link" href="customer">Customer</a>
-								</li>
 
-
-								<li *ngIf="isCustomer" class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-									<a class="nav-link" href="professionals">Professionals</a>
-								</li>
 								<li *ngIf="!isCustomer" class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
 									<a class="nav-link" href="PsyCustomers">My Customers</a>
 								</li>
 
+
+	
 								<li *ngIf="isCustomer" class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-									<a class="nav-link" href="customerexerciselist">Relaxation Exercise</a>
-								<li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-									<a class="nav-link" href="myworkout">myworkout</a>
-								</li>
-								<li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-									<a class="nav-link" href="mydiet">mydiet</a>
+									<a class="nav-link" href="mydiet">Profile</a>
 
 								</li>
+								<li *ngIf="isNutri" class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+									<a class="nav-link" href="allmeals">allmeals</a>
+
+								</li>
+								<li *ngIf="isCoach" class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+									<a class="nav-link" href="clientworkout">Listworkout</a>
+
+								</li>
+								<li *ngIf="isCustomer" class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+									<a class="nav-link" href="prolistrating">All Pro</a>
+
+								</li>
+								<li *ngIf="isCustomer" class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+									<a class="nav-link" href="professionals">My Pro</a>
+								</li>
+
+								<li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+									<a class="nav-link" (click)="logout()">
+										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+											<path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"/>
+											<path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
+										</svg>
+									</a>
+								</li>
+								
 							</ul>
+
 						</div>
-						
+
 					</nav>		
+
 				</div>
 			</div>
 		</div>

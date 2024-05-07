@@ -5,6 +5,10 @@ import { TokenStorageService } from '../user/token-storage.service';
 import { RatingserviceService } from './rating.service';
 import { ProfessionalService } from '../wellbeing/wservices/professional.service';
 import { ERole } from './Role';
+import { ChatService } from '../chat/chat.service';
+import { Router } from '@angular/router';
+import { Chat } from '../chat/chat';
+
 @Component({
   selector: 'app-rating',
   templateUrl: './rating.component.html',
@@ -24,6 +28,9 @@ export class RatingComponent implements OnInit {
     private ratingService: RatingserviceService,
     private token: TokenStorageService,
     private professionalService : ProfessionalService,
+    public chatService :ChatService,
+    private router:Router
+
   ) { }
 
   ngOnInit(): void {
@@ -124,4 +131,25 @@ export class RatingComponent implements OnInit {
   rateChange(userId: number, ratingValue: number) {
     this.createRating(userId, ratingValue);
   }
+ 
+    // Vérifie si un salon de discussion existe déjà entre ces utilisateurs
+    goToChat(selectedUsername: string) {
+      const currentUsername = this.token.getUser().username;
+  
+      const chatObj: Chat = new Chat();
+      chatObj.firstUserName = currentUsername;
+      chatObj.secondUserName = selectedUsername; // Utilisez le nom d'utilisateur sélectionné
+  
+      this.chatService.createChatRoom(chatObj).subscribe(
+        (data: any) => {
+          const chatId = data.chatId;
+          sessionStorage.setItem("chatId", String(chatId));
+          this.router.navigateByUrl('/chat');
+        },
+        (error) => {
+          console.log("Error occurred while creating chat room:", error);
+        }
+      );
+    }
+  
 }

@@ -98,4 +98,8 @@ export class UsersService {
   getUserRoleById(userId: number): Observable<string> {
     return this.http.get<string>(`${this.authUrl}/${userId}/role`);
   }
+  logoutUser(): Observable<any> {
+    const url = `${this.authUrl}/logout`;
+    return this.http.post(url, null);
+  }
 }

@@ -1,4 +1,4 @@
-
+<app-after-login></app-after-login>
 <div class="container centered-container"></div>
 <div class="padding">
     <div class="row justify-content-center">
@@ -10,14 +10,31 @@
                     <div class="pro-img"><img [src]="user?.profileImageUrl" alt="user"></div>
                     <h3 class="m-b-0">{{ user?.firstName }} {{ user?.lastName }}</h3>
                     <!-- Your Follow button here -->
-                    <a href="javascript:void(0)" class="m-t-10 waves-effect waves-dark btn btn-primary btn-md btn-rounded" data-abc="true">Follow</a>
+              
                     <div class="row text-center m-t-20">
-                        <div class="col-lg-4 col-md-4 m-t-20">
+                        <div class="col-lg-2 col-md-4 m-t-20">
                             <h3 class="m-b-0 font-light">{{ user?.weight }}</h3><small>Weight</small>
                         </div>
-                        <div class="col-lg-4 col-md-4 m-t-20">
+                        <div class="col-lg-2 col-md-4 m-t-20">
                             <h3 class="m-b-0 font-light">{{ user?.height }}</h3><small>Height</small>
                         </div>
+                        <div class="col-lg-4 col-md-4 m-t-20" *ngIf="isCustomer">
+                       
+                       
+                                <button class="btn btn-info">
+                                    <a class="nav-link" href="myworkout">My Workout</a>
+                                </button>
+                      
+                             
+                        </div>
+                        <div class="col-lg-4 col-md-4 m-t-20" *ngIf="isCustomer">
+
+                        <button class="btn btn-info">
+                            <a class="nav-link" href="customerexerciselist">Relaxation Exercise</a>
+
+                        </button>
+                    </div>
+                        
                     </div>
                 </div>
             </div>

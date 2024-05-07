@@ -79,15 +79,14 @@
           <td>{{ user.username }}</td>
           <td>{{ user.firstName }}</td>
           <td>{{ user.lastName }}</td>
-          <td>{{ user.diploma }}</td>
+          <td> <img [src]="user.diploma " alt=""></td>
 
           <td>{{ user.accountStatus }}</td>
           <td>
             <select [(ngModel)]="user.accountStatus">
               <option value="ACTIVE">ACTIVE</option>
               <option value="INACTIVE">Inactive</option>
-              <option value="VERIFIED">Verified</option>
-              <option value="UNVERIFIED">Unverified</option>
+            
             </select>
             <button class="btn btn-sm btn-info" (click)="updateUserAccountStatus(user.userId, selectedStatus)">Update Status</button>
             <button class="fa fa-remove delete-btn" (click)="deleteUser(user.userId)">Delete User</button>

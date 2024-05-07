@@ -37,6 +37,7 @@ export class ListExerciseCustomerComponent implements OnInit {
     this.getTotalExercisesCount();
     this.loadNotes();
       this.initCalendarOptions();
+      this.loadUserId();
   }
   
   initCalendarOptions(): void {
@@ -74,7 +75,22 @@ export class ListExerciseCustomerComponent implements OnInit {
       );
     }
   }
+  loadUserId(): void {
+    // Get current user from token storage
+    const currentUser = this.tokenstorageservice.getUser();
 
+    // Get user ID by username
+    this.userservice.getUserIdByUsername(currentUser.username).subscribe(
+      (data: any) => {
+        this.userId = data.userId;
+        this.loadExercises();
+        this.loadNotes();
+      },
+      (error: any) => {
+        console.error('Error loading user ID:', error);
+      }
+    );
+  }
   loadNotes(): void {
     this.notesservice.getNotesByUserId(this.userId)
       .subscribe(

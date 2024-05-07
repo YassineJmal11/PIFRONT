@@ -16,7 +16,7 @@
           </div>
           <ngb-rating [max]="5" [rate]="coach.averageRating || 0" [readonly]="true" class="average-rating"></ngb-rating>
           <div class="buttons">
-            <button class="btn btn-primary">Chat</button>
+            <button class="btn btn-primary" (click)="goToChat(coach.username)">Chat</button>
             <button class="btn btn-info" (click)="followProfessional(coach.userId, 'coach')">Follow</button>
           </div>
         </div>
@@ -38,7 +38,7 @@
           </div>
           <ngb-rating [max]="5" [rate]="nutritionist.averageRating || 0" [readonly]="true" class="average-rating"></ngb-rating>
           <div class="buttons">
-            <button class="btn btn-primary">Chat</button>
+            <button class="btn btn-primary" (click)="goToChat(nutritionist.username)">Chat</button>
             <button class="btn btn-info" (click)="followProfessional(nutritionist.userId, 'nutritionist')">Follow</button>
           </div>
         </div>
@@ -60,7 +60,7 @@
           </div>
           <ngb-rating [max]="5" [rate]="psychologist.averageRating || 0" [readonly]="true" class="average-rating"></ngb-rating>
           <div class="buttons">
-            <button class="btn btn-primary">Chat</button>
+            <button class="btn btn-primary" (click)="goToChat(psychologist.username)">Chat</button>
             <button class="btn btn-info" (click)="followProfessional(psychologist.userId, 'psychologist')">Follow</button>
           </div>
         </div>

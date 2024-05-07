@@ -44,7 +44,7 @@ import { ViewPostComponent } from './forum/community/view-post/view-post.compone
 import dayGridPlugin from '@fullcalendar/daygrid'; // DayGrid plugin
 import { ForgotPasswordComponent } from './user/forgot-password/forgot-password.component';
 import { ChatComponent } from './chat/chat/chat.component';
-import { CustomerComponent } from './user/customer/customer.component';
+
 import { MeetComponent } from './chat/meet/meet.component';
 import { ProductCardComponent } from './store/product-card/product-card.component';
 import { ProductReviewComponent } from './store/product-review/product-review.component';
@@ -116,7 +116,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
    SignupadminComponent,
    AfterLoginComponent,
    ChatComponent,
-   CustomerComponent,
+ 
    MeetComponent,
    AllFoodsComponent,
    ListmealsComponent,
